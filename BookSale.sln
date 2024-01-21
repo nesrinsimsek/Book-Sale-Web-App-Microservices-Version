@@ -49,23 +49,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{84
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{CC6085B7-3667-4EB3-8D99-7CA3244383EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookSale.Notification.Business", "BookSale.Notification.Business\BookSale.Notification.Business.csproj", "{74A0B59A-224C-41FC-B577-0D34C827D19F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookSale.Notification.Business", "BookSale.Notification.Business\BookSale.Notification.Business.csproj", "{74A0B59A-224C-41FC-B577-0D34C827D19F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookSale.Notification.DataAccess", "BookSale.Notification.DataAccess\BookSale.Notification.DataAccess.csproj", "{59CEEB13-7DBA-4E1C-8557-F8EA064B0EAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookSale.Notification.DataAccess", "BookSale.Notification.DataAccess\BookSale.Notification.DataAccess.csproj", "{59CEEB13-7DBA-4E1C-8557-F8EA064B0EAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookSale.Sale.Business", "BookSale.Sale.Business\BookSale.Sale.Business.csproj", "{76A854E1-3D60-46C7-8C72-3BEE5342DC6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookSale.Sale.Business", "BookSale.Sale.Business\BookSale.Sale.Business.csproj", "{76A854E1-3D60-46C7-8C72-3BEE5342DC6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookSale.Sale.DataAccess", "BookSale.Sale.DataAccess\BookSale.Sale.DataAccess.csproj", "{3614E5DA-E557-4D7B-92B4-55656329FF44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookSale.Sale.DataAccess", "BookSale.Sale.DataAccess\BookSale.Sale.DataAccess.csproj", "{3614E5DA-E557-4D7B-92B4-55656329FF44}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{74905FB1-3721-4BC7-8FF6-B95A19376F56}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{C5FF55DE-5118-414F-91F1-FA76E3CB4BC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookSale.Sale.Entities", "BookSale.Sale.Entities\BookSale.Sale.Entities.csproj", "{D0DE6C44-058A-4CAF-AAFD-5AA1CAFFCF00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookSale.Sale.Entities", "BookSale.Sale.Entities\BookSale.Sale.Entities.csproj", "{D0DE6C44-058A-4CAF-AAFD-5AA1CAFFCF00}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ValidationRules", "ValidationRules", "{168638CA-26FA-480F-BBD7-041A6D59A4F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookSale.Sale.ValidationRules", "BookSale.Sale.ValidationRules\BookSale.Sale.ValidationRules.csproj", "{CD72E8CC-FF06-4C00-B918-CFD457B94F99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookSale.Sale.ValidationRules", "BookSale.Sale.ValidationRules\BookSale.Sale.ValidationRules.csproj", "{CD72E8CC-FF06-4C00-B918-CFD457B94F99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
