@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookSale.Sale.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace BookSale.Sale.Business.Abstract
 {
     public interface ICategoryService
     {
+        List<Category> GetCategoryList();
     }
 }

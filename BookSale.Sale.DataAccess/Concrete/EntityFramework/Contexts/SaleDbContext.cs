@@ -18,6 +18,14 @@ namespace BookSale.Sale.DataAccess.Concrete.EntityFramework.Contexts
         public SaleDbContext(DbContextOptions options) : base(options)
         {
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Data Source=TRN00089\\SQLEXPRESS;Initial Catalog=BookSaleWeek8CaseDB;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True");
+            }
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Category> Categories { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookSale.Sale.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace BookSale.Sale.Business.Abstract
 {
-    public class IOrderService
+    public interface IOrderService
     {
+        List<Order> GetOrderList();
+        void Add(Order order);
+        void Delete(Order order);
+        void Update(Order order);
+
     }
 }

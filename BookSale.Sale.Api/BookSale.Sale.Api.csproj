@@ -28,11 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BookSale.IoC\BookSale.IoC.csproj" />
+    <ProjectReference Include="..\BookSale.Sale.Business\BookSale.Sale.Business.csproj" />
     <ProjectReference Include="..\BookSale.Sale.DataAccess\BookSale.Sale.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
