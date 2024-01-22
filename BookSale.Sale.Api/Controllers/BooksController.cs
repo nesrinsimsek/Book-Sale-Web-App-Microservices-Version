@@ -1,8 +1,11 @@
-﻿using BookSale.Sale.Business.Abstract;
+﻿using AutoMapper;
+using BookSale.Sale.Business.Abstract;
 using BookSale.Sale.Entities.Concrete;
+using BookSale.Sale.Entities.Concrete.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace BookSale.Sale.Api.Controllers
 {
@@ -10,18 +13,22 @@ namespace BookSale.Sale.Api.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private IBookService _bookService;
+        private readonly IBookService _bookService;
+        private readonly IMapper _mapper;
 
-        public BooksController(IBookService bookService)
+
+        public BooksController(IBookService bookService, IMapper mapper)
         {
             _bookService = bookService;
+            _mapper = mapper;
         }
 
-        [HttpGet("{bookId:int}")]
+        [HttpGet("ById/{bookId}")]
         public ActionResult<Book> Get(int bookId)
         {
-            var books = _bookService.GetBookById(bookId);
-            return Ok(books);
+            var book= _bookService.GetBookById(bookId);
+            var bookGetDto = _mapper.Map<BookGetDto>(book);
+            return Ok(bookGetDto);
 
         }
 
@@ -29,15 +36,26 @@ namespace BookSale.Sale.Api.Controllers
         public ActionResult<IEnumerable<Book>> GetList()
         {
             var books = _bookService.GetBookList();
-            return Ok(books);
+            var bookGetDtos = _mapper.Map<List<BookGetDto>>(books);
+            return Ok(bookGetDtos);
 
         }
 
-        [HttpGet("{categoryId:int}")]
+        [HttpGet("ByCategory/{categoryId}")]
         public ActionResult<IEnumerable<Book>> GetListByCategory(int categoryId)
         {
             var books = _bookService.GetBookListByCategory(categoryId);
-            return Ok(books);
+            var bookGetDtos = _mapper.Map<List<BookGetDto>>(books);
+            return Ok(bookGetDtos);
+        }
+
+        [HttpPost]
+        public ActionResult Add([FromBody] BookCreateDto bookCreateDto) //bunu dto yap
+        {
+            Book book = _mapper.Map<Book>(bookCreateDto);
+            _bookService.AddBook(book);
+            return Ok(bookCreateDto);
+
         }
 
     }

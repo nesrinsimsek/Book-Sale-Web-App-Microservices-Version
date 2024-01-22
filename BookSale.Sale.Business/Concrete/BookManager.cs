@@ -11,7 +11,7 @@ namespace BookSale.Sale.Business.Concrete
 {
     public class BookManager : IBookService
     {
-        private IBookDal _bookDal;
+        private readonly IBookDal _bookDal;
 
         public BookManager(IBookDal bookDal)
         {
@@ -29,24 +29,22 @@ namespace BookSale.Sale.Business.Concrete
         }
         public List<Book> GetBookListByCategory(int categoryId)
         {
-            return new List<Book>(_bookDal.GetList(b => b.Category_Id == categoryId).ToList());
+            return _bookDal.GetList(b => b.Category_Id == categoryId).ToList();
         }
         
-        public void Add(Book book)
+        public void AddBook(Book book)
+        {
+            _bookDal.Add(book);
+        }
+
+        public void DeleteBook(Book book)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Book book)
+        public void UpdateBook(Book book)
         {
             throw new NotImplementedException();
         }
-
-        public void Update(Book book)
-        {
-            throw new NotImplementedException();
-        }
-
-
     }
 }

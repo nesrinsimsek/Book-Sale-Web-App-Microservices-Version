@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using BookSale.Sale.Business.Abstract;
+using BookSale.Sale.Entities.Concrete;
+using BookSale.Sale.Entities.Concrete.Dtos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookSale.Sale.Api.Controllers
@@ -7,5 +11,23 @@ namespace BookSale.Sale.Api.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
+        private readonly ICategoryService _categoryService;
+        private readonly IMapper _mapper;
+
+        public CategoriesController(ICategoryService categoryService, IMapper mapper)
+        {
+            _categoryService = categoryService;
+            _mapper = mapper;
+        }
+
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Category>> GetList()
+        {
+            var categories = _categoryService.GetCategoryList();
+            var categoryGetDtos = _mapper.Map<List<CategoryGetDto>>(categories);
+            return Ok(categoryGetDtos);
+
+        }
     }
 }

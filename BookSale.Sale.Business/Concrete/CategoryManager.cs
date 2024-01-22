@@ -11,7 +11,7 @@ namespace BookSale.Sale.Business.Concrete
 {
     public class CategoryManager : ICategoryService
     {
-        private ICategoryDal _categoryDal;
+        private readonly ICategoryDal _categoryDal;
 
         public CategoryManager(ICategoryDal categoryDal)
         {
@@ -19,7 +19,7 @@ namespace BookSale.Sale.Business.Concrete
         }
         public List<Category> GetCategoryList()
         {
-            throw new NotImplementedException();
+            return _categoryDal.GetList().ToList();
         }
     }
 }

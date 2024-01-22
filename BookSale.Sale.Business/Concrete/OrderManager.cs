@@ -11,7 +11,7 @@ namespace BookSale.Sale.Business.Concrete
 {
     public class OrderManager : IOrderService
     {
-        private IOrderDal _orderDal;
+        private readonly IOrderDal _orderDal;
 
         public OrderManager(IOrderDal orderDal)
         {

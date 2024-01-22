@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 using Microsoft.OpenApi.Models;
+using BookSale.Sale.Api;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<SaleDbContext>(options => options.
     UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
+builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 // Add services to the container.
 
