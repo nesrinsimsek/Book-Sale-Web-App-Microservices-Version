@@ -40,9 +40,13 @@ namespace BookSale.Sale.DataAccess.Concrete.EntityFramework.Contexts
             .Property(u => u.Id)
             .UseIdentityColumn();
 
+            modelBuilder.Entity<User>()
+            .Property(u => u.Role)
+            .HasDefaultValue("Admin");
+
             modelBuilder.Entity<Book>()
-           .Property(b => b.Id)
-           .UseIdentityColumn();
+            .Property(b => b.Id)
+            .UseIdentityColumn();
 
             modelBuilder.Entity<Book>()
             .Property(b => b.Price)
