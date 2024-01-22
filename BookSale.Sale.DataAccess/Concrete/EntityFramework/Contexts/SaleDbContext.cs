@@ -42,7 +42,7 @@ namespace BookSale.Sale.DataAccess.Concrete.EntityFramework.Contexts
 
             modelBuilder.Entity<User>()
             .Property(u => u.Role)
-            .HasDefaultValue("Admin");
+            .HasDefaultValue("User");
 
             modelBuilder.Entity<Book>()
             .Property(b => b.Id)

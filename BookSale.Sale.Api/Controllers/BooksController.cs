@@ -23,6 +23,7 @@ namespace BookSale.Sale.Api.Controllers
             _mapper = mapper;
         }
 
+        
         [HttpGet("ById/{bookId}")]
         public async Task<ActionResult<Book>> Get(int bookId)
         {
@@ -49,6 +50,7 @@ namespace BookSale.Sale.Api.Controllers
             return Ok(bookGetDtos);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult> Add([FromBody] BookCreateDto bookCreateDto) //bunu dto yap
         {

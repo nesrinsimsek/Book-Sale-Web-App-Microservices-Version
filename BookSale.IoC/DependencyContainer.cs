@@ -19,8 +19,12 @@ namespace BookSale.IoC
 
             services.AddTransient<IBookService, BookManager>();
             services.AddTransient<IBookDal, EfBookDal>();
+
             services.AddTransient<ICategoryService, CategoryManager>();
             services.AddTransient<ICategoryDal, EfCategoryDal>();
+
+            services.AddTransient<IUserService, UserManager>();
+            services.AddTransient<IUserDal, EfUserDal>();
 
             //Domain Bus
             //services.AddSingleton<IEventBus, RabbitMQBus>(sp =>

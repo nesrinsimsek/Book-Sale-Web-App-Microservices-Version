@@ -11,6 +11,7 @@ namespace BookSale.Sale.Api
             CreateMap<Book, BookCreateDto>().ReverseMap();
             CreateMap<Book, BookGetDto>().ReverseMap();
             CreateMap<Category, CategoryGetDto>().ReverseMap();
+            CreateMap<User, RegistrationRequestDto>().ReverseMap();
 
         }
     }
