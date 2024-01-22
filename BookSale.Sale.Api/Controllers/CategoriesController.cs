@@ -22,9 +22,9 @@ namespace BookSale.Sale.Api.Controllers
 
 
         [HttpGet]
-        public ActionResult<IEnumerable<Category>> GetList()
+        public async Task<ActionResult<IEnumerable<Category>>> GetList()
         {
-            var categories = _categoryService.GetCategoryList();
+            var categories = await _categoryService.GetCategoryList();
             var categoryGetDtos = _mapper.Map<List<CategoryGetDto>>(categories);
             return Ok(categoryGetDtos);
 

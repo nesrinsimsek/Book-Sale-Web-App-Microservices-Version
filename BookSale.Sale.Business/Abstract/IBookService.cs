@@ -9,11 +9,11 @@ namespace BookSale.Sale.Business.Abstract
 {
     public interface IBookService
     {
-        Book GetBookById(int bookId);
-        List<Book> GetBookList();
-        List<Book> GetBookListByCategory(int categoryId);
-        void AddBook(Book book);
-        void DeleteBook(Book book);
-        void UpdateBook(Book book);
+        Task<Book> GetBookById(int bookId);
+        Task<List<Book>> GetBookList();
+        Task<List<Book>> GetBookListByCategory(int categoryId);
+        Task AddBook(Book book);
+        Task DeleteBook(Book book);
+        Task UpdateBook(Book book);
     }
 }

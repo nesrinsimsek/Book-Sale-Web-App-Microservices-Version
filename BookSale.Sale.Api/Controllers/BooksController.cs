@@ -24,36 +24,36 @@ namespace BookSale.Sale.Api.Controllers
         }
 
         [HttpGet("ById/{bookId}")]
-        public ActionResult<Book> Get(int bookId)
+        public async Task<ActionResult<Book>> Get(int bookId)
         {
-            var book= _bookService.GetBookById(bookId);
+            var book= await _bookService.GetBookById(bookId);
             var bookGetDto = _mapper.Map<BookGetDto>(book);
             return Ok(bookGetDto);
 
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Book>> GetList()
+        public async Task<ActionResult<IEnumerable<Book>>> GetList()
         {
-            var books = _bookService.GetBookList();
+            var books = await _bookService.GetBookList();
             var bookGetDtos = _mapper.Map<List<BookGetDto>>(books);
             return Ok(bookGetDtos);
 
         }
 
         [HttpGet("ByCategory/{categoryId}")]
-        public ActionResult<IEnumerable<Book>> GetListByCategory(int categoryId)
+        public async Task<ActionResult<IEnumerable<Book>>> GetListByCategory(int categoryId)
         {
-            var books = _bookService.GetBookListByCategory(categoryId);
+            var books = await _bookService.GetBookListByCategory(categoryId);
             var bookGetDtos = _mapper.Map<List<BookGetDto>>(books);
             return Ok(bookGetDtos);
         }
 
         [HttpPost]
-        public ActionResult Add([FromBody] BookCreateDto bookCreateDto) //bunu dto yap
+        public async Task<ActionResult> Add([FromBody] BookCreateDto bookCreateDto) //bunu dto yap
         {
             Book book = _mapper.Map<Book>(bookCreateDto);
-            _bookService.AddBook(book);
+            await _bookService.AddBook(book);
             return Ok(bookCreateDto);
 
         }

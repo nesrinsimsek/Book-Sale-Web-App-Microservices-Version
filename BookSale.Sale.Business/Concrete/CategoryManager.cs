@@ -17,9 +17,9 @@ namespace BookSale.Sale.Business.Concrete
         {
             _categoryDal = categoryDal;
         }
-        public List<Category> GetCategoryList()
+        public async Task<List<Category>> GetCategoryList()
         {
-            return _categoryDal.GetList().ToList();
+            return await _categoryDal.GetList();
         }
     }
 }

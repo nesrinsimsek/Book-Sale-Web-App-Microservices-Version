@@ -18,23 +18,23 @@ namespace BookSale.Sale.Business.Concrete
             _orderDal = orderDal;
         }
 
-        public List<Order> GetOrderList()
+        public async Task<List<Order>> GetOrderList()
         {
             throw new NotImplementedException();
         }
-        public void Add(Order order)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Order order)
+        public async Task Add(Order order)
         {
             throw new NotImplementedException();
         }
 
+        public async Task Delete(Order order)
+        {
+            throw new NotImplementedException();
+        }
 
 
-        public void Update(Order order)
+
+        public async Task Update(Order order)
         {
             throw new NotImplementedException();
         }

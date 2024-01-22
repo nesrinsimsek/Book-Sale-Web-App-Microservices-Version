@@ -9,6 +9,6 @@ namespace BookSale.Sale.Business.Abstract
 {
     public interface ICategoryService
     {
-        List<Category> GetCategoryList();
+        Task<List<Category>> GetCategoryList();
     }
 }
