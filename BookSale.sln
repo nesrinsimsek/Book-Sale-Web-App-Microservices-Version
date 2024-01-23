@@ -67,9 +67,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ValidationRules", "Validati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookSale.Sale.ValidationRules", "BookSale.Sale.ValidationRules\BookSale.Sale.ValidationRules.csproj", "{CD72E8CC-FF06-4C00-B918-CFD457B94F99}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{7BCB4153-791D-4B38-97F8-66CDCE11F814}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utility", "Utility", "{7BCB4153-791D-4B38-97F8-66CDCE11F814}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookSale.Sale.Utilities", "BookSale.Sale.Utilities\BookSale.Sale.Utilities.csproj", "{36059A2E-FBA2-4D4E-A8A2-B93615B65114}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookSale.Sale.Utility", "BookSale.Sale.Utilities\BookSale.Sale.Utility.csproj", "{36059A2E-FBA2-4D4E-A8A2-B93615B65114}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

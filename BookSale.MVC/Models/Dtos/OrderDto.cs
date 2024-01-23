@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookSale.Sale.Entities.Concrete.Dtos
+namespace BookSale.MVC.Models.Dtos
 {
-    public class OrderUpdateDto
+    public class OrderDto
     {
         public int Id { get; set; }
         public string Address { get; set; }
+        public ICollection<OrderBookDto> OrderBooks { get; set; } = new List<OrderBookDto>();
     }
 }

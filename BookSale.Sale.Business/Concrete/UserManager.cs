@@ -4,7 +4,7 @@ using BookSale.Sale.DataAccess.Abstract.Dals;
 using BookSale.Sale.DataAccess.Concrete.EntityFramework.Contexts;
 using BookSale.Sale.Entities.Concrete;
 using BookSale.Sale.Entities.Concrete.Dtos;
-using BookSale.Sale.Utilities;
+using BookSale.Sale.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;

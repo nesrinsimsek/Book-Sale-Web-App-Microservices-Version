@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace BookSale.Sale.Entities.Concrete.Dtos
 {
-    public class OrderCreateDto
+    public class OrderBookDto
     {
-        public string Address { get; set; }
+        public int Order_Id { get; set; }
+        public int Book_Id { get; set; }
+        public int Quantity { get; set; }
     }
 }

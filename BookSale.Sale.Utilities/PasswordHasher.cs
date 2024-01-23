@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookSale.Sale.Utilities
+namespace BookSale.Sale.Utility
 {
     public class PasswordHasher
     {

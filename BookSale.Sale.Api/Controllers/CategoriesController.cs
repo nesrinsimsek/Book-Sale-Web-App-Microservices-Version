@@ -23,11 +23,11 @@ namespace BookSale.Sale.Api.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryGetDto>>> GetList()
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetList()
         {
             var categories = await _categoryService.GetCategoryList();
-            var categoryGetDtos = _mapper.Map<List<CategoryGetDto>>(categories);
-            return Ok(categoryGetDtos);
+            var categoryDtos = _mapper.Map<List<CategoryDto>>(categories);
+            return Ok(categoryDtos);
 
         }
     }

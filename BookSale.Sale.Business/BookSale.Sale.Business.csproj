@@ -17,7 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BookSale.Sale.DataAccess\BookSale.Sale.DataAccess.csproj" />
     <ProjectReference Include="..\BookSale.Sale.Entities\BookSale.Sale.Entities.csproj" />
-    <ProjectReference Include="..\BookSale.Sale.Utilities\BookSale.Sale.Utilities.csproj" />
+    <ProjectReference Include="..\BookSale.Sale.Utilities\BookSale.Sale.Utility.csproj" />
   </ItemGroup>
 
 </Project>

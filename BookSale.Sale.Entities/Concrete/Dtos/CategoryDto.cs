@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BookSale.Sale.Entities.Concrete.Dtos
 {
-    public class OrderUpdateDto
+    public class CategoryDto
     {
         public int Id { get; set; }
-        public string Address { get; set; }
+        public string Name { get; set; }
     }
 }

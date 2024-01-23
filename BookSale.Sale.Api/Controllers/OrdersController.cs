@@ -35,13 +35,13 @@ namespace BookSale.Sale.Api.Controllers
 
         [Authorize(Roles = "User")]
         [HttpPut("{orderId}")]
-        public async Task<ActionResult<OrderGetDto>> Update(int orderId, [FromBody] OrderUpdateDto orderUpdateDto) //bunu dto yap
+        public async Task<ActionResult<OrderDto>> Update(int orderId, [FromBody] OrderUpdateDto orderUpdateDto) //bunu dto yap
         {
             Order order = _mapper.Map<Order>(orderUpdateDto);
             order.Id = orderId;
             await _orderService.UpdateOrder(order);
-            OrderGetDto orderGetDto = _mapper.Map<OrderGetDto>(order);
-            return Ok(orderGetDto);
+            OrderDto orderDto = _mapper.Map<OrderDto>(order);
+            return Ok(orderDto);
 
         }
 
@@ -55,30 +55,30 @@ namespace BookSale.Sale.Api.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet("ById/{orderId}")]
-        public async Task<ActionResult<OrderGetDto>> Get(int orderId)
+        public async Task<ActionResult<OrderDto>> Get(int orderId)
         {
             var order = await _orderService.GetOrderById(orderId);
-            var orderGetDto = _mapper.Map<OrderGetDto>(order);
-            return Ok(orderGetDto);
+            var orderDto = _mapper.Map<OrderDto>(order);
+            return Ok(orderDto);
 
         }
 
         [Authorize(Roles = "Admin,User")]
         [HttpGet("ByUser/{userId}")]
-        public async Task<ActionResult<IEnumerable<OrderGetDto>>> GetListByUser(int userId)
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetListByUser(int userId)
         {
             var orders = await _orderService.GetOrderListByUser(userId);
-            var orderGetDtos = _mapper.Map<List<OrderGetDto>>(orders);
-            return Ok(orderGetDtos);
+            var orderDtos = _mapper.Map<List<OrderDto>>(orders);
+            return Ok(orderDtos);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OrderGetDto>>> GetList()
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetList()
         {
             var orders = await _orderService.GetOrderList();
-            var orderGetDtos = _mapper.Map<List<OrderGetDto>>(orders);
-            return Ok(orderGetDtos);
+            var orderDtos = _mapper.Map<List<OrderDto>>(orders);
+            return Ok(orderDtos);
 
         }
     }

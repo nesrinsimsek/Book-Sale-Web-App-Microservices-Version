@@ -2,10 +2,12 @@
 using BookSale.Sale.Business.Abstract;
 using BookSale.Sale.Entities.Concrete;
 using BookSale.Sale.Entities.Concrete.Dtos;
+using BookSale.Sale.Entities.Concrete.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Net;
 
 namespace BookSale.Sale.Api.Controllers
 {
@@ -15,17 +17,18 @@ namespace BookSale.Sale.Api.Controllers
     {
         private readonly IBookService _bookService;
         private readonly IMapper _mapper;
-
+        protected ApiResponse _response;
 
         public BooksController(IBookService bookService, IMapper mapper)
         {
             _bookService = bookService;
             _mapper = mapper;
+            _response = new();
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<ActionResult<BookCreateDto>> Add([FromBody] BookCreateDto bookCreateDto) //bunu dto yap
+        public async Task<ActionResult<ApiResponse>> Add([FromBody] BookCreateDto bookCreateDto) //bunu dto yap
         {
             Book book = _mapper.Map<Book>(bookCreateDto);
             await _bookService.AddBook(book);
@@ -35,13 +38,12 @@ namespace BookSale.Sale.Api.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPut("{bookId}")]
-        public async Task<ActionResult<BookGetDto>> Update(int bookId, [FromBody] BookUpdateDto bookUpdateDto) //bunu dto yap
+        public async Task<ActionResult<BookDto>> Update(int bookId, [FromBody] BookUpdateDto bookUpdateDto) //bunu dto yap
         {
             Book book = _mapper.Map<Book>(bookUpdateDto);
-            book.Id = bookId;
             await _bookService.UpdateBook(book);
-            BookGetDto bookGetDto = _mapper.Map<BookGetDto>(book);
-            return Ok(bookGetDto);
+            _response.StatusCode = HttpStatusCode.OK;
+            return Ok(_response);
 
         }
 
@@ -53,31 +55,38 @@ namespace BookSale.Sale.Api.Controllers
             return Ok();
 
         }
-        [Authorize(Roles = "Admin")]
+
         [HttpGet("ById/{bookId}")]
-        public async Task<ActionResult<BookGetDto>> Get(int bookId)
+        public async Task<ActionResult<BookDto>> Get(int bookId)
         {
             var book= await _bookService.GetBookById(bookId);
-            var bookGetDto = _mapper.Map<BookGetDto>(book);
-            return Ok(bookGetDto);
+            var bookDto = _mapper.Map<BookDto>(book);
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = bookDto;
+            return Ok(bookDto);
 
         }
-        [Authorize(Roles = "Admin,User")]
+
         [HttpGet("ByCategory/{categoryId}")]
-        public async Task<ActionResult<IEnumerable<BookGetDto>>> GetListByCategory(int categoryId)
+        public async Task<ActionResult<ApiResponse>> GetListByCategory(int categoryId)
         {
             var books = await _bookService.GetBookListByCategory(categoryId);
-            var bookGetDtos = _mapper.Map<List<BookGetDto>>(books);
-            return Ok(bookGetDtos);
+            var bookDtos = _mapper.Map<List<BookDto>>(books);
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = bookDtos;
+            return Ok(bookDtos);
         }
 
-        [Authorize(Roles = "Admin,User")]
+ 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BookGetDto>>> GetList()
+        public async Task<ActionResult<ApiResponse>> GetList()
         {
+           
             var books = await _bookService.GetBookList();
-            var bookGetDtos = _mapper.Map<List<BookGetDto>>(books);
-            return Ok(bookGetDtos);
+            var bookDtos = _mapper.Map<List<BookDto>>(books);
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = bookDtos;
+            return Ok(_response);
 
         }
 
