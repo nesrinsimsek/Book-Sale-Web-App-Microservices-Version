@@ -21,5 +21,7 @@ namespace BookSale.Sale.Entities.Concrete
         [ForeignKey("Category")]
         public int Category_Id { get; set; }
         public Category Category { get; set; }
+
+        public ICollection<OrderBook> OrderBooks { get; set; } = new List<OrderBook>();
     }
 }

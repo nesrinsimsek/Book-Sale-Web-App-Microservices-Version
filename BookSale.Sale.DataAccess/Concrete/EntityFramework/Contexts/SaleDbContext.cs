@@ -30,11 +30,14 @@ namespace BookSale.Sale.DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<Book> Books { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderBook> OrderBooks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<OrderBook>().HasKey(u => new { u.Order_Id, u.Book_Id });
 
             modelBuilder.Entity<User>()
             .Property(u => u.Id)

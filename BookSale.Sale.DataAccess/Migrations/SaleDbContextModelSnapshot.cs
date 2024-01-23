@@ -101,6 +101,24 @@ namespace BookSale.Sale.DataAccess.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("BookSale.Sale.Entities.Concrete.OrderBook", b =>
+                {
+                    b.Property<int>("Order_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Book_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Order_Id", "Book_Id");
+
+                    b.HasIndex("Book_Id");
+
+                    b.ToTable("OrderBooks");
+                });
+
             modelBuilder.Entity("BookSale.Sale.Entities.Concrete.User", b =>
                 {
                     b.Property<int>("Id")
@@ -165,9 +183,38 @@ namespace BookSale.Sale.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BookSale.Sale.Entities.Concrete.OrderBook", b =>
+                {
+                    b.HasOne("BookSale.Sale.Entities.Concrete.Book", "Book")
+                        .WithMany("OrderBooks")
+                        .HasForeignKey("Book_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BookSale.Sale.Entities.Concrete.Order", "Order")
+                        .WithMany("OrderBooks")
+                        .HasForeignKey("Order_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("BookSale.Sale.Entities.Concrete.Book", b =>
+                {
+                    b.Navigation("OrderBooks");
+                });
+
             modelBuilder.Entity("BookSale.Sale.Entities.Concrete.Category", b =>
                 {
                     b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("BookSale.Sale.Entities.Concrete.Order", b =>
+                {
+                    b.Navigation("OrderBooks");
                 });
 
             modelBuilder.Entity("BookSale.Sale.Entities.Concrete.User", b =>
