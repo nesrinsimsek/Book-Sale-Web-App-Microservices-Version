@@ -12,10 +12,10 @@ namespace BookSale.MVC.Services.Concrete
         public ApiResponse responseModel {  get; set; }
         public IHttpClientFactory httpClient { get; set; }
 
-        public BaseService(IHttpClientFactory httpClientFactory)
+        public BaseService(IHttpClientFactory httpClient)
         {
             this.responseModel = new();
-            this.httpClient = httpClientFactory;
+            this.httpClient = httpClient;
 
         }
 

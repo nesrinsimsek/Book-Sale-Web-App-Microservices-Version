@@ -29,6 +29,7 @@ namespace BookSale.IoC
             services.AddTransient<IOrderService, OrderManager>();
             services.AddTransient<IOrderDal, EfOrderDal>();
 
+
             //Domain Bus
             //services.AddSingleton<IEventBus, RabbitMQBus>(sp =>
             //{
