@@ -24,15 +24,27 @@ namespace BookSale.Sale.DataAccess.Concrete.EntityFramework.Repositories
             }
         }
 
-        public async Task Delete(TEntity entity)
+        public async Task Update(TEntity entity)
         {
             using (var context = new TContext())
             {
-                var deletedEntity = context.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;
+                var updatedEntity = context.Entry(entity);
+                updatedEntity.State = EntityState.Modified;
                 await context.SaveChangesAsync();
             }
         }
+
+        public async Task Delete(Expression<Func<TEntity, bool>> filter)
+        {
+            using (var context = new TContext())
+            {
+                var deletedEntity = await context.Set<TEntity>().SingleOrDefaultAsync(filter);
+                var entity = context.Entry(deletedEntity);
+                entity.State = EntityState.Deleted;
+                await context.SaveChangesAsync();
+            }
+        }
+
 
         public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter)
         {
@@ -52,14 +64,6 @@ namespace BookSale.Sale.DataAccess.Concrete.EntityFramework.Repositories
             }
         }
 
-        public async Task Update(TEntity entity)
-        {
-            using (var context = new TContext())
-            {
-                var updatedEntity = context.Entry(entity);
-                updatedEntity.State = EntityState.Modified;
-                await context.SaveChangesAsync();
-            }
-        }
+
     }
 }

@@ -23,40 +23,61 @@ namespace BookSale.Sale.Api.Controllers
             _mapper = mapper;
         }
 
-        
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<ActionResult<BookCreateDto>> Add([FromBody] BookCreateDto bookCreateDto) //bunu dto yap
+        {
+            Book book = _mapper.Map<Book>(bookCreateDto);
+            await _bookService.AddBook(book);
+            return Ok(bookCreateDto);
+
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("{bookId}")]
+        public async Task<ActionResult<BookGetDto>> Update(int bookId, [FromBody] BookUpdateDto bookUpdateDto) //bunu dto yap
+        {
+            Book book = _mapper.Map<Book>(bookUpdateDto);
+            book.Id = bookId;
+            await _bookService.UpdateBook(book);
+            BookGetDto bookGetDto = _mapper.Map<BookGetDto>(book);
+            return Ok(bookGetDto);
+
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{bookId}")]
+        public async Task<ActionResult> Delete(int bookId) //bunu dto yap
+        {
+            await _bookService.DeleteBook(bookId);
+            return Ok();
+
+        }
+        [Authorize(Roles = "Admin")]
         [HttpGet("ById/{bookId}")]
-        public async Task<ActionResult<Book>> Get(int bookId)
+        public async Task<ActionResult<BookGetDto>> Get(int bookId)
         {
             var book= await _bookService.GetBookById(bookId);
             var bookGetDto = _mapper.Map<BookGetDto>(book);
             return Ok(bookGetDto);
 
         }
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> GetList()
-        {
-            var books = await _bookService.GetBookList();
-            var bookGetDtos = _mapper.Map<List<BookGetDto>>(books);
-            return Ok(bookGetDtos);
-
-        }
-
+        [Authorize(Roles = "Admin,User")]
         [HttpGet("ByCategory/{categoryId}")]
-        public async Task<ActionResult<IEnumerable<Book>>> GetListByCategory(int categoryId)
+        public async Task<ActionResult<IEnumerable<BookGetDto>>> GetListByCategory(int categoryId)
         {
             var books = await _bookService.GetBookListByCategory(categoryId);
             var bookGetDtos = _mapper.Map<List<BookGetDto>>(books);
             return Ok(bookGetDtos);
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public async Task<ActionResult> Add([FromBody] BookCreateDto bookCreateDto) //bunu dto yap
+        [Authorize(Roles = "Admin,User")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<BookGetDto>>> GetList()
         {
-            Book book = _mapper.Map<Book>(bookCreateDto);
-            await _bookService.AddBook(book);
-            return Ok(bookCreateDto);
+            var books = await _bookService.GetBookList();
+            var bookGetDtos = _mapper.Map<List<BookGetDto>>(books);
+            return Ok(bookGetDtos);
 
         }
 

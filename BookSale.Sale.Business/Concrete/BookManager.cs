@@ -18,33 +18,31 @@ namespace BookSale.Sale.Business.Concrete
             _bookDal = bookDal;
         }
 
+        public async Task AddBook(Book book)
+        {
+            await _bookDal.Add(book);
+        }
+        public async Task UpdateBook(Book book)
+        {
+            await _bookDal.Update(book);
+        }
+        public async Task DeleteBook(int bookId)
+        {
+            await _bookDal.Delete(b => b.Id == bookId);
+        }
         public async Task<Book> GetBookById(int bookId)
         {
             return await _bookDal.Get(b => b.Id == bookId);
-        }
-
-        public async Task<List<Book>> GetBookList()
-        {
-            return await _bookDal.GetList();
         }
         public async Task<List<Book>> GetBookListByCategory(int categoryId)
         {
             return await _bookDal.GetList(b => b.Category_Id == categoryId);
         }
-        
-        public async Task AddBook(Book book)
+        public async Task<List<Book>> GetBookList()
         {
-            await _bookDal.Add(book);
+            return await _bookDal.GetList();
         }
 
-        public async Task DeleteBook(Book book)
-        {
-            throw new NotImplementedException();
-        }
 
-        public async Task UpdateBook(Book book)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

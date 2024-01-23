@@ -14,6 +14,6 @@ namespace BookSale.Sale.DataAccess.Abstract.Repositories
         Task<List<T>> GetList(Expression<Func<T, bool>> filter = null);
         Task Add(T entity);
         Task Update(T entity);
-        Task Delete(T entity);
+        Task Delete(Expression<Func<T, bool>> filter);
     }
 }

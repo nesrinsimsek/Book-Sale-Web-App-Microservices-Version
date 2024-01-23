@@ -9,10 +9,13 @@ namespace BookSale.Sale.Business.Abstract
 {
     public interface IOrderService
     {
+        Task AddOrder(Order order);
+        Task UpdateOrder(Order order);
+        Task DeleteOrder(int orderId);
+        Task<List<Order>> GetOrderById(int id);
+        Task<List<Order>> GetOrderListByUser(int userId);
         Task<List<Order>> GetOrderList();
-        Task Add(Order order);
-        Task Delete(Order order);
-        Task Update(Order order);
+
 
     }
 }

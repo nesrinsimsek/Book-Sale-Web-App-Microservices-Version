@@ -4,7 +4,6 @@ using BookSale.Sale.Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BookSale.Sale.Entities.Concrete.Models;
-using Azure;
 using System.Net;
 
 namespace BookSale.Sale.Api.Controllers
@@ -61,7 +60,7 @@ namespace BookSale.Sale.Api.Controllers
             }
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;
-            _response.Result = loginResponse;
+            _response.Data = loginResponse;
             return Ok(_response);
 
         }

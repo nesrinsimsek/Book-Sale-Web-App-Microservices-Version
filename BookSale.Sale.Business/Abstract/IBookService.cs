@@ -1,4 +1,5 @@
 ﻿using BookSale.Sale.Entities.Concrete;
+using BookSale.Sale.Entities.Concrete.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace BookSale.Sale.Business.Abstract
 {
     public interface IBookService
     {
+        Task AddBook(Book book);
+        Task UpdateBook(Book book);
+        Task DeleteBook(int bookId);
         Task<Book> GetBookById(int bookId);
         Task<List<Book>> GetBookList();
         Task<List<Book>> GetBookListByCategory(int categoryId);
-        Task AddBook(Book book);
-        Task DeleteBook(Book book);
-        Task UpdateBook(Book book);
     }
 }

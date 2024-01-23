@@ -1,5 +1,6 @@
 ﻿using BookSale.Sale.Business.Abstract;
 using BookSale.Sale.DataAccess.Abstract.Dals;
+using BookSale.Sale.DataAccess.Concrete.EntityFramework.Dals;
 using BookSale.Sale.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -18,25 +19,33 @@ namespace BookSale.Sale.Business.Concrete
             _orderDal = orderDal;
         }
 
+        public async Task AddOrder(Order order)
+        {
+            await _orderDal.Add(order);
+        }
+        public async Task UpdateOrder(Order order)
+        {
+            await _orderDal.Update(order);
+        }
+
+        public async Task DeleteOrder(int orderId)
+        {
+            await _orderDal.Delete(o => o.Id == orderId);
+        }
+
+        public async Task<List<Order>> GetOrderById(int id)
+        {
+            return await _orderDal.GetList(o => o.Id == id);
+        }
+
+        public async Task<List<Order>> GetOrderListByUser(int userId)
+        {
+            return await _orderDal.GetList(o => o.User_Id == userId);
+        }
+
         public async Task<List<Order>> GetOrderList()
         {
-            throw new NotImplementedException();
-        }
-        public async Task Add(Order order)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task Delete(Order order)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-        public async Task Update(Order order)
-        {
-            throw new NotImplementedException();
+            return await _orderDal.GetList();
         }
     }
 }

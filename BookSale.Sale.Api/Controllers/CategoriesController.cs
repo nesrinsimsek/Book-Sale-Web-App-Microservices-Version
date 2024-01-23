@@ -2,6 +2,7 @@
 using BookSale.Sale.Business.Abstract;
 using BookSale.Sale.Entities.Concrete;
 using BookSale.Sale.Entities.Concrete.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,9 +21,9 @@ namespace BookSale.Sale.Api.Controllers
             _mapper = mapper;
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetList()
+        public async Task<ActionResult<IEnumerable<CategoryGetDto>>> GetList()
         {
             var categories = await _categoryService.GetCategoryList();
             var categoryGetDtos = _mapper.Map<List<CategoryGetDto>>(categories);
