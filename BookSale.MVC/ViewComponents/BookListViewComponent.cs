@@ -10,40 +10,42 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 
-namespace BookSale.MVC.Components
+namespace BookSale.MVC.ViewComponents
 {
-    public class BookListViewComponent :ViewComponent
+    public class BookListViewComponent : ViewComponent
     {
-
         private readonly IBookService _bookService;
         private readonly IMapper _mapper;
+
         public BookListViewComponent(IBookService bookService, IMapper mapper)
         {
             _bookService = bookService;
             _mapper = mapper;
         }
+
         public async Task<IViewComponentResult> InvokeAsync(int categoryId)
         {
+            List<BookDto> list = new List<BookDto>();
+
             if (categoryId != 0)
             {
-                
-                return View(GetBookListByCategory(categoryId));
+                list = await GetBookListByCategory(categoryId);
             }
-
-            List<BookDto> list = new();
-
-            var response = await _bookService.GetAllAsync<ApiResponse>();
-            if (response != null && response.IsSuccess)
+            else
             {
-                list = JsonConvert.DeserializeObject<List<BookDto>>(Convert.ToString(response.Data));
+                var response = await _bookService.GetAllAsync<ApiResponse>();
+                if (response != null && response.IsSuccess)
+                {
+                    list = JsonConvert.DeserializeObject<List<BookDto>>(Convert.ToString(response.Data));
+                }
             }
+
             return View(list);
         }
 
-        public async Task<IEnumerable<BookDto>> GetBookListByCategory(int categoryId)
+        public async Task<List<BookDto>> GetBookListByCategory(int categoryId)
         {
-
-            List<BookDto> list = new();
+            var list = new List<BookDto>();
 
             var response = await _bookService.GetByCategoryAsync<ApiResponse>(categoryId);
             if (response != null && response.IsSuccess)
@@ -52,6 +54,7 @@ namespace BookSale.MVC.Components
             }
             return list;
         }
-
     }
+
+
 }

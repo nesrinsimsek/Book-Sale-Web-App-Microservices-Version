@@ -57,14 +57,22 @@
                                 }
                             }
 
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kategoriler</a>
-                                <div class="dropdown-menu mt-3 shadow-sm" aria-labelledby="pagesDropdown"><a class="dropdown-item border-0 transition-link" href="index.html">Homepage</a><a class="dropdown-item border-0 transition-link" href="shop.html">Category</a><a class="dropdown-item border-0 transition-link" href="detail.html">Product detail</a><a class="dropdown-item border-0 transition-link" href="cart.html">Shopping cart</a><a class="dropdown-item border-0 transition-link" href="checkout.html">Checkout</a></div>
+                                <div class="dropdown-menu mt-3 shadow-sm" aria-labelledby="pagesDropdown">
+                                   @await Component.InvokeAsync("CategoryList")
+                                </div>
                             </li>
+                            
+
+
                         </ul>
                         <ul class="navbar-nav ms-auto">
 
-                            @if (httpAcc.HttpContext.User.Identity.IsAuthenticated)
+
+                            @if (httpAcc.HttpContext.Session.GetString("JwtToken") != null &&
+                            httpAcc.HttpContext.Session.GetString("JwtToken").ToString().Length > 0)
                             {
                                 var userRole = httpAcc.HttpContext.User.FindFirstValue(ClaimTypes.Role);
                                 if (userRole == "User")

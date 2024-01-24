@@ -1,0 +1,6 @@
+﻿@model IEnumerable<BookSale.MVC.Models.Dtos.CategoryDto>
+
+@foreach (var category in Model)
+{
+    <a class="dropdown-item border-0 transition-link" asp-route-categoryId="@category.Id" asp-action="ListByCategory" asp-controller="Book">@category.Name</a>
+}

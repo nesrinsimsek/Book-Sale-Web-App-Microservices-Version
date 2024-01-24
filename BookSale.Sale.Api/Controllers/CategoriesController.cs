@@ -2,9 +2,11 @@
 using BookSale.Sale.Business.Abstract;
 using BookSale.Sale.Entities.Concrete;
 using BookSale.Sale.Entities.Concrete.Dtos;
+using BookSale.Sale.Entities.Concrete.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace BookSale.Sale.Api.Controllers
 {
@@ -14,20 +16,23 @@ namespace BookSale.Sale.Api.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
+        protected ApiResponse _response;
 
         public CategoriesController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
             _mapper = mapper;
+            _response = new ();
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetList()
+        public async Task<ActionResult<ApiResponse>> GetList()
         {
             var categories = await _categoryService.GetCategoryList();
             var categoryDtos = _mapper.Map<List<CategoryDto>>(categories);
-            return Ok(categoryDtos);
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = categoryDtos;
+            return Ok(_response);
 
         }
     }

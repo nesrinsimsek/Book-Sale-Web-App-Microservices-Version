@@ -19,21 +19,10 @@ namespace BookSale.MVC.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> ListByCategory(int categoryId)
+        public IActionResult ListByCategory(int categoryId)
         {
             return ViewComponent("BookList", categoryId);
         }
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    List<BookDto> list = new();
-
-        //    var response = await _bookService.GetAllAsync<ApiResponse>();
-        //    if (response != null && response.IsSuccess)
-        //    {
-        //        list = JsonConvert.DeserializeObject<List<BookDto>>(Convert.ToString(response.Data));
-        //    }
-        //    return View(list);
-        //}
     }
 }
