@@ -70,12 +70,13 @@ namespace BookSale.Sale.Business.Concrete
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
+                // jwt nin içinde taşınacak olan bilgiler 
                 Subject = new ClaimsIdentity(new Claim[]
                {
                     new Claim(ClaimTypes.Name, user.Id.ToString()),
                     new Claim(ClaimTypes.Role, user.Role)
                }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(7), //tokenin geçerlilik süresi, dolunca kullanıcı tekrar giriş yapmalı
                 SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

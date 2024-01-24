@@ -1,6 +1,8 @@
 using BookSale.MVC.Services.Abstract;
 using BookSale.MVC.Services.Concrete;
 using BookSale.Sale.MVC;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Options;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,9 +14,24 @@ builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 builder.Services.AddHttpClient<IBookService, BookService>();
 builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddHttpClient<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+              .AddCookie(options =>
+              {
+                  options.Cookie.HttpOnly = true;
+                  options.LoginPath = "/Auth/Login";
+                  options.AccessDeniedPath = "/Auth/AccessDenied";
+                  options.SlidingExpiration = true;
+              });
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(100);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
@@ -31,7 +48,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllerRoute(

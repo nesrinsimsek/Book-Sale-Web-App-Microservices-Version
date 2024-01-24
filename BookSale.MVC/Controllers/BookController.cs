@@ -18,6 +18,12 @@ namespace BookSale.MVC.Controllers
             _bookService = bookService;
             _mapper = mapper;
         }
+
+        public async Task<IActionResult> ListByCategory(int categoryId)
+        {
+            return ViewComponent("BookList", categoryId);
+        }
+
         //public async Task<IActionResult> Index()
         //{
         //    List<BookDto> list = new();

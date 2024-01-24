@@ -12,18 +12,24 @@ using Newtonsoft.Json;
 
 namespace BookSale.MVC.Components
 {
-    public class BookListAllViewComponent :ViewComponent
+    public class BookListViewComponent :ViewComponent
     {
 
         private readonly IBookService _bookService;
         private readonly IMapper _mapper;
-        public BookListAllViewComponent(IBookService bookService, IMapper mapper)
+        public BookListViewComponent(IBookService bookService, IMapper mapper)
         {
             _bookService = bookService;
             _mapper = mapper;
         }
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int categoryId)
         {
+            if (categoryId != 0)
+            {
+                
+                return View(GetBookListByCategory(categoryId));
+            }
+
             List<BookDto> list = new();
 
             var response = await _bookService.GetAllAsync<ApiResponse>();
@@ -33,5 +39,19 @@ namespace BookSale.MVC.Components
             }
             return View(list);
         }
+
+        public async Task<IEnumerable<BookDto>> GetBookListByCategory(int categoryId)
+        {
+
+            List<BookDto> list = new();
+
+            var response = await _bookService.GetByCategoryAsync<ApiResponse>(categoryId);
+            if (response != null && response.IsSuccess)
+            {
+                list = JsonConvert.DeserializeObject<List<BookDto>>(Convert.ToString(response.Data));
+            }
+            return list;
+        }
+
     }
 }

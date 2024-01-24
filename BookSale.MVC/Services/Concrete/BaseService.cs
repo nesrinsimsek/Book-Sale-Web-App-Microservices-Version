@@ -21,8 +21,8 @@ namespace BookSale.MVC.Services.Concrete
 
         public async Task<T> SendAsync<T>(ApiRequest apiRequest)
         {
-            try
-            {
+            //try
+            //    {
                 var client = httpClient.CreateClient("SaleAPI");
                 HttpRequestMessage message = new HttpRequestMessage();
                 message.Headers.Add("Accept", "application/json");
@@ -59,39 +59,39 @@ namespace BookSale.MVC.Services.Concrete
                 apiResponse = await client.SendAsync(message);
 
                 var apiContentStr = await apiResponse.Content.ReadAsStringAsync();
-                try
-                {
-                    ApiResponse responseObj = JsonConvert.DeserializeObject<ApiResponse>(apiContentStr);
-                    if (responseObj != null && (responseObj.StatusCode == System.Net.HttpStatusCode.BadRequest
-                        || responseObj.StatusCode == System.Net.HttpStatusCode.NotFound))
-                    {
-                        responseObj.StatusCode = System.Net.HttpStatusCode.BadRequest;
-                        responseObj.IsSuccess = false;
-                        var returnObjStr = JsonConvert.SerializeObject(responseObj);
-                        var returnObj = JsonConvert.DeserializeObject<T>(returnObjStr);
-                        return returnObj;
-                    }
-                }
-                catch (Exception e)
-                {
-                    var exceptionReturnObj = JsonConvert.DeserializeObject<T>(apiContentStr);
-                    return exceptionReturnObj;
-                }
-                var apiResponseReturnObj = JsonConvert.DeserializeObject<T>(apiContentStr);
-                return apiResponseReturnObj;
+            //    try
+            //    {
+            //        ApiResponse responseObj = JsonConvert.DeserializeObject<ApiResponse>(apiContentStr);
+            //        if (responseObj != null && (responseObj.StatusCode == System.Net.HttpStatusCode.BadRequest
+            //            || responseObj.StatusCode == System.Net.HttpStatusCode.NotFound))
+            //        {
+            //            responseObj.StatusCode = System.Net.HttpStatusCode.BadRequest;
+            //            responseObj.IsSuccess = false;
+            //            var returnObjStr = JsonConvert.SerializeObject(responseObj);
+            //            var returnObj = JsonConvert.DeserializeObject<T>(returnObjStr);
+            //            return returnObj;
+            //        }
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        var exceptionReturnObj = JsonConvert.DeserializeObject<T>(apiContentStr);
+            //        return exceptionReturnObj;
+            //    }
+            //    var apiResponseReturnObj = JsonConvert.DeserializeObject<T>(apiContentStr);
+            //    return apiResponseReturnObj;
 
-            }
-            catch (Exception e)
-            {
-                var dto = new ApiResponse
-                {
-                    ErrorMessages = new List<string> { Convert.ToString(e.Message) },
-                    IsSuccess = false
-                };
-                var res = JsonConvert.SerializeObject(dto);
-                var apiResponseExceptionReturnObj = JsonConvert.DeserializeObject<T>(res);
+            //}
+            //catch (Exception e)
+            //{
+                //var dto = new ApiResponse
+                //{
+                //    ErrorMessages = new List<string> { Convert.ToString(e.Message) },
+                //    IsSuccess = false
+                //};
+                //var res = JsonConvert.SerializeObject(dto);
+                var apiResponseExceptionReturnObj = JsonConvert.DeserializeObject<T>(apiContentStr);
                 return apiResponseExceptionReturnObj;
-            }
+            //}
         }
     }
 }

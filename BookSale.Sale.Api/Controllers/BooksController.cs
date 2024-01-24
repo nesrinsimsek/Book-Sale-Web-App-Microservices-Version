@@ -63,7 +63,7 @@ namespace BookSale.Sale.Api.Controllers
             var bookDto = _mapper.Map<BookDto>(book);
             _response.StatusCode = HttpStatusCode.OK;
             _response.Data = bookDto;
-            return Ok(bookDto);
+            return Ok(_response);
 
         }
 
@@ -74,7 +74,7 @@ namespace BookSale.Sale.Api.Controllers
             var bookDtos = _mapper.Map<List<BookDto>>(books);
             _response.StatusCode = HttpStatusCode.OK;
             _response.Data = bookDtos;
-            return Ok(bookDtos);
+            return Ok(_response);
         }
 
  

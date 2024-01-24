@@ -27,41 +27,40 @@ namespace BookSale.MVC.Controllers
 
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Login(LoginRequestDto obj)
-        //{
-        //    APIResponse response = await _authService.LoginAsync<APIResponse>(obj);
-        //    if (response != null && response.IsSuccess)
-        //    {
-        //        LoginResponseDTO model = JsonConvert.DeserializeObject<LoginResponseDTO>(Convert.ToString(response.Result));
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginRequestDto loginRequestDto)
+        {
+            ApiResponse response = await _authService.LoginAsync<ApiResponse>(loginRequestDto);
+            if (response != null && response.IsSuccess)
+            {
+                LoginResponseDto loginResponseDto = JsonConvert.DeserializeObject<LoginResponseDto>(Convert.ToString(response.Data));
 
-        //        var handler = new JwtSecurityTokenHandler();
-        //        var jwt = handler.ReadJwtToken(model.Token);
+                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                identity.AddClaim(new Claim(ClaimTypes.Name, loginResponseDto.User.Id.ToString()));
+                identity.AddClaim(new Claim(ClaimTypes.Role, loginResponseDto.User.Role));
+                var principal = new ClaimsPrincipal(identity);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-        //        var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-        //        identity.AddClaim(new Claim(ClaimTypes.Name, jwt.Claims.FirstOrDefault(u => u.Type == "name").Value));
-        //        identity.AddClaim(new Claim(ClaimTypes.Role, jwt.Claims.FirstOrDefault(u => u.Type == "role").Value));
-        //        var principal = new ClaimsPrincipal(identity);
-        //        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-
-
-        //        HttpContext.Session.SetString(SD.SessionToken, model.Token);
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    else
-        //    {
-        //        ModelState.AddModelError("CustomError", response.ErrorMessages.FirstOrDefault());
-        //        return View(obj);
-        //    }
-        //}
+                /* Başarılı bir giriş durumunda, kullanıcının JWT (Json Web Token) 
+                 * belirteci (token) HttpContext.Session üzerinde saklanır. 
+                 * Bu token, kullanıcının oturum bilgilerini korumak ve doğrulamak için kullanılır.*/
+                HttpContext.Session.SetString("JwtToken", loginResponseDto.Token); //
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("CustomError", response.ErrorMessages.FirstOrDefault());
+                return View(loginRequestDto);
+            }
+        }
 
 
         [HttpGet]
         public IActionResult Register() // register view sayfası için
         {
             return View();
-        } 
+        }
 
 
         [HttpPost]
@@ -75,6 +74,14 @@ namespace BookSale.MVC.Controllers
             }
             return View();
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            HttpContext.Session.SetString("JwtToken", "");
+            return RedirectToAction("Index", "Home");
+        }
+
 
     }
 }

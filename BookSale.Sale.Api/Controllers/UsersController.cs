@@ -33,14 +33,8 @@ namespace BookSale.Sale.Api.Controllers
                 _response.ErrorMessages.Add("Username already exists");
                 return BadRequest(_response);
             }
-            var user = await _userService.Register(registrationRequestDto);
-            if (user == null)
-            {
-                _response.StatusCode = HttpStatusCode.BadRequest;
-                _response.IsSuccess = false;
-                _response.ErrorMessages.Add("Error while registering");
-                return BadRequest(_response);
-            }
+            await _userService.Register(registrationRequestDto);
+
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;
             return Ok(_response);

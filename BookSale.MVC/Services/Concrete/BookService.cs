@@ -58,6 +58,16 @@ namespace BookSale.MVC.Services.Concrete
             });
         }
 
+        public Task<T> GetByCategoryAsync<T>(int categoryId)
+        {
+            return SendAsync<T>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.GET,
+                Url = bookUrl + "/api/Books/ByCategory" + categoryId
+
+            });
+        }
+
         public Task<T> UpdateAsync<T>(BookUpdateDto dto)
         {
             return SendAsync<T>(new ApiRequest()
