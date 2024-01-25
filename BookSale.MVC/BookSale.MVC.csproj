@@ -13,11 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BookSale.Sale.Business\BookSale.Sale.Business.csproj" />
     <ProjectReference Include="..\BookSale.Sale.Entities\BookSale.Sale.Entities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Book\" />
   </ItemGroup>
 
 </Project>

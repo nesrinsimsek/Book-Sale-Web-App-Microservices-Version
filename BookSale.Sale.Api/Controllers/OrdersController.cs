@@ -23,7 +23,7 @@ namespace BookSale.Sale.Api.Controllers
             _mapper = mapper;
         }
 
-        [Authorize(Roles = "User")]
+
         [HttpPost]
         public async Task<ActionResult<OrderCreateDto>> Add([FromBody] OrderCreateDto orderCreateDto) //bunu dto yap
         {
@@ -33,7 +33,6 @@ namespace BookSale.Sale.Api.Controllers
 
         }
 
-        [Authorize(Roles = "User")]
         [HttpPut("{orderId}")]
         public async Task<ActionResult<OrderDto>> Update(int orderId, [FromBody] OrderUpdateDto orderUpdateDto) //bunu dto yap
         {
@@ -45,7 +44,6 @@ namespace BookSale.Sale.Api.Controllers
 
         }
 
-        [Authorize(Roles = "User")]
         [HttpDelete("{orderId}")]
         public async Task<ActionResult> Delete(int orderId) //bunu dto yap
         {
@@ -53,7 +51,7 @@ namespace BookSale.Sale.Api.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
+
         [HttpGet("ById/{orderId}")]
         public async Task<ActionResult<OrderDto>> Get(int orderId)
         {

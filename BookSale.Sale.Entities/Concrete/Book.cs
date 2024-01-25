@@ -17,6 +17,7 @@ namespace BookSale.Sale.Entities.Concrete
         public string Author { get; set; }
         public string Publisher { get; set; }
         public string ISBN { get; set; }
+        public string ImageUrl { get; set; }
 
         [ForeignKey("Category")]
         public int Category_Id { get; set; }

@@ -14,6 +14,7 @@ namespace BookSale.Sale.Entities.Concrete.Dtos
         public string Author { get; set; }
         public string Publisher { get; set; }
         public string ISBN { get; set; }
+        public string ImageUrl { get; set; }
         public int Category_Id { get; set; }
     }
 }

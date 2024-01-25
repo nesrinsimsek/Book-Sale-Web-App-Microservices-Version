@@ -1,6 +1,8 @@
 ﻿using BookSale.Sale.Business.Abstract;
 using BookSale.Sale.DataAccess.Abstract.Dals;
+using BookSale.Sale.DataAccess.Concrete.EntityFramework.Dals;
 using BookSale.Sale.Entities.Concrete;
+using BookSale.Sale.Entities.Concrete.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;

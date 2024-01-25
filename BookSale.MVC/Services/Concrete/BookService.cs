@@ -53,7 +53,7 @@ namespace BookSale.MVC.Services.Concrete
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = bookUrl + "/api/Books/" + id
+                Url = bookUrl + "/api/Books/ById/" + id
 
             });
         }

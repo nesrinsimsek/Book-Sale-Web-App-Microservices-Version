@@ -1,0 +1,96 @@
+﻿@model CartListViewModel
+
+<div class="page-holder">
+
+
+    <div class="container">
+        <!-- HERO SECTION-->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="h2 text-uppercase mb-0">SEPETİM</h1>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <section class="py-5">
+            <div class="row">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <!-- CART TABLE-->
+                    <div class="table-responsive mb-4">
+                        <table class="table text-nowrap">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">ÜRÜN</strong></th>
+                                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">BİRİM FİYATI</strong></th>
+                                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">ADET</strong></th>
+                                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">TOPLAM</strong></th>
+                                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase"></strong></th>
+                                </tr>
+                            </thead>
+                            <tbody class="border-0">
+
+                                @foreach(var item in Model.Cart.CartLines)
+                                {
+                                    <tr>
+                                        <th class="ps-0 py-3 border-0" scope="row">
+                                            <div class="d-flex align-items-center">
+                                                <a class="reset-anchor d-block animsition-link" href="detail.html"><img src="@item.Book.ImageUrl" alt="Kitap Resmi" width="70" /></a>
+                                                <div class="ms-3"><strong class="h6"><a class="reset-anchor animsition-link" href="detail.html">@item.Book.Name</a></strong></div>
+                                            </div>
+                                        </th>
+                                        <td class="p-3 align-middle border-0">
+                                            <p class="mb-0 small">@item.Book.Price</p>
+                                        </td>
+                                        <td class="p-3 align-middle border-0">
+                                            <div class="border d-flex align-items-center justify-content-between px-3">
+                                                <div class="quantity">
+                                                    <a asp-action="DecreaseQuantityInCart" asp-controller="Cart" asp-route-bookId="@item.Book.Id" class="dec-btn p-0"><i class="fas fa-caret-left"></i></a>
+                                                    <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text" value="@item.Quantity" />
+                                                    <a asp-action="IncreaseQuantityInCart" asp-controller="Cart" asp-route-bookId="@item.Book.Id" class="inc-btn p-0"><i class="fas fa-caret-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-3 align-middle border-0">
+                                            @{
+                                                var totalPrice = item.Book.Price * item.Quantity;
+                                            }
+                                            <p class="mb-0 small">@totalPrice</p>
+                                        </td>
+                                        <td class="p-3 align-middle border-0"><a asp-action="RemoveFromCart" asp-controller="Cart" asp-route-bookId="@item.Book.Id" class="reset-anchor"><i class="fas fa-trash-alt small text-muted"></i></a></td>
+                                    </tr>
+                                }
+
+                               
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <!-- ORDER TOTAL-->
+                <div class="col-lg-4">
+                    <div class="card border-0 rounded-0 p-lg-4 bg-light">
+                        <div class="card-body">
+                            <h5 class="text-uppercase mb-4">Toplam Sepet Tutarı</h5>
+                            <ul class="list-unstyled mb-0">
+
+
+                                <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Toplam</strong><span>@Model.Cart.TotalPrice</span></li>
+                                <li class="border-bottom my-2"></li>
+                                <li>
+                                    <form action="#">
+                                        <div class="input-group mb-0">
+                                            <button class="btn btn-dark btn-sm w-100" type="submit"> <i class="fas fa-gift me-2"></i>Siparişi Tamamla</button>
+                                        </div>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

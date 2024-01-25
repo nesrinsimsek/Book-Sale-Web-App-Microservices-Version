@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Azure;
 using BookSale.Sale.Business.Abstract;
 using BookSale.Sale.Entities.Concrete;
 using BookSale.Sale.Entities.Concrete.Dtos;
 using BookSale.Sale.Entities.Concrete.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
@@ -26,17 +28,22 @@ namespace BookSale.Sale.Api.Controllers
             _response = new();
         }
 
-        [Authorize(Roles = "Admin")]
+       
         [HttpPost]
         public async Task<ActionResult<ApiResponse>> Add([FromBody] BookCreateDto bookCreateDto) //bunu dto yap
         {
             Book book = _mapper.Map<Book>(bookCreateDto);
+
+
             await _bookService.AddBook(book);
-            return Ok(bookCreateDto);
+            _response.Data = _mapper.Map<BookDto>(book);
+            _response.StatusCode = HttpStatusCode.Created;
+
+            return _response;
 
         }
 
-        [Authorize(Roles = "Admin")]
+    
         [HttpPut("{bookId}")]
         public async Task<ActionResult<BookDto>> Update(int bookId, [FromBody] BookUpdateDto bookUpdateDto) //bunu dto yap
         {
@@ -47,7 +54,7 @@ namespace BookSale.Sale.Api.Controllers
 
         }
 
-        [Authorize(Roles = "Admin")]
+  
         [HttpDelete("{bookId}")]
         public async Task<ActionResult> Delete(int bookId) //bunu dto yap
         {
@@ -59,7 +66,7 @@ namespace BookSale.Sale.Api.Controllers
         [HttpGet("ById/{bookId}")]
         public async Task<ActionResult<BookDto>> Get(int bookId)
         {
-            var book= await _bookService.GetBookById(bookId);
+            var book = await _bookService.GetBookById(bookId);
             var bookDto = _mapper.Map<BookDto>(book);
             _response.StatusCode = HttpStatusCode.OK;
             _response.Data = bookDto;
@@ -77,11 +84,11 @@ namespace BookSale.Sale.Api.Controllers
             return Ok(_response);
         }
 
- 
+
         [HttpGet]
         public async Task<ActionResult<ApiResponse>> GetList()
         {
-           
+
             var books = await _bookService.GetBookList();
             var bookDtos = _mapper.Map<List<BookDto>>(books);
             _response.StatusCode = HttpStatusCode.OK;

@@ -1,9 +1,13 @@
+using BookSale.MVC.Helpers;
 using BookSale.MVC.Services.Abstract;
 using BookSale.MVC.Services.Concrete;
+using BookSale.Sale.Business.Abstract;
+using BookSale.Sale.Business.Concrete;
 using BookSale.Sale.MVC;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
-
+using IBookService = BookSale.MVC.Services.Abstract.IBookService;
+using ICategoryService = BookSale.MVC.Services.Abstract.ICategoryService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +24,9 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddHttpClient<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICartService, CartManager>();
+builder.Services.AddScoped<ICartSessionHelper, CartSessionHelper>();
+
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
               .AddCookie(options =>

@@ -1,0 +1,115 @@
+﻿@model CategoryListViewModel
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Üye Ol</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/registerUI/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/registerUI/css/style.css">
+</head>
+<body>
+
+    <div class="main">
+
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Kitap Ekle</h2>
+                        <form method="POST" class="register-form" id="register-form">
+                            <strong>Kategori Seçimi</strong>
+                            <br />
+
+                            <select id="category">
+                                <option value="" selected>Seçiniz</option>
+                                @foreach (var item in Model.Categories)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+
+                            <script>
+                                // Sayfa yüklendiğinde çalışacak kod
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    // Dropdown elementini al
+                                    var selectElement = document.getElementById("category");
+
+                                    // Değişiklik olduğunda çalışacak kod
+                                    selectElement.onchange = function () {
+                                        // Seçilen option'un değerini al
+                                        var selectedValue = selectElement.value;
+
+                                        // categoryContainer elementine değeri ata
+                                        document.getElementById("categoryContainer").value = selectedValue;
+                                    };
+
+                                    var selectedValue = selectElement.value;
+                                    document.getElementById("categoryContainer").value = selectedValue;
+                                });
+
+                                // function validateForm() {
+                                //     var inputField1 = document.getElementById("categoryContainer"); // Boş bırakılan input alanının id'sini kullanın
+                                //     var inputField2 = document.getElementById("title"); // Boş bırakılan input alanının id'sini kullanın
+                                //     var inputField3 = document.getElementById("content"); // Boş bırakılan input alanının id'sini kullanın
+                                //     var inputValue1 = inputField1.value.trim();
+                                //     var inputValue2 = inputField2.value.trim();
+                                //     var inputValue3 = inputField3.value.trim();
+
+                                //     if (inputValue1 === "" || inputValue2 === "" || inputValue3 === "") {
+                                //         alert("All input fields are required.");
+                                //         return false; // Formun gönderilmesini engelle
+                                //     }
+
+                                //     return true; // Formu gönder
+                                // }
+                            </script>
+
+                            <div class="form-floating">
+                                <input id="categoryContainer" asp-for="@Model.BookCreateDto.Category_Id" hidden />
+                                @* <span asp-validation-for=@Model.PostList.LastOrDefault().Category_Id class="text-danger"></span> *@
+                            </div>
+
+                            <br />
+                            <div class="form-group">
+                                <input asp-for="@Model.BookCreateDto.Name" type="text" placeholder="Kitap İsmi" />
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="@Model.BookCreateDto.Price" type="number" placeholder="Fiyatı" />
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="@Model.BookCreateDto.StockAmount" type="number" autocomplete="off" placeholder="Stok Adeti" />
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="@Model.BookCreateDto.Author" type="text"  placeholder="Yazarı" />
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="@Model.BookCreateDto.Publisher" type="text" placeholder="Yayınevi" />
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="@Model.BookCreateDto.ISBN" type="text" placeholder="ISBN" />
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="@Model.BookCreateDto.ImageUrl" type="text" placeholder="Kitap Resim Linki" />
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Kitap Ekle" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="~/registerUI/images/createbook-image.jpg" alt="sing up image"></figure>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
