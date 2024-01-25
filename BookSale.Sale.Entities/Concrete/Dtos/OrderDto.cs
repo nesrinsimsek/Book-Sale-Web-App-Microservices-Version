@@ -10,6 +10,7 @@ namespace BookSale.Sale.Entities.Concrete.Dtos
     {
         public int Id { get; set; }
         public string Address { get; set; }
+        public int User_Id { get; set; }
         public ICollection<OrderBookDto> OrderBooks { get; set; } = new List<OrderBookDto>();
     }
 }

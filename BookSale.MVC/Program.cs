@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
 using IBookService = BookSale.MVC.Services.Abstract.IBookService;
 using ICategoryService = BookSale.MVC.Services.Abstract.ICategoryService;
+using IOrderService = BookSale.MVC.Services.Abstract.IOrderService;
+using IOrderBookService = BookSale.MVC.Services.Abstract.IOrderBookService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,13 +19,17 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddHttpClient<IBookService, BookService>();
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddHttpClient<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddHttpClient<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddHttpClient<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddHttpClient<IOrderBookService, OrderBookService>();
+builder.Services.AddScoped<IOrderBookService, OrderBookService>();
 builder.Services.AddScoped<ICartService, CartManager>();
 builder.Services.AddScoped<ICartSessionHelper, CartSessionHelper>();
 

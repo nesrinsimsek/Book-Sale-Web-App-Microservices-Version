@@ -10,5 +10,6 @@ namespace BookSale.MVC.Models.Dtos
     public class OrderCreateDto
     {
         public string Address { get; set; }
+        public int User_Id { get; set; }
     }
 }

@@ -28,6 +28,9 @@ namespace BookSale.IoC
 
             services.AddTransient<IOrderService, OrderManager>();
             services.AddTransient<IOrderDal, EfOrderDal>();
+            
+            services.AddTransient<IOrderBookService, OrderBookManager>();
+            services.AddTransient<IOrderBookDal, EfOrderBookDal>();
 
 
             //Domain Bus

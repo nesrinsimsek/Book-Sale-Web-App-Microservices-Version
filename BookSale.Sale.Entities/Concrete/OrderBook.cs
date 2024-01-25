@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookSale.Sale.Entities.Abstract;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookSale.Sale.Entities.Concrete
 {
-    public class OrderBook
+    public class OrderBook : IEntity
     {
         [ForeignKey("Order")]
         public int Order_Id { get; set; }
