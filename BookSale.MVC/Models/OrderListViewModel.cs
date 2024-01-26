@@ -7,6 +7,6 @@ namespace BookSale.MVC.Models
         public OrderDto Order { get; set; }
         public List<BookDto> BookList = new List<BookDto>();
         public UserDto User { get; set; }
-        public OrderBookDto OrderBook { get; set; }
+        public List<OrderBookDto> OrderBookList = new List<OrderBookDto>();
     }
 }

@@ -14,16 +14,6 @@ namespace BookSale.Sale.MVC
             CreateMap<OrderDto, OrderCreateDto>().ReverseMap();
             CreateMap<OrderDto, OrderUpdateDto>().ReverseMap();
 
-            //CreateMap<Book, BookUpdateDto>().ReverseMap();
-
-            //CreateMap<Order, OrderCreateDto>().ReverseMap();
-            //CreateMap<Order, OrderGetDto>().ReverseMap();
-            //CreateMap<Order, OrderUpdateDto>().ReverseMap();
-
-            //CreateMap<Category, CategoryGetDto>().ReverseMap();
-            
-            //CreateMap<User, RegistrationRequestDto>().ReverseMap();
-
         }
     }
 }

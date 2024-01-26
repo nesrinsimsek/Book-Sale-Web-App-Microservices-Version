@@ -93,12 +93,12 @@ namespace BookSale.MVC.Controllers
                     {
                         Order = order,
                         User = user,
-                        OrderBook = orderBook,
                     };
                     orderListViewModelList.Add(orderListViewModel);
                 }
 
                 orderListViewModel.BookList.Add(book);
+                orderListViewModel.OrderBookList.Add(orderBook);
             }
 
             return View(orderListViewModelList);

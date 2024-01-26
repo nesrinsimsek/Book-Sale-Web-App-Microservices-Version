@@ -32,32 +32,6 @@ namespace BookSale.IoC
             services.AddTransient<IOrderBookService, OrderBookManager>();
             services.AddTransient<IOrderBookDal, EfOrderBookDal>();
 
-
-            //Domain Bus
-            //services.AddSingleton<IEventBus, RabbitMQBus>(sp =>
-            //{
-            //    var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
-            //    return new RabbitMQBus(sp.GetService<IMediator>(), scopeFactory);
-            //});
-
-            ////Subscriptions
-            //services.AddTransient<TransferEventHandler>();
-
-            ////Domain Events
-            //services.AddTransient<IEventHandler<TransferCreatedEvent>, TransferEventHandler>();
-
-            ////Domain Banking Commands
-            //services.AddTransient<IRequestHandler<CreateTransferCommand, bool>, TransferCommandHandler>();
-
-            ////Application Services
-            //services.AddTransient<IAccountService, AccountService>();
-            //services.AddTransient<ITransferService, TransferService>();
-
-            ////Data
-            //services.AddTransient<IAccountRepository, AccountRepository>();
-            //services.AddTransient<ITransferRepository, TransferRepository>();
-            //services.AddTransient<BankingDbContext>();
-            //services.AddTransient<TransferDbContext>();
         }
     }
 }

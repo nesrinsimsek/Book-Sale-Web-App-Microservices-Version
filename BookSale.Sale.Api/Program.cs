@@ -69,11 +69,10 @@ builder.Services.AddSwaggerGen(options =>
     });
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Sale Api", Version = "v1" });
 });
-//builder.Services.AddMediatR(typeof(Program));
+
 
 DependencyContainer.RegisterServices(builder.Services);
 
-//builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<SaleDbContext>();
 
 var app = builder.Build();
 
