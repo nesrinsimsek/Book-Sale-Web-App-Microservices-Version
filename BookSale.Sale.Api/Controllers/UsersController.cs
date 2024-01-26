@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BookSale.Sale.Entities.Concrete.Models;
 using System.Net;
+using AutoMapper;
 
 namespace BookSale.Sale.Api.Controllers
 {
@@ -13,11 +14,13 @@ namespace BookSale.Sale.Api.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
         protected ApiResponse _response;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
             _response = new();
         }
 
@@ -55,6 +58,16 @@ namespace BookSale.Sale.Api.Controllers
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;
             _response.Data = loginResponse;
+            return Ok(_response);
+
+        }
+        [HttpGet("ById/{userId}")]
+        public async Task<ActionResult<UserDto>> Get(int userId)
+        {
+            var user = await _userService.GetUserById(userId);
+            UserDto userDto = _mapper.Map<UserDto>(user);
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = userDto;
             return Ok(_response);
 
         }

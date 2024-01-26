@@ -13,5 +13,10 @@ namespace BookSale.Sale.Entities.CartModels
     {
         public Book Book { get; set; }
         public int Quantity { get; set; }
+        public decimal TotalPrice
+        {
+            get { return Quantity * Book.Price; }
+        }
+
     }
 }

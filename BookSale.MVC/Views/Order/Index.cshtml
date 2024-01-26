@@ -1,4 +1,8 @@
-﻿
+﻿@model IEnumerable<OrderListViewModel>
+@{
+    decimal totalOrderPrice = 0;
+}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,53 +35,52 @@
 </head>
 
 <body>
-
-    <!-- ***** Preloader Start ***** -->
-
-
     <div class="recent-listing" style="margin-top:0px; padding-top:50px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-heading">
-                        <h2>Recent Listing</h2>
+                    <div class="col-lg-6">
+                        <h1 class="h2 mb-0">SİPARİŞLER</h1>
                     </div>
+                    <br />
                 </div>
-                <div class="col-lg-12">
-                    <div class="owl-carousel owl-listing">
-                        <div class="item">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="listing-item">
-                                        <div class="left-image">
-                                            <a href="#"><img src="~/orderUI/assets/images/listing-01.jpg" alt=""></a>
-                                        </div>
-                                        <div class="right-content align-self-center">
-                                            <a href="#"><h4>First Apartment Unit</h4></a>
-
-                                            <span class="price"><div class="icon"><img src="~/orderUI/assets/images/listing-icon-01.png" alt=""></div> $450 - $950 / month with taxes</span>
-                                            <span class="details">Details: <em>2760 sq ft</em></span>
-                                            <ul class="info">
-                                                <li><img src="~/orderUI/assets/images/listing-icon-02.png" alt=""> 4 Bedrooms</li>
-                                                <li><img src="~/orderUI/assets/images/listing-icon-03.png" alt=""> 4 Bathrooms</li>
-                                            </ul>
-                                            <div class="main-white-button">
-                                                <a href="contact.html"><i class="fa fa-eye"></i> Contact Now</a>
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-12">
+                        <div class="owl-carousel owl-listing">
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="listing-item">
+                                            <div class="left-image">
+                                                
+                                            </div>
+                                            <div class="right-content align-self-center">
+                                                @foreach (var book in item.BookList)
+                                                {
+                                                    totalOrderPrice += book.Price * item.OrderBook.Quantity;
+                                                    <h4>@book.Name</h4>
+                                                    <span class="details">Sipariş Adeti: <em>@item.OrderBook.Quantity</em></span>
+                                                }
+                                                <span class="details">Müşteri İsmi: <em>@item.User.Name @item.User.Surname</em></span>
+                                                <span class="details">Toplam Sipariş Tutarı: <em>@totalOrderPrice</em></span>
+                                                <span class="details">Gönderileceği Adres: <em>@item.Order.Address</em></span>
+                                                <span class="price"></span>
+                                                <div class="main-white-button">
+                                                    <a href="contact.html" style="background-color:mediumspringgreen">Siparişi Onayla</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-                </div>
+                }
+
             </div>
         </div>
     </div>
-
-
-
 
     <!-- Scripts -->
     <script src="vendor/jquery/jquery.min.js"></script>

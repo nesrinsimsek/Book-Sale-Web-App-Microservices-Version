@@ -7,6 +7,5 @@ namespace BookSale.MVC.Models
     {
         public Cart Cart { get; set; }
         public OrderCreateDto OrderCreateDto { get; set; }
-        public List<OrderBookDto> OrderBookList { get; set; }
     }
 }

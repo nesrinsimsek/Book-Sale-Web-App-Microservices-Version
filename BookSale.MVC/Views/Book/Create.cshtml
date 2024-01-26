@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Üye Ol</title>
+    <title>Kitap Ekle</title>
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="~/registerUI/fonts/material-icon/css/material-design-iconic-font.min.css">
@@ -23,11 +23,13 @@
                     <div class="signup-form">
                         <h2 class="form-title">Kitap Ekle</h2>
                         <form method="POST" class="register-form" id="register-form">
-                            <label class="form-label text-sm">>Kategori Seçimi</label>
+
+                            <strong><div>Kategori Seçimi</div></strong>
+                           
                             <br />
 
                             <select id="category">
-                                <option value="" selected>Seçiniz</option>
+                                <option value="" selected>Seçiniz ...</option>
                                 @foreach (var item in Model.Categories)
                                 {
                                     <option value="@item.Id">@item.Name</option>

@@ -13,5 +13,6 @@ namespace BookSale.Sale.Business.Abstract
         bool IsUniqueUser(string email);
         Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto);
         Task<User> Register(RegistrationRequestDto registrationRequestDto);
+        Task<User> GetUserById(int userId);
     }
 }

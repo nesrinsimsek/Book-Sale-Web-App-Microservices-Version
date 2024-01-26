@@ -12,7 +12,7 @@ namespace BookSale.Sale.Business.Abstract
         Task AddOrder(Order order);
         Task UpdateOrder(Order order);
         Task DeleteOrder(int orderId);
-        Task<List<Order>> GetOrderById(int id);
+        Task<Order> GetOrderById(int id);
         Task<List<Order>> GetOrderListByUser(int userId);
         Task<List<Order>> GetOrderList();
 

@@ -29,7 +29,6 @@ namespace BookSale.MVC.Services.Concrete
         }
 
 
-
         public Task<T> RegisterAsync<T>(RegistrationRequestDto registrationRequestDto)
         {
             return SendAsync<T>(new ApiRequest()
@@ -37,6 +36,16 @@ namespace BookSale.MVC.Services.Concrete
                 ApiType = SD.ApiType.POST,
                 Data = registrationRequestDto,
                 Url = authUrl + "/api/Users/Register"
+
+            });
+        }
+
+        public Task<T> GetAsync<T>(int id)
+        {
+            return SendAsync<T>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.GET,
+                Url = authUrl + "/api/Users/ById/" + id
 
             });
         }

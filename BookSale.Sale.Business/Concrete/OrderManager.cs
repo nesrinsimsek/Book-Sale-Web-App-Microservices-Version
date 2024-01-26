@@ -33,9 +33,9 @@ namespace BookSale.Sale.Business.Concrete
             await _orderDal.Delete(o => o.Id == orderId);
         }
 
-        public async Task<List<Order>> GetOrderById(int id)
+        public async Task<Order> GetOrderById(int id)
         {
-            return await _orderDal.GetList(o => o.Id == id);
+            return await _orderDal.Get(o => o.Id == id);
         }
 
         public async Task<List<Order>> GetOrderListByUser(int userId)

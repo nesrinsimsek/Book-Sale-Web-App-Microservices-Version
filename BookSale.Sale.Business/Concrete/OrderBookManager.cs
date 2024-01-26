@@ -22,5 +22,10 @@ namespace BookSale.Sale.Business.Concrete
         {
             await _orderBookDal.Add(orderBook);
         }
+
+        public async Task<List<OrderBook>> GetOrderBookList()
+        {
+            return await _orderBookDal.GetList();
+        }
     }
 }

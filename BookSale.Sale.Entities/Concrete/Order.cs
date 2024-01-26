@@ -16,7 +16,7 @@ namespace BookSale.Sale.Entities.Concrete
         [ForeignKey("User")]
         public int User_Id { get; set; }
         public User User { get; set; }
-
+        public decimal TotalPrice { get; set; }
         public ICollection<OrderBook> OrderBooks { get; set; } = new List<OrderBook>();
     }
 }

@@ -30,6 +30,7 @@ builder.Services.AddHttpClient<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddHttpClient<IOrderBookService, OrderBookService>();
 builder.Services.AddScoped<IOrderBookService, OrderBookService>();
+
 builder.Services.AddScoped<ICartService, CartManager>();
 builder.Services.AddScoped<ICartSessionHelper, CartSessionHelper>();
 

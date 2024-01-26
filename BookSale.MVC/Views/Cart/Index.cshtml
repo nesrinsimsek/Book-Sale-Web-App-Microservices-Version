@@ -54,10 +54,8 @@
                                             </div>
                                         </td>
                                         <td class="p-3 align-middle border-0">
-                                            @{
-                                                var totalPrice = item.Book.Price * item.Quantity;
-                                            }
-                                            <p class="mb-0 small">@totalPrice</p>
+                                       
+                                            <p class="mb-0 small">@item.TotalPrice</p>
                                         </td>
                                         <td class="p-3 align-middle border-0"><a asp-action="RemoveFromCart" asp-controller="Cart" asp-route-bookId="@item.Book.Id" class="reset-anchor"><i class="fas fa-trash-alt small text-muted"></i></a></td>
                                     </tr>

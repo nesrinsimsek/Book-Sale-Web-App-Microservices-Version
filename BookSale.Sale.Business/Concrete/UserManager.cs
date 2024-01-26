@@ -2,6 +2,7 @@
 using BookSale.Sale.Business.Abstract;
 using BookSale.Sale.DataAccess.Abstract.Dals;
 using BookSale.Sale.DataAccess.Concrete.EntityFramework.Contexts;
+using BookSale.Sale.DataAccess.Concrete.EntityFramework.Dals;
 using BookSale.Sale.Entities.Concrete;
 using BookSale.Sale.Entities.Concrete.Dtos;
 using BookSale.Sale.Utility;
@@ -14,6 +15,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,8 +40,13 @@ namespace BookSale.Sale.Business.Concrete
             _saleDbContext = saleDbContext;
             _mapper = mapper;
             _userDal = userDal;
-            
         }
+
+        public async Task<User> GetUserById(int userId)
+        {
+            return await _userDal.Get(u => u.Id == userId);
+        }
+
         public bool IsUniqueUser(string email)
         {
             var user = _saleDbContext.Users.FirstOrDefault(u => u.Email == email);

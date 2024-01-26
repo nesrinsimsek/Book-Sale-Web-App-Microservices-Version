@@ -88,5 +88,15 @@ namespace BookSale.Sale.Api.Controllers
             return Ok(_response);
 
         }
+        [HttpGet("ById/{orderId}")]
+        public async Task<ActionResult<ApiResponse>> Get(int orderId)
+        {
+            var order = await _orderService.GetOrderById(orderId);
+            OrderDto orderDto = _mapper.Map<OrderDto>(order);
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = orderDto;
+            return Ok(_response);
+
+        }
     }
 }

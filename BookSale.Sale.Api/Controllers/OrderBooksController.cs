@@ -36,5 +36,17 @@ namespace BookSale.Sale.Api.Controllers
             return _response;
 
         }
+        [HttpGet]
+        public async Task<ActionResult<ApiResponse>> GetList()
+        {
+
+            var orderBooks = await _orderBookService.GetOrderBookList();
+            var orderBookDtos = _mapper.Map<List<OrderBookDto>>(orderBooks);
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = orderBookDtos;
+            return Ok(_response);
+
+        }
+
     }
 }

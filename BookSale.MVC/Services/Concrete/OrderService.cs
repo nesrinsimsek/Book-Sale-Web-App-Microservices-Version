@@ -36,6 +36,15 @@ namespace BookSale.MVC.Services.Concrete
 
             });
         }
+        public Task<T> GetAsync<T>(int id)
+        {
+            return SendAsync<T>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.GET,
+                Url = orderUrl + "/api/Orders/ById/" + id
+
+            });
+        }
     }
 }
 

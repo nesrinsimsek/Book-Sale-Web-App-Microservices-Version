@@ -11,5 +11,6 @@ namespace BookSale.Sale.Entities.Concrete.Dtos
     {
         public string Address { get; set; }
         public int User_Id { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }
