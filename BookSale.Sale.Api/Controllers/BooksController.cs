@@ -45,7 +45,7 @@ namespace BookSale.Sale.Api.Controllers
 
     
         [HttpPut("{bookId}")]
-        public async Task<ActionResult<BookDto>> Update(int bookId, [FromBody] BookUpdateDto bookUpdateDto) //bunu dto yap
+        public async Task<ActionResult<ApiResponse>> Update(int bookId, [FromBody] BookUpdateDto bookUpdateDto) //bunu dto yap
         {
             Book book = _mapper.Map<Book>(bookUpdateDto);
             await _bookService.UpdateBook(book);

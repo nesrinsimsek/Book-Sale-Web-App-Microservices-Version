@@ -82,7 +82,7 @@
                                 <input asp-for="@Model.BookCreateDto.Name" type="text" placeholder="Kitap İsmi" />
                             </div>
                             <div class="form-group">
-                                <input asp-for="@Model.BookCreateDto.Price" type="number" placeholder="Fiyatı" />
+                                <input asp-for="@Model.BookCreateDto.Price" type="number" step=".01" placeholder="Fiyatı" />
                             </div>
                             <div class="form-group">
                                 <input asp-for="@Model.BookCreateDto.StockAmount" type="number" autocomplete="off" placeholder="Stok Adeti" />

@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Kitap Dükkanı</title>
+    <title>Kitap Köşesi</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -26,7 +26,7 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="~/homeUI/css/custom.css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="~/homeUI/img/favicon.png">
+    <link rel="shortcut icon" href="~/homeUI/img/favicon-new.png">
 </head>
 <body>
     <div class="page-holder">
@@ -34,7 +34,9 @@
         <header class="header bg-white">
             <div class="container px-lg-3" style="width:auto;">
                 <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0">
-                    <a class="navbar-brand" asp-action="Index" asp-controller="Home"><span class="fw-bold text-uppercase text-dark">KİTAP DÜKKANI</span></a>
+                    <a class="navbar-brand" asp-action="Index" asp-controller="Home">
+                        <span class="fw-bold text-uppercase text-dark style="font-size: 22px;">KİTAP KÖŞESİ</span>
+                    </a>
                     <button class="navbar-toggler navbar-toggler-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto">
@@ -61,10 +63,10 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kategoriler</a>
                                 <div class="dropdown-menu mt-3 shadow-sm" aria-labelledby="pagesDropdown">
-                                   @await Component.InvokeAsync("CategoryList")
+                                    @await Component.InvokeAsync("CategoryList")
                                 </div>
                             </li>
-                            
+
 
 
                         </ul>
@@ -108,7 +110,7 @@
                 <div class="border-top pt-4" style="border-color: #1d1d1d !important">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start">
-                            <p class="small mb-0"><strong>www.kitapdukkani.com</strong> &copy; 2024 Tüm Hakları Saklıdır.</p>
+                            <p class="small mb-0"><strong>www.kitapkosesi.com</strong> &copy; 2024 Tüm Hakları Saklıdır.</p>
                         </div>
                     </div>
                 </div>

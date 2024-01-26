@@ -14,5 +14,6 @@ namespace BookSale.Sale.Business.Abstract
         Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto);
         Task<User> Register(RegistrationRequestDto registrationRequestDto);
         Task<User> GetUserById(int userId);
+        Task<List<User>> GetUserList();
     }
 }

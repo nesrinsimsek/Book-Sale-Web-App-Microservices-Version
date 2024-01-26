@@ -71,5 +71,17 @@ namespace BookSale.Sale.Api.Controllers
             return Ok(_response);
 
         }
+
+        [HttpGet]
+        public async Task<ActionResult<ApiResponse>> GetList()
+        {
+
+            var users = await _userService.GetUserList();
+            var userDtos = _mapper.Map<List<UserDto>>(users);
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = userDtos;
+            return Ok(_response);
+
+        }
     }
 }

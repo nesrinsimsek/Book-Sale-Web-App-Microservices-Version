@@ -47,6 +47,11 @@ namespace BookSale.Sale.Business.Concrete
             return await _userDal.Get(u => u.Id == userId);
         }
 
+        public async Task<List<User>> GetUserList()
+        {
+           return await _userDal.GetList();
+        }
+
         public bool IsUniqueUser(string email)
         {
             var user = _saleDbContext.Users.FirstOrDefault(u => u.Email == email);

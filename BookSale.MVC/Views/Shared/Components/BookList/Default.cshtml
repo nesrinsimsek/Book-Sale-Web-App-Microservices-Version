@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<BookSale.MVC.Models.Dtos.BookDto>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpAcc
 @using BookSale.MVC.ViewComponents
-
+@using System.Security.Claims
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -19,20 +20,28 @@
             <div class="col-xl-3 col-lg-4 col-sm-6">
                 <div class="product">
                     <div class="position-relative mb-3">
-                            <div class="badge text-white bg-"></div><a class="d-block" href="detail.html"><img class="img-fluid w-100" src="@item.ImageUrl" alt="Kitap Resmi" style="width:150px; height:350px"></a>
+                            <div class="badge text-white bg-"></div><a class="d-block" href="@item.ImageUrl"><img class="img-fluid w-100" src="@item.ImageUrl" alt="Kitap Resmi" style="width:150px; height:350px"></a>
                         <div class="product-overlay">
-                            <ul class="mb-0 list-inline">
-                           
-                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" asp-action="AddToCart" asp-controller="Cart" asp-route-bookId="@item.Id">Sepete ekle</a></li>
+                                @if (httpAcc.HttpContext.Session.GetString("JwtToken") != null &&
+                               httpAcc.HttpContext.Session.GetString("JwtToken").ToString().Length > 0)
+                                {
+                                    var userRole = httpAcc.HttpContext.User.FindFirstValue(ClaimTypes.Role);
+                                    if (userRole == "User")
+                                    {
+                                        <ul class="mb-0 list-inline">
+                                            <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" asp-action="AddToCart" asp-controller="Cart" asp-route-bookId="@item.Id">Sepete ekle</a></li>
+                                        </ul>
+                                    }
+                                }
                             
-                            </ul>
                         </div>
                     </div>
                     <br />
-                    <h6> <a class="reset-anchor" href="detail.html">@item.Name</a></h6>
+                    <h6> @item.Name</h6>
+                    <hr />
                     <p class="small text-muted">Yazar: @item.Author</p>
                     <p class="small text-muted">Yayınevi: @item.Publisher</p>
-                    <p class="small text-muted">@item.Price TL</p>
+                    <p class="small">@item.Price TL</p>
                 </div>
             </div>
 
