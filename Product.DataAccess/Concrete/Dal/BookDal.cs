@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.Entity.Abstract
+namespace Product.DataAccess.Concrete.Dal
 {
-    public interface IEntity
+    public class BookDal
     {
     }
 }

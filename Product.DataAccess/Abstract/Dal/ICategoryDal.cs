@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.Entity.Abstract
+namespace Product.DataAccess.Abstract.Dal
 {
-    public interface IEntity
+    public interface ICategoryDal
     {
     }
 }

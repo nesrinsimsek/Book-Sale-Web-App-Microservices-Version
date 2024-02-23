@@ -1,6 +1,7 @@
 ﻿using Product.Entity.Abstract;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,5 +18,8 @@ namespace Product.Entity.Concrete
         public string Publisher { get; set; }
         public string ISBN { get; set; }
         public string ImageUrl { get; set; }
+        [ForeignKey("Category")]
+        public int Category_Id { get; set; }
+        public Category Category { get; set; }
     }
 }
