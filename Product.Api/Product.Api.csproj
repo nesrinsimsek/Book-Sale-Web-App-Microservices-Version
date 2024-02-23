@@ -32,6 +32,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BookSale.IoC\BookSale.IoC.csproj" />
+    <ProjectReference Include="..\Product.Business\Product.Business.csproj" />
     <ProjectReference Include="..\Product.DataAccess\Product.DataAccess.csproj" />
   </ItemGroup>
 
