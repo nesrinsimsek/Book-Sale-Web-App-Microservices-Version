@@ -1,5 +1,4 @@
 ﻿
-using Product.Entity.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.DataAccess.Abstract.Repository
+namespace EFRepository
 {
     public interface IEntityRepository<T> where T : class, IEntity, new()
     {

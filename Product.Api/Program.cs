@@ -1,7 +1,7 @@
 using BookSale.IoC;
 using Microsoft.EntityFrameworkCore;
 using Product.Api;
-using Product.DataAccess.Concrete.Context;
+using Product.DataAccess.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 

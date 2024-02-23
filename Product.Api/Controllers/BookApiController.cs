@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Product.Business.Abstract;
-using Product.Entity.Concrete;
 using Product.Entity.Dto;
+using Product.Entity.Entities;
 using Product.Entity.Model;
 using System.Net;
 

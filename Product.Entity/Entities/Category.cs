@@ -1,11 +1,12 @@
-﻿using Product.Entity.Abstract;
+﻿
+using EFRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.Entity.Concrete
+namespace Product.Entity.Entities
 {
     public class Category : IEntity
     {

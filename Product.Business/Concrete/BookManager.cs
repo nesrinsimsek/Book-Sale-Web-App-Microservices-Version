@@ -1,6 +1,6 @@
 ﻿using Product.Business.Abstract;
-using Product.DataAccess.Abstract.Dal;
-using Product.Entity.Concrete;
+using Product.DataAccess.Abstract;
+using Product.Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

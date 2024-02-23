@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Product.Business.Abstract;
 using Product.Business.Concrete;
-using Product.DataAccess.Abstract.Dal;
-using Product.DataAccess.Concrete.Dal;
+using Product.DataAccess.Abstract;
+using Product.DataAccess.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;

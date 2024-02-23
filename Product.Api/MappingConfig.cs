@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Product.Entity.Concrete;
 using Product.Entity.Dto;
+using Product.Entity.Entities;
 
 namespace Product.Api
 {

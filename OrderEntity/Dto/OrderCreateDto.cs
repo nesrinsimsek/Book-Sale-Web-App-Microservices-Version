@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.Entity.Abstract
+namespace OrderEntity.Dto
 {
-    public interface IEntity
+    public class OrderCreateDto
     {
     }
 }

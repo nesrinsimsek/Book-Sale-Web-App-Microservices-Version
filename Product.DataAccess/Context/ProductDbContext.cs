@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Product.Entity.Concrete;
+using Product.Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.DataAccess.Concrete.Context
+namespace Product.DataAccess.Context
 {
     public class ProductDbContext : DbContext
     {

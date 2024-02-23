@@ -1,4 +1,5 @@
-﻿using Product.Entity.Abstract;
+﻿
+using EFRepository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.Entity.Concrete
+namespace Product.Entity.Entities
 {
     public class Book : IEntity
     {

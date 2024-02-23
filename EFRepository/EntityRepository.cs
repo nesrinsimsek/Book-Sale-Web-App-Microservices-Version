@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Product.DataAccess.Abstract.Repository;
-using Product.Entity.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +6,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.DataAccess.Concrete.Repository
+namespace EFRepository
+
 {
     public class EntityRepository<TEntity, TContext> : IEntityRepository<TEntity>
        where TEntity : class, IEntity, new()
