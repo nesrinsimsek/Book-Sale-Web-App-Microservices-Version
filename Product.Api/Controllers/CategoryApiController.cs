@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Product.Business.Abstract;
-using Product.Entity.Dto;
-using Product.Entity.Model;
+using Product.Entity.Dtos;
+using Product.Entity.ResponseModel;
 using System.Net;
 
 namespace Product.Api.Controllers

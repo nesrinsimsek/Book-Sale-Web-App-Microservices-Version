@@ -71,7 +71,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 
-DependencyContainer.RegisterServices(builder.Services);
+//DependencyContainer.RegisterServices(builder.Services);
 
 
 var app = builder.Build();

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderEntity.Dto
+namespace Product.Entity.Dtos
 {
-    public class OrderCreateDto
+    public class CategoryDto
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

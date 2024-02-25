@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookSale.Sale.Business\BookSale.Sale.Business.csproj" />
+    <ProjectReference Include="..\OrderBusiness\OrderBusiness.csproj" />
     <ProjectReference Include="..\Product.Business\Product.Business.csproj" />
   </ItemGroup>
 

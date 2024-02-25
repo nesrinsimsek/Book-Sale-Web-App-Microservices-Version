@@ -34,11 +34,11 @@ namespace OrderDataAccess.Context
 
             //modelBuilder.Entity<OrderBook>().HasKey(u => new { u.Order_Id, u.Book_Id });
 
-       
 
-           // modelBuilder.Entity<Order>()
-           //.Property(o => o.Id)
-           //.UseIdentityColumn();
+
+            modelBuilder.Entity<Order>()
+           .Property(o => o.Id)
+           .UseIdentityColumn();
 
         }
     }

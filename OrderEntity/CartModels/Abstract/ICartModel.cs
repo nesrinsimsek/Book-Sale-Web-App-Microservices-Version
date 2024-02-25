@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.Entity.Dto
+namespace OrderEntity.CartModels.Abstract
 {
-    public class CategoryDto
+    public interface ICartModel
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
     }
 }

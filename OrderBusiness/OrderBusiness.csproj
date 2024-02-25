@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EFRepository\EFRepository.csproj" />
-    <ProjectReference Include="..\Product.Entity\Product.Entity.csproj" />
+    <ProjectReference Include="..\OrderDataAccess\OrderDataAccess.csproj" />
+    <ProjectReference Include="..\OrderEntity\OrderEntity.csproj" />
   </ItemGroup>
 
 </Project>

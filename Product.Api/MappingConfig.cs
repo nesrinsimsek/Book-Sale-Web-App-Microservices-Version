@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Product.Entity.Dto;
+using Product.Entity.Dtos;
 using Product.Entity.Entities;
 
 namespace Product.Api
