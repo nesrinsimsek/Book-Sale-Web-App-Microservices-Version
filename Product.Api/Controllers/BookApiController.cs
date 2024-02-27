@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Product.Business.Abstract;
@@ -26,6 +27,7 @@ namespace Product.Api.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public async Task<ActionResult<ApiResponse>> Add([FromBody] BookCreateDto bookCreateDto) //bunu dto yap
         {
             Book book = _mapper.Map<Book>(bookCreateDto);
@@ -40,18 +42,20 @@ namespace Product.Api.Controllers
         }
 
 
-        //[HttpPut("{bookId}")]
-        //public async Task<ActionResult<ApiResponse>> Update(int bookId, [FromBody] BookUpdateDto bookUpdateDto) //bunu dto yap
-        //{
-        //    Book book = _mapper.Map<Book>(bookUpdateDto);
-        //    await _bookService.UpdateBook(book);
-        //    _response.StatusCode = HttpStatusCode.OK;
-        //    return Ok(_response);
+        [HttpPut("{bookId}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ApiResponse>> Update(int bookId, [FromBody] BookUpdateDto bookUpdateDto) //bunu dto yap
+        {
+            Book book = _mapper.Map<Book>(bookUpdateDto);
+            await _bookManager.UpdateBook(book);
+            _response.StatusCode = HttpStatusCode.OK;
+            return Ok(_response);
 
-        //}
+        }
 
 
         [HttpDelete("{bookId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int bookId) //bunu dto yap
         {
             await _bookManager.DeleteBook(bookId);

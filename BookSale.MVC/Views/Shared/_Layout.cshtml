@@ -41,7 +41,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
-                                <!-- Link--><a class="nav-link active" asp-action="Index" asp-controller="Home">Anasayfa</a>
+                                <a class="nav-link active" asp-action="Index" asp-controller="Home">Anasayfa</a>
                             </li>
 
                             @if (httpAcc.HttpContext.Session.GetString("JwtToken") != null &&
@@ -51,10 +51,10 @@
                                 if (userRole == "Admin")
                                 {
                                     <li class="nav-item">
-                                        <!-- Link--><a class="nav-link" asp-action="Create" asp-controller="Book">Kitap Ekle</a>
+                                        <a class="nav-link" asp-action="Create" asp-controller="Book">Kitap Ekle</a>
                                     </li>
                                     <li class="nav-item">
-                                        <!-- Link--><a class="nav-link" asp-action="Index" asp-controller="Order">Siparişler</a>
+                                        <a class="nav-link" asp-action="Index" asp-controller="Order">Siparişler</a>
                                     </li>
                                 }
                             }

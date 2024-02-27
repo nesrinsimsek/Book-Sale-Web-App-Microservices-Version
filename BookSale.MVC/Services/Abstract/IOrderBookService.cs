@@ -4,7 +4,7 @@ namespace BookSale.MVC.Services.Abstract
 {
     public interface IOrderBookService
     {
-        Task<T> GetAllAsync<T>();
-        Task<T> CreateAsync<T>(OrderBookDto orderBookDto);
+        Task<T> GetAllAsync<T>(string token);
+        Task<T> CreateAsync<T>(OrderBookDto orderBookDto, string token);
     }
 }

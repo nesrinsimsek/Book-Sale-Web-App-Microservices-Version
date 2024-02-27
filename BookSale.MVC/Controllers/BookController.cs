@@ -41,7 +41,7 @@ namespace BookSale.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(BookCreateDto bookCreateDto)
         {
-            await _bookService.CreateAsync<ApiResponse>(bookCreateDto);
+            await _bookService.CreateAsync<ApiResponse>(bookCreateDto, HttpContext.Session.GetString("JwtToken"));
             return RedirectToAction("Index", "Home");
         }
 

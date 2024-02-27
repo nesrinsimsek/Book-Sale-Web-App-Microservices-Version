@@ -15,23 +15,25 @@ namespace BookSale.MVC.Services.Concrete
             orderBookUrl = "https://localhost:7062";
         }
 
-        public Task<T> CreateAsync<T>(OrderBookDto orderBookDto)
+        public Task<T> CreateAsync<T>(OrderBookDto orderBookDto, string token)
         {
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.POST,
                 Data = orderBookDto,
-                Url = orderBookUrl + "/api/OrderBooks"
+                Url = orderBookUrl + "/api/OrderBooks",
+                Token = token
 
             });
         }
 
-        public Task<T> GetAllAsync<T>()
+        public Task<T> GetAllAsync<T>(string token)
         {
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = orderBookUrl + "/api/OrderBooks"
+                Url = orderBookUrl + "/api/OrderBooks",
+                Token = token
 
             });
         }

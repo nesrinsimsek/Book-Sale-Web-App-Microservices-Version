@@ -43,9 +43,9 @@ namespace BookSale.MVC.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                 /* Başarılı bir giriş durumunda, kullanıcının JWT (Json Web Token) 
-                 * belirteci (token) HttpContext.Session üzerinde saklanır. 
+                 * belirteci (token) HttpContext.Session üzerinde saklanır (apiden gelen response'un datası üzerinden Token çekiliyor.)
                  * Bu token, kullanıcının oturum bilgilerini korumak ve doğrulamak için kullanılır.*/
-                HttpContext.Session.SetString("JwtToken", loginResponseDto.Token); //
+                HttpContext.Session.SetString("JwtToken", loginResponseDto.Token); // Token'i session a atadı
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -82,6 +82,10 @@ namespace BookSale.MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        [HttpPut]
+        public IActionResult UpdateUserStatus(int userId) // register view sayfası için
+        {
+            return View();
+        }
     }
 }

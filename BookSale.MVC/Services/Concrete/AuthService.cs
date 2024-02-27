@@ -9,11 +9,11 @@ namespace BookSale.MVC.Services.Concrete
     public class AuthService : BaseService, IAuthService
     {
         private readonly IHttpClientFactory _clientFactory;
-        private string authUrl;
+        private string _authUrl;
         public AuthService(IHttpClientFactory clientFactory) : base(clientFactory)
         {
             _clientFactory = clientFactory;
-            authUrl = "https://localhost:7062";
+            _authUrl = "https://localhost:7062";
         }
 
         public Task<T> LoginAsync<T>(LoginRequestDto loginRequestDto)
@@ -23,7 +23,7 @@ namespace BookSale.MVC.Services.Concrete
             {
                 ApiType = SD.ApiType.POST,
                 Data = loginRequestDto,
-                Url = authUrl + "/api/Users/Login"
+                Url = _authUrl + "/api/Users/Login"
 
             });
         }
@@ -35,17 +35,27 @@ namespace BookSale.MVC.Services.Concrete
             {
                 ApiType = SD.ApiType.POST,
                 Data = registrationRequestDto,
-                Url = authUrl + "/api/Users/Register"
+                Url = _authUrl + "/api/Users/Register"
 
             });
         }
 
-        public Task<T> GetAsync<T>(int id)
+        public Task<T> GetAsync<T>(int id, string token)
         {
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = authUrl + "/api/Users/ById/" + id
+                Url = _authUrl + "/api/Users/ById/" + id,
+                Token = token
+
+            });
+        }
+        public Task<T> UpdateAsync<T>(int userId)
+        {
+            return SendAsync<T>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.PUT,
+                Url = _authUrl + "/api/Users" + userId
 
             });
         }

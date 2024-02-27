@@ -40,7 +40,10 @@ namespace AuthenticationDataAccess.Context
             .Property(u => u.Role)
             .HasDefaultValue("User");
 
-          
+            modelBuilder.Entity<User>()
+            .Property(u => u.Status)
+            .HasDefaultValue("Onay Bekliyor");
+
 
         }
     }

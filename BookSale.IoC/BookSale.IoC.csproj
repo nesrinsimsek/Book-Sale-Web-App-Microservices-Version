@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AuthenticationBusiness\AuthenticationBusiness.csproj" />
     <ProjectReference Include="..\BookSale.Sale.Business\BookSale.Sale.Business.csproj" />
     <ProjectReference Include="..\OrderBusiness\OrderBusiness.csproj" />
     <ProjectReference Include="..\Product.Business\Product.Business.csproj" />

@@ -48,8 +48,8 @@ namespace BookSale.MVC.Controllers
         public async Task<IActionResult> Create(OrderCreateDto orderCreateDto)
         {
             var cartLines = _cartSessionHelper.GetCart("Cart").CartLines;
-            await _orderService.CreateAsync<ApiResponse>(orderCreateDto);
-            var orderListResponse = await _orderService.GetAllAsync<ApiResponse>();
+            await _orderService.CreateAsync<ApiResponse>(orderCreateDto, HttpContext.Session.GetString("JwtToken"));
+            var orderListResponse = await _orderService.GetAllAsync<ApiResponse>(HttpContext.Session.GetString("JwtToken"));
             var orderList = JsonConvert.DeserializeObject<List<OrderDto>>(Convert.ToString(orderListResponse.Data));
             var createdOrder = orderList.LastOrDefault();
 
@@ -62,7 +62,7 @@ namespace BookSale.MVC.Controllers
                     Quantity = cartLine.Quantity
 
                 };
-                _orderBookService.CreateAsync<ApiResponse>(orderBookDto);
+                _orderBookService.CreateAsync<ApiResponse>(orderBookDto, HttpContext.Session.GetString("JwtToken"));
             }
             return RedirectToAction("Index", "Home");
         }
@@ -70,16 +70,16 @@ namespace BookSale.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var orderBookListResponse = await _orderBookService.GetAllAsync<ApiResponse>();
+            var orderBookListResponse = await _orderBookService.GetAllAsync<ApiResponse>(HttpContext.Session.GetString("JwtToken"));
             var orderBookList = JsonConvert.DeserializeObject<List<OrderBookDto>>(Convert.ToString(orderBookListResponse.Data));
             List<OrderListViewModel> orderListViewModelList = new List<OrderListViewModel>();
 
             foreach (var orderBook in orderBookList)
             {
-                var orderResponse = await _orderService.GetAsync<ApiResponse>(orderBook.Order_Id);
+                var orderResponse = await _orderService.GetAsync<ApiResponse>(orderBook.Order_Id, HttpContext.Session.GetString("JwtToken"));
                 var order = JsonConvert.DeserializeObject<OrderDto>(Convert.ToString(orderResponse.Data));
 
-                var userResponse = await _authService.GetAsync<ApiResponse>(order.User_Id);
+                var userResponse = await _authService.GetAsync<ApiResponse>(order.User_Id, HttpContext.Session.GetString("JwtToken"));
                 var user = JsonConvert.DeserializeObject<UserDto>(Convert.ToString(userResponse.Data));
 
                 var bookResponse = await _bookService.GetAsync<ApiResponse>(orderBook.Book_Id);

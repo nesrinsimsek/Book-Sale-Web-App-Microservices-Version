@@ -20,14 +20,19 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddHttpClient<IBookService, BookService>();
 builder.Services.AddScoped<IBookService, BookService>();
+
 builder.Services.AddHttpClient<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 builder.Services.AddHttpClient<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+
 builder.Services.AddHttpClient<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+
 builder.Services.AddHttpClient<IOrderBookService, OrderBookService>();
 builder.Services.AddScoped<IOrderBookService, OrderBookService>();
 
@@ -42,6 +47,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
                   options.LoginPath = "/Auth/Login";
                   options.AccessDeniedPath = "/Auth/AccessDenied";
                   options.SlidingExpiration = true;
+
               });
 builder.Services.AddSession(options =>
 {

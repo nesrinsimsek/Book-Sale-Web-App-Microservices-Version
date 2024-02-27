@@ -17,31 +17,34 @@ namespace BookSale.MVC.Services.Concrete
         }
 
 
-        public Task<T> CreateAsync<T>(OrderCreateDto orderCreateDto)
+        public Task<T> CreateAsync<T>(OrderCreateDto orderCreateDto, string token)
         {
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.POST,
                 Data = orderCreateDto,
-                Url = orderUrl + "/api/Orders"
+                Url = orderUrl + "/api/Orders",
+                Token = token
 
             });
         }
-        public Task<T> GetAllAsync<T>()
+        public Task<T> GetAllAsync<T>(string token)
         {
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = orderUrl + "/api/Orders"
+                Url = orderUrl + "/api/Orders",
+                Token = token
 
             });
         }
-        public Task<T> GetAsync<T>(int id)
+        public Task<T> GetAsync<T>(int id, string token)
         {
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = orderUrl + "/api/Orders/ById/" + id
+                Url = orderUrl + "/api/Orders/ById/" + id,
+                Token = token
 
             });
         }

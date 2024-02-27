@@ -49,12 +49,12 @@ namespace BookSale.MVC.Services.Concrete
 
                 }
 
-                HttpResponseMessage apiResponse = null;
+                HttpResponseMessage apiResponse;
 
-                //if (!string.IsNullOrEmpty(apiRequest.Token))
-                //{
-                //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.Token);
-                //}
+                if (!string.IsNullOrEmpty(apiRequest.Token))
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.Token);
+                }
 
                 apiResponse = await client.SendAsync(message);
 
@@ -89,8 +89,8 @@ namespace BookSale.MVC.Services.Concrete
                 //    IsSuccess = false
                 //};
                 //var res = JsonConvert.SerializeObject(dto);
-                var apiResponseExceptionReturnObj = JsonConvert.DeserializeObject<T>(apiContentStr);
-                return apiResponseExceptionReturnObj;
+                var apiResponseObj = JsonConvert.DeserializeObject<T>(apiContentStr);
+                return apiResponseObj;
             //}
         }
     }

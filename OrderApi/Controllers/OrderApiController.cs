@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OrderBusiness.Abstract;
@@ -26,6 +27,7 @@ namespace OrderApi.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles ="User")]
         public async Task<ActionResult<ApiResponse>> Add([FromBody] OrderCreateDto orderCreateDto) //bunu dto yap
         {
             Order order = _mapper.Map<Order>(orderCreateDto);
@@ -40,6 +42,7 @@ namespace OrderApi.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ApiResponse>> GetList()
         {
             var orders = await _orderManager.GetOrderList();
