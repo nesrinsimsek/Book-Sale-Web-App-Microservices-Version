@@ -26,15 +26,15 @@ namespace OrderDataAccess.Context
 
 
         public DbSet<Order> Orders { get; set; }
-        //public DbSet<OrderBook> OrderBooks { get; set; }
+        public DbSet<OrderBook> OrderBooks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<OrderBook>().HasKey(u => new { u.Order_Id, u.Book_Id });
-          
+            modelBuilder.Entity<OrderBook>().HasKey(u => new { u.Order_Id, u.Book_Id });
+
 
 
             modelBuilder.Entity<Order>()

@@ -38,7 +38,7 @@ namespace AuthenticationDataAccess.Context
 
             modelBuilder.Entity<User>()
             .Property(u => u.Role)
-            .HasDefaultValue("User");
+            .HasDefaultValue("Admin");
 
             modelBuilder.Entity<User>()
             .Property(u => u.Status)

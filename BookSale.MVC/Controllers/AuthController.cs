@@ -83,7 +83,7 @@ namespace BookSale.MVC.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateUserStatus(int userId) // register view sayfası için
+        public IActionResult UpdateUserStatus(int userId) 
         {
             return View();
         }

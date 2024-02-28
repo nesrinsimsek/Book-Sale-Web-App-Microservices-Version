@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<OrderListViewModel>
-@{
-    decimal totalOrderPrice = 0;
-}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -60,14 +58,13 @@
                                                 @foreach (var book in item.BookList)
                                                 {
                                                     int quantity = item.OrderBookList.ElementAt(orderBookIndex++).Quantity;
-                                                    totalOrderPrice += book.Price * quantity;
                                                     <h4>@book.Name</h4>
                                                     <span class="details">Sipariş Adeti: <em>@quantity</em></span>
                                                 }
                                                 <hr />
                                                 <br />
                                                 <span class="details">Müşteri İsmi: <em>@item.User.Name @item.User.Surname</em></span>
-                                                <span class="details">Toplam Sipariş Tutarı: <em>@totalOrderPrice</em></span>
+                                                <span class="details">Toplam Sipariş Tutarı: <em>@item.Order.TotalPrice</em></span>
                                                 <span class="details">Gönderileceği Adres: <em>@item.Order.Address</em></span>
                                                 <span class="price"></span>
                                                 <div class="main-white-button">

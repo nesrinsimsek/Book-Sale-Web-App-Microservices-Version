@@ -26,5 +26,9 @@ namespace OrderBusiness.Concrete
         {
             return await _orderDal.GetList();
         }
+        public async Task<Order> GetOrderById(int id)
+        {
+            return await _orderDal.Get(o => o.Id == id);
+        }
     }
 }

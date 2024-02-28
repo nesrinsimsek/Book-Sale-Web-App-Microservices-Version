@@ -42,13 +42,25 @@ namespace OrderApi.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> GetList()
         {
             var orders = await _orderManager.GetOrderList();
             var orderDtos = _mapper.Map<List<OrderDto>>(orders);
             _response.StatusCode = HttpStatusCode.OK;
             _response.Data = orderDtos;
+            return Ok(_response);
+
+        }
+
+        [HttpGet("ById/{orderId}")]
+        [Authorize]
+        public async Task<ActionResult<ApiResponse>> Get(int orderId)
+        {
+            var order = await _orderManager.GetOrderById(orderId);
+            OrderDto orderDto = _mapper.Map<OrderDto>(order);
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = orderDto;
             return Ok(_response);
 
         }

@@ -9,11 +9,11 @@ namespace BookSale.MVC.Services.Concrete
     public class OrderService : BaseService, IOrderService
     {
         private readonly IHttpClientFactory _clientFactory;
-        private string orderUrl;
+        private string _orderUrl;
         public OrderService(IHttpClientFactory clientFactory) : base(clientFactory)
         {
             _clientFactory = clientFactory;
-            orderUrl = "https://localhost:7062";
+            _orderUrl = "https://localhost:7223";
         }
 
 
@@ -23,7 +23,7 @@ namespace BookSale.MVC.Services.Concrete
             {
                 ApiType = SD.ApiType.POST,
                 Data = orderCreateDto,
-                Url = orderUrl + "/api/Orders",
+                Url = _orderUrl + "/api/Orders",
                 Token = token
 
             });
@@ -33,7 +33,7 @@ namespace BookSale.MVC.Services.Concrete
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = orderUrl + "/api/Orders",
+                Url = _orderUrl + "/api/Orders",
                 Token = token
 
             });
@@ -43,7 +43,7 @@ namespace BookSale.MVC.Services.Concrete
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = orderUrl + "/api/Orders/ById/" + id,
+                Url = _orderUrl + "/api/Orders/ById/" + id,
                 Token = token
 
             });

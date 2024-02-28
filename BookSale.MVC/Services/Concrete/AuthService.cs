@@ -13,7 +13,7 @@ namespace BookSale.MVC.Services.Concrete
         public AuthService(IHttpClientFactory clientFactory) : base(clientFactory)
         {
             _clientFactory = clientFactory;
-            _authUrl = "https://localhost:7062";
+            _authUrl = "https://localhost:7152";
         }
 
         public Task<T> LoginAsync<T>(LoginRequestDto loginRequestDto)

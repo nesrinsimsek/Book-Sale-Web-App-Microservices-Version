@@ -30,8 +30,8 @@ namespace BookSale.IoC
             services.AddTransient<IOrderManager, OrderManager>();
             services.AddTransient<IOrderDal, OrderDal>();
 
-            //services.AddTransient<IOrderBookService, OrderBookManager>();
-            //services.AddTransient<IOrderBookDal, EfOrderBookDal>();
+            services.AddTransient<IOrderBookManager, OrderBookManager>();
+            services.AddTransient<IOrderBookDal, OrderBookDal>();
 
         }
     }

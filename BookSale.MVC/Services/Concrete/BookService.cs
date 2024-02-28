@@ -10,11 +10,11 @@ namespace BookSale.MVC.Services.Concrete
     public class BookService : BaseService, IBookService
     {
         private readonly IHttpClientFactory _clientFactory;
-        private string bookUrl;
+        private string _bookUrl;
         public BookService(IHttpClientFactory clientFactory) : base(clientFactory)
         {
             _clientFactory = clientFactory;
-            bookUrl = "https://localhost:7062";
+            _bookUrl = "https://localhost:7160";
         }
 
         public Task<T> CreateAsync<T>(BookCreateDto dto, string token)
@@ -23,7 +23,7 @@ namespace BookSale.MVC.Services.Concrete
             {
                 ApiType = SD.ApiType.POST,
                 Data = dto,
-                Url = bookUrl + "/api/Books",
+                Url = _bookUrl + "/api/Books",
                 Token = token
 
             });
@@ -45,7 +45,7 @@ namespace BookSale.MVC.Services.Concrete
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = bookUrl + "/api/Books"
+                Url = _bookUrl + "/api/Books"
 
             });
         }
@@ -55,7 +55,7 @@ namespace BookSale.MVC.Services.Concrete
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = bookUrl + "/api/Books/ById/" + id
+                Url = _bookUrl + "/api/Books/ById/" + id
 
             });
         }
@@ -65,7 +65,7 @@ namespace BookSale.MVC.Services.Concrete
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = bookUrl + "/api/Books/ByCategory/" + categoryId
+                Url = _bookUrl + "/api/Books/ByCategory/" + categoryId
 
             });
         }

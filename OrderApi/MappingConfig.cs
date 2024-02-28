@@ -10,6 +10,8 @@ namespace OrderApi
         {
             CreateMap<Order, OrderCreateDto>().ReverseMap();
             CreateMap<Order, OrderDto>().ReverseMap();
+
+            CreateMap<OrderBook, OrderBookDto>().ReverseMap();
         }
     }
 }

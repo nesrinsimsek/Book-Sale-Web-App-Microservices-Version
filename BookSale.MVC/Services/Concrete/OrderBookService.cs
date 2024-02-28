@@ -8,11 +8,11 @@ namespace BookSale.MVC.Services.Concrete
     public class OrderBookService : BaseService, IOrderBookService
     {
         private readonly IHttpClientFactory _clientFactory;
-        private string orderBookUrl;
+        private string _orderBookUrl;
         public OrderBookService(IHttpClientFactory clientFactory) : base(clientFactory)
         {
             _clientFactory = clientFactory;
-            orderBookUrl = "https://localhost:7062";
+            _orderBookUrl = "https://localhost:7223";
         }
 
         public Task<T> CreateAsync<T>(OrderBookDto orderBookDto, string token)
@@ -21,7 +21,7 @@ namespace BookSale.MVC.Services.Concrete
             {
                 ApiType = SD.ApiType.POST,
                 Data = orderBookDto,
-                Url = orderBookUrl + "/api/OrderBooks",
+                Url = _orderBookUrl + "/api/OrderBooks",
                 Token = token
 
             });
@@ -32,7 +32,7 @@ namespace BookSale.MVC.Services.Concrete
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = orderBookUrl + "/api/OrderBooks",
+                Url = _orderBookUrl + "/api/OrderBooks",
                 Token = token
 
             });

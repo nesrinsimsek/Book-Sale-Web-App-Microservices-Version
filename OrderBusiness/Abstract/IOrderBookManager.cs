@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace OrderBusiness.Abstract
 {
-    public interface IOrderManager
+    public interface IOrderBookManager
     {
-        Task AddOrder(Order order);
-        Task<List<Order>> GetOrderList();
-        Task<Order> GetOrderById(int id);
+        Task AddOrderBook(OrderBook orderBook);
+        Task<List<OrderBook>> GetOrderBookList();
     }
 }

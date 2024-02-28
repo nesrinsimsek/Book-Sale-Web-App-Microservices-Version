@@ -10,11 +10,11 @@ namespace BookSale.MVC.Services.Concrete
     public class CategoryService : BaseService, ICategoryService
     {
         private readonly IHttpClientFactory _clientFactory;
-        private string categoryUrl;
+        private string _categoryUrl;
         public CategoryService(IHttpClientFactory clientFactory) : base(clientFactory)
         {
             _clientFactory = clientFactory;
-            categoryUrl = "https://localhost:7062";
+            _categoryUrl = "https://localhost:7160";
         }
 
 
@@ -23,7 +23,7 @@ namespace BookSale.MVC.Services.Concrete
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = categoryUrl + "/api/Categories"
+                Url = _categoryUrl + "/api/Categories"
 
             });
         }
