@@ -10,7 +10,7 @@ namespace BookSaleDomainCore.Events
     {
         public DateTime Timestamp { get; protected set; }
 
-        protected Event()
+        public Event()
         {
             Timestamp = DateTime.Now;
         }

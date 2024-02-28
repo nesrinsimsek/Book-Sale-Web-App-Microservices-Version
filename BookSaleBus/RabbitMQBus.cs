@@ -2,6 +2,7 @@
 using BookSaleDomainCore.Commands;
 using BookSaleDomainCore.Events;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace BookSaleBus
 {
-    public sealed class RabbitMQBus : IEventBus
+    public class RabbitMQBus : IEventBus
     {
         private readonly IMediator _mediator;
         private readonly Dictionary<string, List<Type>> _handlers;
