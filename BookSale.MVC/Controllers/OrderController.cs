@@ -48,11 +48,10 @@ namespace BookSale.MVC.Controllers
         public async Task<IActionResult> Create(OrderCreateDto orderCreateDto)
         {
             var cartLines = _cartSessionHelper.GetCart("Cart").CartLines;
-            var token = HttpContext.Session.GetString("JwtToken");
             await _orderService.CreateAsync<ApiResponse>(orderCreateDto, HttpContext.Session.GetString("JwtToken"));
             var orderListResponse = await _orderService.GetAllAsync<ApiResponse>(HttpContext.Session.GetString("JwtToken"));
             var orderList = JsonConvert.DeserializeObject<List<OrderDto>>(Convert.ToString(orderListResponse.Data));
-            var createdOrder = orderList.LastOrDefault();
+            var createdOrder = orderList.LastOrDefault(); // son oluşan order'ın id'sine ulaşmak için order tablosundan çekmem gerekti çünkü ordercreatedto objesinin id'si yok
 
             foreach (var cartLine in cartLines)
             {

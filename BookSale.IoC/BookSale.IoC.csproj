@@ -15,6 +15,7 @@
     <ProjectReference Include="..\BookSale.Sale.Business\BookSale.Sale.Business.csproj" />
     <ProjectReference Include="..\BookSaleBus\BookSaleBus.csproj" />
     <ProjectReference Include="..\BookSaleDomainCore\BookSaleDomainCore.csproj" />
+    <ProjectReference Include="..\EmailDomain\EmailDomain.csproj" />
     <ProjectReference Include="..\OrderBusiness\OrderBusiness.csproj" />
     <ProjectReference Include="..\Product.Business\Product.Business.csproj" />
   </ItemGroup>
