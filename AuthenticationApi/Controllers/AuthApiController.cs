@@ -1,4 +1,6 @@
 ﻿using AuthenticationBusiness.Abstract;
+using AuthenticationDomain.Models;
+using AuthenticationDomain.Services.Abstract;
 using AuthenticationEntity.Dtos;
 using AuthenticationEntity.Entities;
 using AuthenticationEntity.ResponseModel;
@@ -17,12 +19,14 @@ namespace AuthenticationApi.Controllers
 
         private readonly IUserManager _userManager;
         private readonly IMapper _mapper;
+        private readonly IEmailService _emailService;
         protected ApiResponse _response;
 
-        public AuthApiController(IUserManager userManager, IMapper mapper)
+        public AuthApiController(IUserManager userManager, IMapper mapper, IEmailService emailService)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _emailService = emailService;
             _response = new();
         }
 
@@ -39,6 +43,13 @@ namespace AuthenticationApi.Controllers
                 return BadRequest(_response);
             }
             await _userManager.Register(registrationRequestDto);
+
+            string emailContent = "Hesabınızı aktive etmek için lütfen linke tıklayınız: ";
+            var email = new Email(
+                registrationRequestDto.Email, 
+                emailContent
+                );
+            _emailService.SendMail(email);
 
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;
@@ -76,7 +87,7 @@ namespace AuthenticationApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ApiResponse>> GetList()
         {
 
@@ -89,7 +100,7 @@ namespace AuthenticationApi.Controllers
         }
         [HttpPut("{userId}")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ApiResponse>> UpdateUserStatus(int userId) 
+        public async Task<ActionResult<ApiResponse>> UpdateUserStatus(int userId)
         {
             User user = await _userManager.GetUserById(userId);
             user.Status = "Aktif";

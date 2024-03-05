@@ -1,11 +1,11 @@
-﻿using EmailDomain.Models;
+﻿using AuthenticationDomain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmailDomain.Services.Abstract
+namespace AuthenticationDomain.Services.Abstract
 {
     public interface IEmailService
     {

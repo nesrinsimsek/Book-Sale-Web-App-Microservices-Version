@@ -109,9 +109,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationBusiness", "A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationUtility", "AuthenticationUtility\AuthenticationUtility.csproj", "{53BA08B4-1B31-4081-8F58-2520E5C8F4CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookSaleDomainCore", "BookSaleDomainCore\BookSaleDomainCore.csproj", "{D3994AE9-5451-44D0-842A-2DF4B891DF8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookSaleDomainCore", "BookSaleDomainCore\BookSaleDomainCore.csproj", "{D3994AE9-5451-44D0-842A-2DF4B891DF8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookSaleBus", "BookSaleBus\BookSaleBus.csproj", "{12EC8E48-C567-4546-BEC7-B609A7315C64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookSaleBus", "BookSaleBus\BookSaleBus.csproj", "{12EC8E48-C567-4546-BEC7-B609A7315C64}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Email", "Email", "{1F7FBEE9-ECE6-4038-91F5-988BE1740B0E}"
 EndProject
@@ -119,9 +119,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{DC1CA587-B05
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{5BA48674-4DC1-4DB7-921F-3739C0186D13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailApi", "EmailApi\EmailApi.csproj", "{10D655CB-26DF-48CB-85C3-8F749069BF7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailApi", "EmailApi\EmailApi.csproj", "{10D655CB-26DF-48CB-85C3-8F749069BF7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailDomain", "EmailDomain\EmailDomain.csproj", "{5C0F4BD1-C287-452C-ABB0-4E10BF273B1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailDomain", "EmailDomain\EmailDomain.csproj", "{5C0F4BD1-C287-452C-ABB0-4E10BF273B1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{50A61576-1B62-4F4C-8C08-2E625854FD8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationDomain", "AuthenticationDomain\AuthenticationDomain.csproj", "{77239CA5-34B5-4A03-8AEA-752F1FB4C5BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -237,6 +241,10 @@ Global
 		{5C0F4BD1-C287-452C-ABB0-4E10BF273B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C0F4BD1-C287-452C-ABB0-4E10BF273B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C0F4BD1-C287-452C-ABB0-4E10BF273B1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77239CA5-34B5-4A03-8AEA-752F1FB4C5BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77239CA5-34B5-4A03-8AEA-752F1FB4C5BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77239CA5-34B5-4A03-8AEA-752F1FB4C5BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77239CA5-34B5-4A03-8AEA-752F1FB4C5BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -296,6 +304,8 @@ Global
 		{5BA48674-4DC1-4DB7-921F-3739C0186D13} = {1F7FBEE9-ECE6-4038-91F5-988BE1740B0E}
 		{10D655CB-26DF-48CB-85C3-8F749069BF7D} = {DC1CA587-B052-4176-A2D3-EB03EC5D830B}
 		{5C0F4BD1-C287-452C-ABB0-4E10BF273B1C} = {5BA48674-4DC1-4DB7-921F-3739C0186D13}
+		{50A61576-1B62-4F4C-8C08-2E625854FD8E} = {2F57A5D3-BA57-4869-9169-2B82493EE87C}
+		{77239CA5-34B5-4A03-8AEA-752F1FB4C5BB} = {50A61576-1B62-4F4C-8C08-2E625854FD8E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44FAA3C9-9C35-4D41-A766-49CE54CD5AB3}

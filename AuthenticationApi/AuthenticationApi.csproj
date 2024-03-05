@@ -33,6 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AuthenticationBusiness\AuthenticationBusiness.csproj" />
     <ProjectReference Include="..\AuthenticationDataAccess\AuthenticationDataAccess.csproj" />
+    <ProjectReference Include="..\AuthenticationDomain\AuthenticationDomain.csproj" />
     <ProjectReference Include="..\AuthenticationEntity\AuthenticationEntity.csproj" />
     <ProjectReference Include="..\BookSale.IoC\BookSale.IoC.csproj" />
   </ItemGroup>

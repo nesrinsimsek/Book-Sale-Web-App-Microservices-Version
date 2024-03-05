@@ -1,6 +1,6 @@
-﻿using BookSaleDomainCore.Bus;
-using EmailDomain.Commands;
-using EmailDomain.Events;
+﻿using AuthenticationDomain.Commands;
+using AuthenticationDomain.Events;
+using BookSaleDomainCore.Bus;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmailDomain.CommandHandlers
+namespace AuthenticationDomain.CommandHandlers
 {
     public class EmailCommandHandler : IRequestHandler<EmailCommand, bool>
     {

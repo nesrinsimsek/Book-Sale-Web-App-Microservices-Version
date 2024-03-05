@@ -1,15 +1,14 @@
-﻿using BookSaleDomainCore.Bus;
-using EmailDomain.Commands;
-using EmailDomain.Models;
-using EmailDomain.Services.Abstract;
+﻿using AuthenticationDomain.Commands;
+using AuthenticationDomain.Models;
+using AuthenticationDomain.Services.Abstract;
+using BookSaleDomainCore.Bus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmailDomain.Services.Concrete
+namespace AuthenticationDomain.Services.Concrete
 {
     public class EmailService : IEmailService
     {

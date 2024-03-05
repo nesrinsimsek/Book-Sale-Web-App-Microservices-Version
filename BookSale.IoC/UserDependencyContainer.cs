@@ -2,6 +2,13 @@
 using AuthenticationBusiness.Concrete;
 using AuthenticationDataAccess.Abstract;
 using AuthenticationDataAccess.Concrete;
+using AuthenticationDomain.CommandHandlers;
+using AuthenticationDomain.Commands;
+using AuthenticationDomain.Services.Abstract;
+using AuthenticationDomain.Services.Concrete;
+using BookSaleBus;
+using BookSaleDomainCore.Bus;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Product.Business.Abstract;
 using Product.DataAccess.Concrete;
@@ -26,6 +33,16 @@ namespace BookSale.IoC
 
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<IUserDal, UserDal>();
+
+            services.AddSingleton<IEventBus, RabbitMQBus>(sp =>
+            {
+                var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
+                return new RabbitMQBus(sp.GetService<IMediator>(), scopeFactory);
+            });
+
+            services.AddTransient<IRequestHandler<EmailCommand, bool>, EmailCommandHandler>();
+            services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IMediator, Mediator>();
 
             //services.AddTransient<IOrderService, OrderManager>();
             //services.AddTransient<IOrderDal, EfOrderDal>();
