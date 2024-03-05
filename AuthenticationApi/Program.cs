@@ -69,6 +69,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 UserDependencyContainer.RegisterServices(builder.Services);
+RabbitMQDependencyContainer.RegisterServices(builder.Services);
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

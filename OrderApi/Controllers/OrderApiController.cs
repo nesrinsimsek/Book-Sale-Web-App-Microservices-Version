@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using OrderBusiness.Abstract;
 using OrderEntity.Dtos;
 using OrderEntity.Entities;
-using OrderEntity.ResponseModel;
+using OrderEntity.Models;
 using System.Net;
 
 namespace OrderApi.Controllers

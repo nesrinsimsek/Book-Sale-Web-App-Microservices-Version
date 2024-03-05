@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Product.Business.Abstract;
 using Product.Entity.Dtos;
 using Product.Entity.Entities;
-using Product.Entity.ResponseModel;
+using Product.Entity.Models;
 using System.Net;
 
 namespace Product.Api.Controllers

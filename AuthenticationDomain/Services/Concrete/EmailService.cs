@@ -1,5 +1,5 @@
 ﻿using AuthenticationDomain.Commands;
-using AuthenticationDomain.Models;
+using AuthenticationEntity.Models;
 using AuthenticationDomain.Services.Abstract;
 using BookSaleDomainCore.Bus;
 using System;

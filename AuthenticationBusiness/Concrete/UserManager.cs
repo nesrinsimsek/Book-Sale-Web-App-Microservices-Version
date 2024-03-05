@@ -3,7 +3,7 @@ using AuthenticationDataAccess.Abstract;
 using AuthenticationDataAccess.Context;
 using AuthenticationEntity.Dtos;
 using AuthenticationEntity.Entities;
-using AuthenticationEntity.Utility;
+using AuthenticationUtility;
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -84,9 +84,9 @@ namespace AuthenticationBusiness.Concrete
                 Subject = new ClaimsIdentity(new Claim[]
                {
                     new Claim(ClaimTypes.Name, user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, user.Role) // authorization için role atanıyor
+                    new Claim(ClaimTypes.Role, user.Role) // authorization için kullanıcının rolü claim'e atanıyor
                }),
-                Expires = DateTime.UtcNow.AddDays(7), //tokenin geçerlilik süresi, dolunca kullanıcı tekrar giriş yapmalı ve yeni tokenini edinmeli apide login olmak için
+                Expires = DateTime.UtcNow.AddDays(7), //tokenin geçerlilik süresi, dolunca kullanıcı tekrar giriş yapmalı ve yeni tokenini edinmeli login olmak için
                 SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

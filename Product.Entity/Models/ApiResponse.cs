@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthenticationEntity.ResponseModel
+namespace Product.Entity.Models
 {
     public class ApiResponse
     {

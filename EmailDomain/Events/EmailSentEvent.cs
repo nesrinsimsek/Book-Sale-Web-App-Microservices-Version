@@ -1,17 +1,18 @@
-﻿using System;
+﻿using BookSaleDomainCore.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthenticationDomain.Models
+namespace EmailDomain.Events
 {
-    public class Email
+    public class EmailSentEvent : Event
     {
         public string EmailAddress { get; set; }
         public string MailContent { get; set; }
 
-        public Email(string emailAddress, string mailContent)
+        public EmailSentEvent(string emailAddress, string mailContent)
         {
             EmailAddress = emailAddress;
             MailContent = mailContent;

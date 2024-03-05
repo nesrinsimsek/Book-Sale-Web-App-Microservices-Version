@@ -1,11 +1,12 @@
 ﻿using BookSaleBus;
 using BookSaleDomainCore.Bus;
-using EmailDomain.CommandHandlers;
-using EmailDomain.Commands;
-using EmailDomain.Services.Abstract;
-using EmailDomain.Services.Concrete;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BookSale.IoC
 {
@@ -20,8 +21,8 @@ namespace BookSale.IoC
                 return new RabbitMQBus(sp.GetService<IMediator>(), scopeFactory);
             });
 
-            services.AddTransient<IRequestHandler<EmailCommand, bool>, EmailCommandHandler>();
-            services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IMediator, Mediator>();
+
         }
     }
 }

@@ -13,6 +13,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookSale.IoC\BookSale.IoC.csproj" />
+    <ProjectReference Include="..\BookSaleDomainCore\BookSaleDomainCore.csproj" />
+    <ProjectReference Include="..\EmailDomain\EmailDomain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

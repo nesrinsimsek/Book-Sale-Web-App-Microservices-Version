@@ -25,30 +25,11 @@ namespace BookSale.IoC
         public static void RegisterServices(IServiceCollection services)
         {
 
-            //services.AddTransient<IBookManager, BookManager>();
-            //services.AddTransient<IBookDal, BookDal>();
-
-            //services.AddTransient<ICategoryManager, CategoryManager>();
-            //services.AddTransient<ICategoryDal, CategoryDal>();
-
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<IUserDal, UserDal>();
 
-            services.AddSingleton<IEventBus, RabbitMQBus>(sp =>
-            {
-                var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
-                return new RabbitMQBus(sp.GetService<IMediator>(), scopeFactory);
-            });
-
             services.AddTransient<IRequestHandler<EmailCommand, bool>, EmailCommandHandler>();
             services.AddTransient<IEmailService, EmailService>();
-            services.AddTransient<IMediator, Mediator>();
-
-            //services.AddTransient<IOrderService, OrderManager>();
-            //services.AddTransient<IOrderDal, EfOrderDal>();
-
-            //services.AddTransient<IOrderBookService, OrderBookManager>();
-            //services.AddTransient<IOrderBookDal, EfOrderBookDal>();
 
         }
     }

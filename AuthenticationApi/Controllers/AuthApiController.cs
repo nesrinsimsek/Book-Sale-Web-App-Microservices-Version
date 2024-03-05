@@ -1,9 +1,8 @@
 ﻿using AuthenticationBusiness.Abstract;
-using AuthenticationDomain.Models;
 using AuthenticationDomain.Services.Abstract;
 using AuthenticationEntity.Dtos;
 using AuthenticationEntity.Entities;
-using AuthenticationEntity.ResponseModel;
+using AuthenticationEntity.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

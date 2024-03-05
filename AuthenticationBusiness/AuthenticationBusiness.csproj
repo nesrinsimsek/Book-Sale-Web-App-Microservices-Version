@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AuthenticationDataAccess\AuthenticationDataAccess.csproj" />
     <ProjectReference Include="..\AuthenticationEntity\AuthenticationEntity.csproj" />
+    <ProjectReference Include="..\AuthenticationUtility\AuthenticationUtility.csproj" />
   </ItemGroup>
 
 
