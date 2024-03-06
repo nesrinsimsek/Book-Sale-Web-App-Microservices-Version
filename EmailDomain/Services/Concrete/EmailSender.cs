@@ -25,8 +25,8 @@ namespace EmailDomain.Services.Concrete
             var from = new EmailAddress("kitapkosesi.com@gmail.com", "Kitap Köşesi");
             var subject = mailSubject;
             var to = new EmailAddress(emailAddress);
-            var plainTextContent = mailContent;
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, null);
+            var htmlContent = $"<p>{mailContent}</p>";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, null, htmlContent);
             await client.SendEmailAsync(msg);
         }
     }

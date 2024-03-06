@@ -45,8 +45,8 @@ namespace AuthenticationApi.Controllers
             
             var user = await _userManager.GetUserByEmail(registrationRequestDto.Email);
             string mailSubject = "Hesap Aktivasyonu";
-            string mailContent = "Hesabınızı aktive etmek için lütfen linke tıklayınız:\n\n" +
-                "https://localhost:7058/Auth/ActivateAccount?id=" + user.Id;
+            string mailContent = "Hesabınızı aktive etmek için lütfen aşağıdaki linke tıklayınız: " +
+                $"<p><a href='https://localhost:7058/Auth/ActivateAccount?id={user.Id}'>Aktivasyon Linki</a></p>";
             var email = new Email(
                 user.Email,
                 mailContent,
