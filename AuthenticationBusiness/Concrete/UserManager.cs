@@ -37,6 +37,11 @@ namespace AuthenticationBusiness.Concrete
             _userDal = userDal;
         }
 
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await _userDal.Get(u => u.Email == email);
+        }
+
         public async Task<User> GetUserById(int userId)
         {
             return await _userDal.Get(u => u.Id == userId);
@@ -61,7 +66,8 @@ namespace AuthenticationBusiness.Concrete
         {
             var userList = await _userDal.GetList();
             var user = userList.FirstOrDefault(u => u.Email.ToLower() == loginRequestDto.Email.ToLower()
-                                && u.Password == PasswordHasher.HashPassword(loginRequestDto.Password));
+                                && u.Password == PasswordHasher.HashPassword(loginRequestDto.Password) 
+                                && (u.Status == "Aktif" || u.Role == "Admin"));
 
 
             if (user == null)

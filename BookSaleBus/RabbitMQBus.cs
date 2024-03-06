@@ -124,7 +124,6 @@ namespace BookSaleBus
                         var eventType = _eventTypes.SingleOrDefault(t => t.Name == eventName);
                         var @event = JsonConvert.DeserializeObject(message, eventType);
                         var conreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
-                        Console.WriteLine("şu anda rabbitmqbus processevent metodu son satırın önündeyim");
                         await (Task)conreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
                     }
                 }

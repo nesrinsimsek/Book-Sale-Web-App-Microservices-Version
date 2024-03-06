@@ -35,7 +35,6 @@ namespace BookSale.MVC.Controllers
             if (response != null && response.IsSuccess)
             {
                 LoginResponseDto loginResponseDto = JsonConvert.DeserializeObject<LoginResponseDto>(Convert.ToString(response.Data));
-
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                 identity.AddClaim(new Claim(ClaimTypes.Name, loginResponseDto.User.Id.ToString()));
                 identity.AddClaim(new Claim(ClaimTypes.Role, loginResponseDto.User.Role));
@@ -82,10 +81,18 @@ namespace BookSale.MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpPut]
-        public IActionResult UpdateUserStatus(int userId) 
+     
+        public async Task<IActionResult> ActivateAccount(int id) 
         {
+            await _authService.UpdateUserStatusAsync<ApiResponse>(id, HttpContext.Session.GetString("JwtToken"));
             return View();
         }
+
+        public async Task<IActionResult> AcceptOrderMail(int id)
+        {
+            await _authService.SendOrderAcceptMailAsync<ApiResponse>(id, HttpContext.Session.GetString("JwtToken"));
+            return RedirectToAction("Index", "Order");
+        }
+
     }
 }

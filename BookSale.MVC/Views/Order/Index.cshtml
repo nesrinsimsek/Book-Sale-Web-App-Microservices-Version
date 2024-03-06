@@ -64,11 +64,11 @@
                                                 <hr />
                                                 <br />
                                                 <span class="details">Müşteri İsmi: <em>@item.User.Name @item.User.Surname</em></span>
-                                                <span class="details">Toplam Sipariş Tutarı: <em>@item.Order.TotalPrice</em></span>
+                                                <span class="details">Toplam Sipariş Tutarı: <em>@item.Order.TotalPrice TL</em></span>
                                                 <span class="details">Gönderileceği Adres: <em>@item.Order.Address</em></span>
                                                 <span class="price"></span>
                                                 <div class="main-white-button">
-                                                    <a href="contact.html" style="background-color:mediumspringgreen">Siparişi Onayla</a>
+                                                    <a asp-controller="Auth" asp-action="AcceptOrderMail" asp-route-id="@item.User.Id" style="background-color:mediumspringgreen">Siparişi Onayla</a>
                                                 </div>
                                             </div>
                                         </div>

@@ -42,11 +42,15 @@ namespace AuthenticationApi.Controllers
                 return BadRequest(_response);
             }
             await _userManager.Register(registrationRequestDto);
-
-            string emailContent = "Hesabınızı aktive etmek için lütfen linke tıklayınız: ";
+            
+            var user = await _userManager.GetUserByEmail(registrationRequestDto.Email);
+            string mailSubject = "Hesap Aktivasyonu";
+            string mailContent = "Hesabınızı aktive etmek için lütfen linke tıklayınız:\n\n" +
+                "https://localhost:7058/Auth/ActivateAccount?id=" + user.Id;
             var email = new Email(
-                registrationRequestDto.Email, 
-                emailContent
+                user.Email,
+                mailContent,
+                mailSubject
                 );
             _emailService.SendMail(email);
 
@@ -73,6 +77,7 @@ namespace AuthenticationApi.Controllers
             return Ok(_response);
 
         }
+
         [HttpGet("ById/{userId}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<UserDto>> Get(int userId)
@@ -97,14 +102,32 @@ namespace AuthenticationApi.Controllers
             return Ok(_response);
 
         }
-        [HttpPut("{userId}")]
+
+        [HttpGet("AcceptOrder/{userId}")]
         [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ApiResponse>> SendOrderAcceptMail(int userId)
+        {
+
+            var user = await _userManager.GetUserById(userId);
+            string mailSubject = "Sipariş Onayı";
+            string mailContent = "Siparişiniz onaylanmıştır.";
+            var email = new Email(
+                user.Email,
+                mailContent,
+                mailSubject
+                );
+            _emailService.SendMail(email);
+            _response.StatusCode = HttpStatusCode.OK;
+            return Ok(_response);
+
+        }
+
+        [HttpPut("ActivateAccount/{userId}")]
         public async Task<ActionResult<ApiResponse>> UpdateUserStatus(int userId)
         {
             User user = await _userManager.GetUserById(userId);
             user.Status = "Aktif";
 
-            //User user = _mapper.Map<User>(userUpdateDto);
             await _userManager.UpdateUser(user);
             UserDto userDto = _mapper.Map<UserDto>(user);
             _response.StatusCode = HttpStatusCode.OK;

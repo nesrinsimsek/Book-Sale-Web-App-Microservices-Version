@@ -24,7 +24,7 @@ namespace AuthenticationDomain.CommandHandlers
         public Task<bool> Handle(EmailCommand request, CancellationToken cancellationToken)
         {
             //publish event to RabbitMQ
-            _bus.Publish(new EmailSentEvent(request.EmailAddress, request.MailContent));
+            _bus.Publish(new EmailSentEvent(request.EmailAddress, request.MailContent, request.MailSubject));
             return Task.FromResult(true);
         }
     }

@@ -42,7 +42,7 @@
                                             </div>
                                         </th>
                                         <td class="p-3 align-middle border-0">
-                                            <p class="mb-0 small">@item.Book.Price</p>
+                                            <p class="mb-0 small">@item.Book.Price TL</p>
                                         </td>
                                         <td class="p-3 align-middle border-0">
                                             <div class="border d-flex align-items-center justify-content-between px-3">
@@ -55,7 +55,7 @@
                                         </td>
                                         <td class="p-3 align-middle border-0">
                                        
-                                            <p class="mb-0 small">@item.TotalPrice</p>
+                                            <p class="mb-0 small">@item.TotalPrice TL</p>
                                         </td>
                                         <td class="p-3 align-middle border-0"><a asp-action="RemoveFromCart" asp-controller="Cart" asp-route-bookId="@item.Book.Id" class="reset-anchor"><i class="fas fa-trash-alt small text-muted"></i></a></td>
                                     </tr>
@@ -75,7 +75,7 @@
                             <ul class="list-unstyled mb-0">
 
 
-                                <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Toplam</strong><span>@Model.Cart.TotalPrice</span></li>
+                                <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Toplam</strong><span>@Model.Cart.TotalPrice TL</span></li>
                                 <li class="border-bottom my-2"></li>
                                 <li>
                                     <form action="#">

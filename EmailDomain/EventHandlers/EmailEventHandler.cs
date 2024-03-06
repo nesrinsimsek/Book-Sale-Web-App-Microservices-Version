@@ -18,8 +18,7 @@ namespace EmailDomain.EventHandlers
         }
         public async Task Handle(EmailSentEvent @event)
         {
-            Console.WriteLine("şu anda emaileventhandler handledayım");
-            await _emailSender.Sender(@event.EmailAddress, @event.MailContent);
+            await _emailSender.Sender(@event.EmailAddress, @event.MailContent, @event.MailSubject);
         }
     }
 }

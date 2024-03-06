@@ -18,12 +18,12 @@ namespace EmailDomain.Services.Concrete
         {
             _configuration = configuration;
         }
-        public async Task Sender(string emailAddress, string mailContent)
+        public async Task Sender(string emailAddress, string mailContent, string mailSubject)
         {
             var apiKey = _configuration.GetSection("APIs")["SendGridApi"];
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress("kitapkosesi.com@gmail.com", "Kitap Köşesi");
-            var subject = "Hesap Aktivasyonu";
+            var subject = mailSubject;
             var to = new EmailAddress(emailAddress);
             var plainTextContent = mailContent;
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, null);

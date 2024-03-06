@@ -78,5 +78,10 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "activateAccount",
+    pattern: "Auth/ActivateAccount/{id}",
+    defaults: new { controller = "Auth", action = "ActivateAccount" }
+);
 
 app.Run();

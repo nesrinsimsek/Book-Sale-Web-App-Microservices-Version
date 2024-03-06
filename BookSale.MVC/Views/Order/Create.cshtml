@@ -38,11 +38,11 @@
                             <ul class="list-unstyled mb-0">
                                 @foreach (var item in Model.Cart.CartLines)
                                 {
-                                    <li class="d-flex align-items-center justify-content-between"><strong class="small fw-bold">@item.Book.Name</strong><span class="text-muted small">@item.TotalPrice</span></li>
+                                    <li class="d-flex align-items-center justify-content-between"><strong class="small fw-bold">@item.Book.Name</strong><span class="text-muted small">@item.TotalPrice TL</span></li>
                                     <li class="border-bottom my-2"></li>
                                 }
 
-                                <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small fw-bold">Toplam Tutar</strong><span>@Model.Cart.TotalPrice</span></li>
+                                <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small fw-bold">Toplam Tutar</strong><span>@Model.Cart.TotalPrice TL</span></li>
                             </ul>
                         </div>
                     </div>

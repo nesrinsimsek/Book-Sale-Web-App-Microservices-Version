@@ -7,5 +7,7 @@ namespace BookSale.MVC.Services.Abstract
         Task<T> GetAsync<T>(int id, string token);
         Task<T> LoginAsync<T>(LoginRequestDto loginRequestDto);
         Task<T> RegisterAsync<T>(RegistrationRequestDto registrationRequestDto);
+        Task<T> UpdateUserStatusAsync<T>(int id, string token);
+        Task<T> SendOrderAcceptMailAsync<T>(int id, string token);
     }
 }

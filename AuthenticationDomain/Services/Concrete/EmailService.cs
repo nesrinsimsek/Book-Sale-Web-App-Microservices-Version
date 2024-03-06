@@ -17,7 +17,6 @@ namespace AuthenticationDomain.Services.Concrete
 
         public EmailService(IEventBus bus)
         {
-
             _bus = bus;
         }
 
@@ -26,7 +25,8 @@ namespace AuthenticationDomain.Services.Concrete
         {
             var emailCommand = new EmailCommand(
                     email.EmailAddress,
-                    email.MailContent
+                    email.MailContent,
+                    email.MailSubject
                 );
 
             _bus.SendCommand(emailCommand);

@@ -44,10 +44,11 @@ namespace Product.Api.Controllers
 
         [HttpPut("{bookId}")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ApiResponse>> Update(int bookId, [FromBody] BookUpdateDto bookUpdateDto) //bunu dto yap
+        public async Task<ActionResult<ApiResponse>> Update([FromBody] BookUpdateDto bookUpdateDto) //bunu dto yap
         {
             Book book = _mapper.Map<Book>(bookUpdateDto);
             await _bookManager.UpdateBook(book);
+            _response.Data = book;
             _response.StatusCode = HttpStatusCode.OK;
             return Ok(_response);
 

@@ -29,16 +29,6 @@ namespace BookSale.MVC.Services.Concrete
             });
         }
 
-        //public Task<T> DeleteAsync<T>(int id, string token)
-        //{
-        //    return SendAsync<T>(new ApiRequest()
-        //    {
-        //        ApiType = SD.ApiType.DELETE,
-        //        Url = bookUrl + "/api/Books/" + id,
-        //        Token = token
-
-        //    });
-        //}
 
         public Task<T> GetAllAsync<T>()
         {
@@ -70,16 +60,6 @@ namespace BookSale.MVC.Services.Concrete
             });
         }
 
-        //public Task<T> UpdateAsync<T>(BookUpdateDto dto, string token)
-        //{
-        //    return SendAsync<T>(new ApiRequest()
-        //    {
-        //        ApiType = SD.ApiType.PUT,
-        //        Data = dto,
-        //        Url = bookUrl + "/api/Books" + dto.Id,
-        //        Token = token
 
-        //    });
-        //}
     }
 }
