@@ -22,6 +22,7 @@ namespace BookSale.IoC
             });
 
             services.AddTransient<IMediator, Mediator>();
+            
 
         }
     }

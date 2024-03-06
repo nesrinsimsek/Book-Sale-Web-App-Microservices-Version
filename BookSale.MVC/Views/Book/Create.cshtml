@@ -55,26 +55,10 @@
                                     document.getElementById("categoryContainer").value = selectedValue;
                                 });
 
-                                // function validateForm() {
-                                //     var inputField1 = document.getElementById("categoryContainer"); // Boş bırakılan input alanının id'sini kullanın
-                                //     var inputField2 = document.getElementById("title"); // Boş bırakılan input alanının id'sini kullanın
-                                //     var inputField3 = document.getElementById("content"); // Boş bırakılan input alanının id'sini kullanın
-                                //     var inputValue1 = inputField1.value.trim();
-                                //     var inputValue2 = inputField2.value.trim();
-                                //     var inputValue3 = inputField3.value.trim();
-
-                                //     if (inputValue1 === "" || inputValue2 === "" || inputValue3 === "") {
-                                //         alert("All input fields are required.");
-                                //         return false; // Formun gönderilmesini engelle
-                                //     }
-
-                                //     return true; // Formu gönder
-                                // }
                             </script>
 
                             <div class="form-floating">
                                 <input id="categoryContainer" asp-for="@Model.BookCreateDto.Category_Id" hidden />
-                                @* <span asp-validation-for=@Model.PostList.LastOrDefault().Category_Id class="text-danger"></span> *@
                             </div>
 
                             <br />

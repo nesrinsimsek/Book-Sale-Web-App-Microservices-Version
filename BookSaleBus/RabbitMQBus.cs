@@ -59,28 +59,32 @@ namespace BookSaleBus
             var eventName = typeof(T).Name;
             var handlerType = typeof(TH);
 
+            // event listesi o eventi içermiyorsa listeye ekle
             if (!_eventTypes.Contains(typeof(T)))
             {
                 _eventTypes.Add(typeof(T));
             }
 
+            //handlers dictionary o eventi key olarak içermiyorsa ekle
             if (!_handlers.ContainsKey(eventName))
             {
                 _handlers.Add(eventName, new List<Type>());
             }
 
+            // event handler o evente zaten kayıtlıysa exception fırlat
             if (_handlers[eventName].Any(s => s.GetType() == handlerType))
             {
                 throw new ArgumentException(
                     $"Handler Type {handlerType.Name} already is registered for '{eventName}'", nameof(handlerType));
             }
 
+            // evente event handlerı kaydet
             _handlers[eventName].Add(handlerType);
 
             StartBasicConsume<T>();
         }
 
-        private void StartBasicConsume<T>() where T : Event
+        public void StartBasicConsume<T>() where T : Event
         {
             var factory = new ConnectionFactory()
             {
@@ -96,26 +100,17 @@ namespace BookSaleBus
             channel.QueueDeclare(eventName, false, false, false, null);
 
             var consumer = new AsyncEventingBasicConsumer(channel);
-            consumer.Received += Consumer_Received;
+            consumer.Received += async (model, ea) =>
+            {
+                var message = Encoding.UTF8.GetString(ea.Body.ToArray());
+
+                await ProcessEvent(eventName, message);
+            };
 
             channel.BasicConsume(eventName, true, consumer);
         }
 
-        private async Task Consumer_Received(object sender, BasicDeliverEventArgs e)
-        {
-            var eventName = e.RoutingKey;
-            var message = Encoding.UTF8.GetString(e.Body);
-
-            try
-            {
-                await ProcessEvent(eventName, message).ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-            }
-        }
-
-        private async Task ProcessEvent(string eventName, string message)
+        public async Task ProcessEvent(string eventName, string message)
         {
             if (_handlers.ContainsKey(eventName))
             {
@@ -129,6 +124,7 @@ namespace BookSaleBus
                         var eventType = _eventTypes.SingleOrDefault(t => t.Name == eventName);
                         var @event = JsonConvert.DeserializeObject(message, eventType);
                         var conreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
+                        Console.WriteLine("şu anda rabbitmqbus processevent metodu son satırın önündeyim");
                         await (Task)conreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
                     }
                 }
@@ -136,4 +132,3 @@ namespace BookSaleBus
         }
     }
 }
-    

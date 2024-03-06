@@ -1,5 +1,6 @@
 ﻿using BookSaleDomainCore.Bus;
 using EmailDomain.Events;
+using EmailDomain.Services.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,15 @@ namespace EmailDomain.EventHandlers
 {
     public class EmailEventHandler : IEventHandler<EmailSentEvent>
     {
-        public Task Handle(EmailSentEvent @event)
+        private readonly IEmailSender _emailSender;
+        public EmailEventHandler(IEmailSender emailSender)
         {
-            throw new NotImplementedException();
+            _emailSender = emailSender;
+        }
+        public async Task Handle(EmailSentEvent @event)
+        {
+            Console.WriteLine("şu anda emaileventhandler handledayım");
+            await _emailSender.Sender(@event.EmailAddress, @event.MailContent);
         }
     }
 }

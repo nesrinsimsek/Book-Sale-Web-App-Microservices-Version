@@ -15,12 +15,10 @@ namespace BookSale.MVC.ViewComponents
     public class BookListViewComponent : ViewComponent
     {
         private readonly IBookService _bookService;
-        private readonly IMapper _mapper;
 
-        public BookListViewComponent(IBookService bookService, IMapper mapper)
+        public BookListViewComponent(IBookService bookService)
         {
             _bookService = bookService;
-            _mapper = mapper;
         }
 
         public async Task<IViewComponentResult> InvokeAsync(int categoryId)
