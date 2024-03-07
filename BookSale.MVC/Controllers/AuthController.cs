@@ -63,14 +63,17 @@ namespace BookSale.MVC.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegistrationRequestDto obj)
         {
             ApiResponse result = await _authService.RegisterAsync<ApiResponse>(obj);
-            if (result != null && result.IsSuccess)
+            if(ModelState.IsValid)
             {
-                return RedirectToAction("Login");
+                if (result != null && result.IsSuccess)
+                {
+                    return RedirectToAction("Login");
+                }
             }
+          
             return View();
         }
 
@@ -88,7 +91,7 @@ namespace BookSale.MVC.Controllers
             return View();
         }
 
-        public async Task<IActionResult> AcceptOrderMail(int id)
+        public async Task<IActionResult> AcceptedOrderMail(int id)
         {
             await _authService.SendOrderAcceptMailAsync<ApiResponse>(id, HttpContext.Session.GetString("JwtToken"));
             return RedirectToAction("Index", "Order");

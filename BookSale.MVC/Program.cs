@@ -10,14 +10,25 @@ using IBookService = BookSale.MVC.Services.Abstract.IBookService;
 using ICategoryService = BookSale.MVC.Services.Abstract.ICategoryService;
 using IOrderService = BookSale.MVC.Services.Abstract.IOrderService;
 using IOrderBookService = BookSale.MVC.Services.Abstract.IOrderBookService;
+using FluentValidation;
+using BookSale.MVC.ValidationRules;
+using BookSale.MVC.Models.Dtos;
+using FluentValidation.AspNetCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
 
+builder.Services.AddControllersWithViews().AddFluentValidation(options =>
+{
+    options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+});
 
 builder.Services.AddAutoMapper(typeof(MappingConfig));
+
+//builder.Services.AddScoped<IValidator<RegistrationRequestDto>, RegistrationValidator>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -56,6 +67,8 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 builder.Services.AddRazorPages();
+
+
 
 var app = builder.Build();
 
