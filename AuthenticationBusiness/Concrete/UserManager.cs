@@ -95,7 +95,7 @@ namespace AuthenticationBusiness.Concrete
                 Expires = DateTime.UtcNow.AddDays(7), //tokenin geçerlilik süresi, dolunca kullanıcı tekrar giriş yapmalı ve yeni tokenini edinmeli login olmak için
                 SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
-
+             
             // token oluşturuluyor
             var token = tokenHandler.CreateToken(tokenDescriptor);
             LoginResponseDto loginResponseDTO = new LoginResponseDto()
