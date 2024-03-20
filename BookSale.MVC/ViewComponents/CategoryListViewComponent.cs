@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Newtonsoft.Json;
 using AutoMapper;
 using BookSale.MVC.Models;
 using BookSale.MVC.Models.Dtos;
 using BookSale.MVC.Services.Abstract;
-using BookSale.MVC.Utility;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 
 namespace BookSale.MVC.ViewComponents

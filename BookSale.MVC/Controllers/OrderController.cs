@@ -62,7 +62,7 @@ namespace BookSale.MVC.Controllers
                     Quantity = cartLine.Quantity
 
                 };
-                _orderBookService.CreateAsync<ApiResponse>(orderBookDto, HttpContext.Session.GetString("JwtToken"));
+                await _orderBookService.CreateAsync<ApiResponse>(orderBookDto, HttpContext.Session.GetString("JwtToken"));
             }
             return RedirectToAction("Index", "Home");
         }
