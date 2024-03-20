@@ -37,7 +37,7 @@ namespace BookSale.MVC.ValidationRules
             // doğum tarihinden 18 yıl önceki tarihi alıyor
             var minimumDateOfBirth = DateTime.Today.AddYears(-18);
 
-            // verilen doğum tarihi minimum doğum tarihinden geride veya eşitse true dönüyor
+            // girilen doğum tarihi minimum doğum tarihinden geride veya eşitse true dönüyor
             return birthDate <= minimumDateOfBirth;
         }
 

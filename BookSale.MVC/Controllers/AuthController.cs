@@ -63,6 +63,7 @@ namespace BookSale.MVC.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegistrationRequestDto obj)
         {
             ApiResponse result = await _authService.RegisterAsync<ApiResponse>(obj);
