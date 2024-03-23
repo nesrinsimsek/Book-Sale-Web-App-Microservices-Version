@@ -1,5 +1,5 @@
 ﻿using BookSale.MVC.Extensions;
-using BookSale.Sale.Entities.CartModels;
+using OrderEntity.CartModels.Concrete;
 
 namespace BookSale.MVC.Helpers
 {

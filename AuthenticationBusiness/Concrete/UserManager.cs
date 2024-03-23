@@ -96,9 +96,9 @@ namespace AuthenticationBusiness.Concrete
                 SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
              
-            // token oluşturuluyor
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            LoginResponseDto loginResponseDTO = new LoginResponseDto()
+            
+            var token = tokenHandler.CreateToken(tokenDescriptor); // token oluşturuluyor
+            LoginResponseDto loginResponseDTO = new LoginResponseDto() 
             {
                 Token = tokenHandler.WriteToken(token), // token serialize edilip atanıyor
                 User = user

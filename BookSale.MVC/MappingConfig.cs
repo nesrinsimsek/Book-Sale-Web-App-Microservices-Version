@@ -1,19 +1,13 @@
 ﻿using AutoMapper;
 using BookSale.MVC.Models.Dtos;
-using BookSale.Sale.Entities.Concrete;
+using Product.Entity.Entities;
 namespace BookSale.Sale.MVC
 {
     public class MappingConfig : Profile
     {
-        public MappingConfig() { 
-
-            CreateMap<BookDto, BookCreateDto>().ReverseMap();
-            CreateMap<BookDto, BookUpdateDto>().ReverseMap();
+        public MappingConfig()
+        {
             CreateMap<BookDto, Book>().ReverseMap();
-
-            CreateMap<OrderDto, OrderCreateDto>().ReverseMap();
-            CreateMap<OrderDto, OrderUpdateDto>().ReverseMap();
-
         }
     }
 }

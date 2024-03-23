@@ -2,24 +2,24 @@
 using BookSale.MVC.Helpers;
 using BookSale.MVC.Models;
 using BookSale.MVC.Models.Dtos;
-using BookSale.Sale.Business.Abstract;
-using BookSale.Sale.Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using IBookService = BookSale.MVC.Services.Abstract.IBookService;
+using OrderBusiness.Abstract;
+using Product.Entity.Entities;
+using BookSale.MVC.Services.Abstract;
 
 namespace BookSale.MVC.Controllers
 {
     public class CartController : Controller
     {
-        private ICartService _cartService;
+        private ICartManager _cartManager;
         private ICartSessionHelper _cartSessionHelper;
         private IBookService _bookService;
         private IMapper _mapper;
 
-        public CartController(ICartService cartService, ICartSessionHelper cartSessionHelper, IBookService bookService, IMapper mapper)
+        public CartController(ICartManager cartManager, ICartSessionHelper cartSessionHelper, IBookService bookService, IMapper mapper)
         {
-            _cartService = cartService;
+            _cartManager = cartManager;
             _cartSessionHelper = cartSessionHelper;
             _bookService = bookService;
             _mapper = mapper;
@@ -41,8 +41,8 @@ namespace BookSale.MVC.Controllers
             var bookDto = JsonConvert.DeserializeObject<BookDto>(Convert.ToString(response.Data));
             var book = _mapper.Map<Book>(bookDto);
 
-            var cart = _cartSessionHelper.GetCart("Cart"); // yoksa oluştur varsa dön
-            _cartService.AddToCart(cart, book); // sepette book yoksa ekle varsa 1 arttır
+            var cart = _cartSessionHelper.GetCart("Cart"); // sepet yoksa oluştur varsa dön
+            _cartManager.AddToCart(cart, book); // sepette o book yoksa ekle varsa 1 arttır
             _cartSessionHelper.SetCart("Cart", cart);
             return RedirectToAction("Index", "Home");
 
@@ -53,7 +53,7 @@ namespace BookSale.MVC.Controllers
         {
             
             var cart = _cartSessionHelper.GetCart("Cart"); // yoksa oluştur varsa dön
-            _cartService.RemoveFromCart(cart, bookId);
+            _cartManager.RemoveFromCart(cart, bookId);
             _cartSessionHelper.SetCart("Cart", cart);
             return RedirectToAction("Index", "Cart");
 
@@ -64,7 +64,7 @@ namespace BookSale.MVC.Controllers
         { 
 
             var cart = _cartSessionHelper.GetCart("Cart"); // yoksa oluştur varsa dön
-            _cartService.DecreaseQuantityInCart(cart, bookId);
+            _cartManager.DecreaseQuantityInCart(cart, bookId);
             _cartSessionHelper.SetCart("Cart", cart);
             return RedirectToAction("Index", "Cart");
 
@@ -75,7 +75,7 @@ namespace BookSale.MVC.Controllers
         {
 
             var cart = _cartSessionHelper.GetCart("Cart"); // yoksa oluştur varsa dön
-            _cartService.IncreaseQuantityInCart(cart, bookId);
+            _cartManager.IncreaseQuantityInCart(cart, bookId);
             _cartSessionHelper.SetCart("Cart", cart);
             return RedirectToAction("Index", "Cart");
 

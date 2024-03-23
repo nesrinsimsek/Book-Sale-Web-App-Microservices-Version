@@ -1,5 +1,4 @@
-﻿using BookSale.Sale.Entities.Concrete;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace BookSale.MVC.Controllers
 {

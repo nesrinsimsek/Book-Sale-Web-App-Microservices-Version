@@ -62,12 +62,12 @@ namespace BookSale.MVC.Services.Concrete
             });
         }
 
-        public Task<T> SendOrderAcceptMailAsync<T>(int id, string token)
+        public Task<T> SendOrderAcceptedMailAsync<T>(int id, string token)
         {
             return SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = _authUrl + "/api/Users/AcceptOrder/" + id,
+                Url = _authUrl + "/api/Users/OrderAccepted/" + id,
                 Token = token
 
             });

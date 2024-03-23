@@ -2,29 +2,24 @@
 using BookSale.MVC.Models;
 using BookSale.MVC.Models.Dtos;
 using BookSale.MVC.Services.Abstract;
-using BookSale.Sale.Business.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using IOrderService = BookSale.MVC.Services.Abstract.IOrderService;
-using IOrderBookService = BookSale.MVC.Services.Abstract.IOrderBookService;
-using IBookService = BookSale.MVC.Services.Abstract.IBookService;
+using OrderBusiness.Abstract;
 
 namespace BookSale.MVC.Controllers
 {
     public class OrderController : Controller
     {
-        private ICartService _cartService;
         private ICartSessionHelper _cartSessionHelper;
         private IOrderService _orderService;
         private IOrderBookService _orderBookService;
         private IAuthService _authService;
         private IBookService _bookService;
 
-        public OrderController(ICartService cartService, ICartSessionHelper cartSessionHelper,
+        public OrderController(ICartSessionHelper cartSessionHelper,
                                 IOrderService orderService, IOrderBookService orderBookService,
                                 IAuthService authService, IBookService bookService)
         {
-            _cartService = cartService;
             _cartSessionHelper = cartSessionHelper;
             _orderService = orderService;
             _orderBookService = orderBookService;
@@ -70,9 +65,9 @@ namespace BookSale.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var orderBookListResponse = await _orderBookService.GetAllAsync<ApiResponse>(HttpContext.Session.GetString("JwtToken"));
-            var orderBookList = JsonConvert.DeserializeObject<List<OrderBookDto>>(Convert.ToString(orderBookListResponse.Data));
-            List<OrderListViewModel> orderListViewModelList = new List<OrderListViewModel>();
+            var orderBookResponse = await _orderBookService.GetAllAsync<ApiResponse>(HttpContext.Session.GetString("JwtToken"));
+            var orderBookList = JsonConvert.DeserializeObject<List<OrderBookDto>>(Convert.ToString(orderBookResponse.Data));
+            List<OrderListViewModel> orderListViewModels = new List<OrderListViewModel>(); // order bilgilerini tutan liste
 
             foreach (var orderBook in orderBookList)
             {
@@ -85,23 +80,24 @@ namespace BookSale.MVC.Controllers
                 var bookResponse = await _bookService.GetAsync<ApiResponse>(orderBook.Book_Id);
                 var book = JsonConvert.DeserializeObject<BookDto>(Convert.ToString(bookResponse.Data));
 
-                OrderListViewModel orderListViewModel = orderListViewModelList.FirstOrDefault(vm => vm.Order.Id == order.Id);
-
+                // listede ilgili order var mı bakıyor
+                OrderListViewModel orderListViewModel = orderListViewModels.FirstOrDefault(vm => vm.Order.Id == order.Id);
+                // yoksa oluşturuyor (yani order.Id değişince)
                 if (orderListViewModel == null)
                 {
                     orderListViewModel = new OrderListViewModel
                     {
-                        Order = order,
-                        User = user,
+                        Order = order, // aynı order için order sabit
+                        User = user,  // aynı order için user sabit
                     };
-                    orderListViewModelList.Add(orderListViewModel);
+                    orderListViewModels.Add(orderListViewModel);  // listeye orderı ekledi
                 }
 
-                orderListViewModel.BookList.Add(book);
-                orderListViewModel.OrderBookList.Add(orderBook);
+                orderListViewModel.BookList.Add(book); // ilgili orderdaki kitabı listeye ekliyor (kitap bilgilerini çekebilmek için)
+                orderListViewModel.OrderBookList.Add(orderBook); // ilgili orderbooku listeye ekliyor (quantity çekebilmek için)
             }
 
-            return View(orderListViewModelList);
+            return View(orderListViewModels);
         }
 
     }

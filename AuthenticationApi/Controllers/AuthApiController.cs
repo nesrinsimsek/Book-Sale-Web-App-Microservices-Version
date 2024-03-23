@@ -63,8 +63,8 @@ namespace AuthenticationApi.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult> Login([FromBody] LoginRequestDto loginRequestDto) //bunu dto yap
         {
-            var loginResponse = await _userManager.Login(loginRequestDto);
-            if (loginResponse == null || string.IsNullOrEmpty(loginResponse.Token))
+            var loginResponseDto = await _userManager.Login(loginRequestDto);
+            if (loginResponseDto == null || string.IsNullOrEmpty(loginResponseDto.Token))
             {
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.IsSuccess = false;
@@ -73,7 +73,7 @@ namespace AuthenticationApi.Controllers
             }
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;
-            _response.Data = loginResponse;
+            _response.Data = loginResponseDto;
             return Ok(_response);
 
         }
@@ -103,9 +103,9 @@ namespace AuthenticationApi.Controllers
 
         }
 
-        [HttpGet("AcceptOrder/{userId}")]
+        [HttpGet("OrderAccepted/{userId}")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ApiResponse>> SendOrderAcceptMail(int userId)
+        public async Task<ActionResult<ApiResponse>> SendOrderAcceptedMail(int userId)
         {
 
             var user = await _userManager.GetUserById(userId);
@@ -125,10 +125,10 @@ namespace AuthenticationApi.Controllers
         [HttpPut("ActivateAccount/{userId}")]
         public async Task<ActionResult<ApiResponse>> UpdateUserStatus(int userId)
         {
-            User user = await _userManager.GetUserById(userId);
+            User user = await _userManager.GetUserById(userId); // normalde from body'den çekilir ama bu senaryoda body girmiyorum
             user.Status = "Aktif";
 
-            await _userManager.UpdateUser(user);
+            await _userManager.UpdateUser(user); 
             UserDto userDto = _mapper.Map<UserDto>(user);
             _response.StatusCode = HttpStatusCode.OK;
             _response.Data = userDto;

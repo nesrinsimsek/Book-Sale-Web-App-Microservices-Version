@@ -1,4 +1,6 @@
-﻿using BookSale.Sale.Entities.CartModels;
+﻿
+
+using OrderEntity.CartModels.Concrete;
 
 namespace BookSale.MVC.Models
 {

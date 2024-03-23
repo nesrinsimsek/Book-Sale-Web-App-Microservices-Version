@@ -13,12 +13,10 @@ namespace BookSale.MVC.Controllers
 
         private readonly IBookService _bookService;
         private readonly ICategoryService _categoryService;
-        private readonly IMapper _mapper;
         public BookController(IBookService bookService, IMapper mapper, ICategoryService categoryService)
         {
             _bookService = bookService;
             _categoryService = categoryService;
-            _mapper = mapper;
         }
 
         public IActionResult ListByCategory(int categoryId)
