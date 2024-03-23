@@ -42,24 +42,37 @@ namespace BookSale.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(OrderCreateDto orderCreateDto)
         {
-            var cartLines = _cartSessionHelper.GetCart("Cart").CartLines;
-            await _orderService.CreateAsync<ApiResponse>(orderCreateDto, HttpContext.Session.GetString("JwtToken"));
-            var orderListResponse = await _orderService.GetAllAsync<ApiResponse>(HttpContext.Session.GetString("JwtToken"));
-            var orderList = JsonConvert.DeserializeObject<List<OrderDto>>(Convert.ToString(orderListResponse.Data));
-            var createdOrder = orderList.LastOrDefault(); // son oluşan order'ın id'sine ulaşmak için order tablosundan çekmem gerekti çünkü ordercreatedto objesinin id'si yok
-
-            foreach (var cartLine in cartLines)
+            
+            if (ModelState.IsValid)
             {
-                OrderBookDto orderBookDto = new OrderBookDto
-                {
-                    Order_Id = createdOrder.Id,
-                    Book_Id = cartLine.Book.Id,
-                    Quantity = cartLine.Quantity
+                var cartLines = _cartSessionHelper.GetCart("Cart").CartLines;
+                await _orderService.CreateAsync<ApiResponse>(orderCreateDto, HttpContext.Session.GetString("JwtToken"));
+                var response = await _orderService.GetAllAsync<ApiResponse>(HttpContext.Session.GetString("JwtToken"));
+                var orderList = JsonConvert.DeserializeObject<List<OrderDto>>(Convert.ToString(response.Data));
+                var createdOrder = orderList.LastOrDefault(); // son oluşan order'ın id'sine ulaşmak için order tablosundan çekmem gerekti
+                                                              // çünkü ordercreatedto objesinin id'si yok
 
-                };
-                await _orderBookService.CreateAsync<ApiResponse>(orderBookDto, HttpContext.Session.GetString("JwtToken"));
+                foreach (var cartLine in cartLines)
+                {
+                    OrderBookDto orderBookDto = new OrderBookDto
+                    {
+                        Order_Id = createdOrder.Id,
+                        Book_Id = cartLine.Book.Id,
+                        Quantity = cartLine.Quantity
+
+                    };
+                    await _orderBookService.CreateAsync<ApiResponse>(orderBookDto, HttpContext.Session.GetString("JwtToken"));
+                }
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
+
+            var orderViewModel = new OrderViewModel
+            {
+                Cart = _cartSessionHelper.GetCart("Cart"),
+                OrderCreateDto = orderCreateDto
+            };
+
+            return View(orderViewModel);
         }
 
         [HttpGet]

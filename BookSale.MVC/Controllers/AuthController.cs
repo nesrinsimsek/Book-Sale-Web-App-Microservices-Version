@@ -86,13 +86,14 @@ namespace BookSale.MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-     
+        // aktivasyon linkinden buraya geliyor
         public async Task<IActionResult> ActivateAccount(int id) 
         {
             await _authService.UpdateUserStatusAsync<ApiResponse>(id, HttpContext.Session.GetString("JwtToken"));
             return View();
         }
 
+        // admin siparişi onaylaya basınca buraya geliyor
         public async Task<IActionResult> SendOrderAcceptedMail(int id)
         {
             await _authService.SendOrderAcceptedMailAsync<ApiResponse>(id, HttpContext.Session.GetString("JwtToken"));
