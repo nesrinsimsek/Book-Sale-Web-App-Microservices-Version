@@ -4,8 +4,6 @@ using BookSale.MVC.Models;
 using BookSale.MVC.Models.Dtos;
 using BookSale.MVC.Services.Abstract;
 
-
-
 namespace BookSale.MVC.ViewComponents
 {
     public class BookListViewComponent : ViewComponent

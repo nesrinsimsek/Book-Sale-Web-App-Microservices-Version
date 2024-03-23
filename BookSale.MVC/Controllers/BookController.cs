@@ -37,8 +37,19 @@ namespace BookSale.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(BookCreateDto bookCreateDto)
         {
-            await _bookService.CreateAsync<ApiResponse>(bookCreateDto, HttpContext.Session.GetString("JwtToken"));
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                await _bookService.CreateAsync<ApiResponse>(bookCreateDto, HttpContext.Session.GetString("JwtToken"));
+                return RedirectToAction("Index", "Home");
+            }
+            var response = await _categoryService.GetAllAsync<ApiResponse>();
+            var categoryListViewModel = new CategoryListViewModel
+            {
+                BookCreateDto = new BookCreateDto(),
+                Categories = JsonConvert.DeserializeObject<List<CategoryDto>>(Convert.ToString(response.Data))
+            };
+            return View(categoryListViewModel);
+
         }
 
     }
