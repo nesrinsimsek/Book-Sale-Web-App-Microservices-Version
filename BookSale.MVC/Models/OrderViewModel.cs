@@ -1,5 +1,4 @@
 ﻿using BookSale.MVC.Models.Dtos;
-using OrderEntity.CartModels.Concrete;
 
 namespace BookSale.MVC.Models
 {

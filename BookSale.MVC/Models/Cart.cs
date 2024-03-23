@@ -1,13 +1,6 @@
-﻿using OrderEntity.CartModels.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OrderEntity.CartModels.Concrete
+﻿namespace BookSale.MVC.Models
 {
-    public class Cart : ICartModel
+    public class Cart
     {
         public List<CartLine> CartLines { get; set; }
         public decimal TotalPrice

@@ -1,17 +1,13 @@
-﻿using OrderBusiness.Abstract;
-using OrderEntity.CartModels.Concrete;
-using Product.Entity.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BookSale.MVC.Models;
+using BookSale.MVC.Models.Dtos;
+using BookSale.MVC.Services.Abstract;
+using OrderBusiness.Abstract;
 
-namespace OrderBusiness.Concrete
+namespace BookSale.MVC.Services.Concrete
 {
-    public class CartManager : ICartManager
+    public class CartService : ICartService
     {
-        public void AddToCart(Cart cart, Book book)
+        public void AddToCart(Cart cart, BookDto book)
         {
             CartLine cartLine = cart.CartLines.FirstOrDefault(c => c.Book.Id == book.Id);
 

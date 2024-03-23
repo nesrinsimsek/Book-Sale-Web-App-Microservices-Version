@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using BookSale.MVC.Models;
+﻿using BookSale.MVC.Models;
 using BookSale.MVC.Models.Dtos;
 using BookSale.MVC.Services.Abstract;
-using BookSale.MVC.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -13,7 +11,7 @@ namespace BookSale.MVC.Controllers
 
         private readonly IBookService _bookService;
         private readonly ICategoryService _categoryService;
-        public BookController(IBookService bookService, IMapper mapper, ICategoryService categoryService)
+        public BookController(IBookService bookService, ICategoryService categoryService)
         {
             _bookService = bookService;
             _categoryService = categoryService;

@@ -12,11 +12,9 @@ namespace BookSale.MVC.ViewComponents
     {
 
         private readonly ICategoryService _categoryService;
-        private readonly IMapper _mapper;
-        public CategoryListViewComponent(ICategoryService categoryService, IMapper mapper)
+        public CategoryListViewComponent(ICategoryService categoryService)
         {
             _categoryService = categoryService;
-            _mapper = mapper;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {

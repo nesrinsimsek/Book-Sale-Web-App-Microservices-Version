@@ -1,7 +1,6 @@
 using BookSale.MVC.Helpers;
 using BookSale.MVC.Services.Abstract;
 using BookSale.MVC.Services.Concrete;
-using BookSale.Sale.MVC;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
 using FluentValidation;
@@ -9,8 +8,6 @@ using BookSale.MVC.ValidationRules;
 using BookSale.MVC.Models.Dtos;
 using FluentValidation.AspNetCore;
 using System.Reflection;
-using OrderBusiness.Abstract;
-using OrderBusiness.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +19,6 @@ builder.Services.AddControllersWithViews().AddFluentValidation(options =>
 
 });
 
-builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 //builder.Services.AddScoped<IValidator<RegistrationRequestDto>, RegistrationValidator>();
 
@@ -43,7 +39,7 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddHttpClient<IOrderBookService, OrderBookService>();
 builder.Services.AddScoped<IOrderBookService, OrderBookService>();
 
-builder.Services.AddScoped<ICartManager, CartManager>();
+builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<ICartSessionHelper, CartSessionHelper>();
 
 builder.Services.AddDistributedMemoryCache();
