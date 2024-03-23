@@ -15,17 +15,16 @@ namespace BookSale.MVC.ValidationRules
             _bookService = bookService;
             RuleFor(x => x.ISBN)
                .Must(ISBNIsUnique).WithMessage("Bu ISBN zaten kullanılıyor");
+
+            RuleFor(x => x.Price)
+              .InclusiveBetween(1, 10000).WithMessage("Birim fiyat 1 TL ile 10.000 TL arasında olmalıdır");
+
+            RuleFor(x => x.StockAmount)
+                .LessThanOrEqualTo(100).WithMessage("Stok adedi en fazla 100 olabilir");
         }
 
         private bool ISBNIsUnique(string isbn)
         {
-            // Bu kısımda asenkron bir işlem yapmak yerine senkron bir şekilde veritabanından kontrol yapabilirsiniz.
-            // _bookService kullanarak veritabanından ISBN kontrolü yapabilirsiniz.
-            // Örneğin:
-            // var existingBook = _bookService.GetBookByISBN(isbn);
-            // return existingBook == null;
-
-            // Burada bir senkron kontrol örneği:
             var response = _bookService.GetAllAsync<ApiResponse>().Result;
             var books = JsonConvert.DeserializeObject<List<BookDto>>(Convert.ToString(response.Data));
             var book = books.FirstOrDefault(b => b.ISBN == isbn);
