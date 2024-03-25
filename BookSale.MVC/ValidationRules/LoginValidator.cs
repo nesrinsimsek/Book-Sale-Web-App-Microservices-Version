@@ -40,7 +40,7 @@ namespace BookSale.MVC.ValidationRules
             var response = _authService.GetAllAsync<ApiResponse>().Result;
             var users = JsonConvert.DeserializeObject<List<UserDto>>(Convert.ToString(response.Data));
             var user = users.FirstOrDefault(u => u.Email == email);
-            return user.Status == "deneme";
+            return user.Status == "Aktif";
         }
     }
 }

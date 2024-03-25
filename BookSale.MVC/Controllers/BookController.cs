@@ -17,10 +17,6 @@ namespace BookSale.MVC.Controllers
             _categoryService = categoryService;
         }
 
-        public IActionResult ListByCategory(int categoryId)
-        {
-            return ViewComponent("BookList", categoryId);
-        }
 
         [HttpGet]
         public async Task<IActionResult> Create()
