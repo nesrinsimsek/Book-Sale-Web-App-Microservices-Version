@@ -90,8 +90,8 @@ namespace AuthenticationApi.Controllers
 
         }
 
+
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ApiResponse>> GetList()
         {
 
@@ -125,7 +125,7 @@ namespace AuthenticationApi.Controllers
         [HttpPut("ActivateAccount/{userId}")]
         public async Task<ActionResult<ApiResponse>> UpdateUserStatus(int userId)
         {
-            User user = await _userManager.GetUserById(userId); // normalde from body'den çekilir ama bu senaryoda body girmiyorum
+            User user = await _userManager.GetUserById(userId); // user normalde from body'den çekilir ama bu senaryoda body girmiyorum
             user.Status = "Aktif";
 
             await _userManager.UpdateUser(user); 

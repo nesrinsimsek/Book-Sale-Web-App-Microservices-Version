@@ -51,6 +51,16 @@ namespace BookSale.MVC.Services.Concrete
             });
         }
 
+        public Task<T> GetAllAsync<T>()
+        {
+            return SendAsync<T>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.GET,
+                Url = _authUrl + "/api/Users"
+
+            });
+        }
+
         public Task<T> UpdateUserStatusAsync<T>(int id, string token)
         {
             return SendAsync<T>(new ApiRequest()

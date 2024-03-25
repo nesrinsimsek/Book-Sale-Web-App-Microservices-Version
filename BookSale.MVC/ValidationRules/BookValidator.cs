@@ -13,14 +13,35 @@ namespace BookSale.MVC.ValidationRules
         public BookValidator(IBookService bookService)
         {
             _bookService = bookService;
-            RuleFor(x => x.ISBN)
-               .Must(ISBNIsUnique).WithMessage("Bu ISBN zaten kullanılıyor");
+
+            RuleFor(x => x.Category_Id)
+                .NotEmpty().WithMessage("Lütfen kategori seçiniz");
+
+            RuleFor(x => x.Name)
+                .NotEmpty().WithMessage("İsim alanı boş bırakılamaz");
 
             RuleFor(x => x.Price)
-              .InclusiveBetween(1, 10000).WithMessage("Birim fiyat 1 TL ile 10.000 TL arasında olmalıdır");
+                .NotEmpty().WithMessage("Fiyat alanı boş bırakılamaz")
+                .InclusiveBetween(1, 10000).WithMessage("Birim fiyat 1 TL ile 10.000 TL arasında olmalıdır");
 
             RuleFor(x => x.StockAmount)
+                .NotEmpty().WithMessage("Stok adedi alanı boş bırakılamaz")
                 .LessThanOrEqualTo(100).WithMessage("Stok adedi en fazla 100 olabilir");
+
+            RuleFor(x => x.Author)
+                .NotEmpty().WithMessage("Yazar alanı boş bırakılamaz");
+
+            RuleFor(x => x.Publisher)
+                .NotEmpty().WithMessage("Yayınevi alanı boş bırakılamaz");
+
+            RuleFor(x => x.ISBN)
+                .NotEmpty().WithMessage("ISBN alanı boş bırakılamaz")
+                .Must(ISBNIsUnique).WithMessage("Bu ISBN zaten kullanılıyor");
+
+            RuleFor(x => x.ImageUrl)
+                .NotEmpty().WithMessage("Kitap resim linki alanı boş bırakılamaz");
+
+
         }
 
         private bool ISBNIsUnique(string isbn)

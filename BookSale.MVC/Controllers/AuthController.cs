@@ -31,27 +31,29 @@ namespace BookSale.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginRequestDto loginRequestDto)
         {
-            ApiResponse response = await _authService.LoginAsync<ApiResponse>(loginRequestDto);
-            if (response != null && response.IsSuccess)
+            if (ModelState.IsValid)
             {
-                LoginResponseDto loginResponseDto = JsonConvert.DeserializeObject<LoginResponseDto>(Convert.ToString(response.Data));
-                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-                identity.AddClaim(new Claim(ClaimTypes.Name, loginResponseDto.User.Id.ToString()));
-                identity.AddClaim(new Claim(ClaimTypes.Role, loginResponseDto.User.Role));
-                var principal = new ClaimsPrincipal(identity);
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                ApiResponse response = await _authService.LoginAsync<ApiResponse>(loginRequestDto);
+                if (response != null && response.IsSuccess)
+                {
+                    LoginResponseDto loginResponseDto = JsonConvert.DeserializeObject<LoginResponseDto>(Convert.ToString(response.Data));
+                    var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                    identity.AddClaim(new Claim(ClaimTypes.Name, loginResponseDto.User.Id.ToString()));
+                    identity.AddClaim(new Claim(ClaimTypes.Role, loginResponseDto.User.Role));
+                    var principal = new ClaimsPrincipal(identity);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                /* Başarılı bir giriş durumunda, kullanıcının JWT (Json Web Token) 
-                 * belirteci (token) HttpContext.Session üzerinde saklanır (apiden gelen response'un datası üzerinden Token çekiliyor.)
-                 * Bu token, kullanıcının oturum bilgilerini korumak ve doğrulamak için kullanılır.*/
-                HttpContext.Session.SetString("JwtToken", loginResponseDto.Token); // Token'i session a atadı
-                return RedirectToAction("Index", "Home");
+                    /* Başarılı bir giriş durumunda, kullanıcının JWT (Json Web Token) 
+                     * belirteci (token) HttpContext.Session üzerinde saklanır (apiden gelen response'un datası üzerinden Token çekiliyor.)
+                     * Bu token, kullanıcının oturum bilgilerini korumak ve doğrulamak için kullanılır.*/
+                    HttpContext.Session.SetString("JwtToken", loginResponseDto.Token); // Token'i session a atadı
+                    return RedirectToAction("Index", "Home");
+                }
             }
-            else
-            {
-                ModelState.AddModelError("CustomError", response.ErrorMessages.FirstOrDefault());
-                return View(loginRequestDto);
-            }
+
+            LoginRequestDto obj = new();
+            return View(obj);
+
         }
 
 

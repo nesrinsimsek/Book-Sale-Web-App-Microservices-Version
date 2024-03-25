@@ -28,10 +28,12 @@
                         <h2 class="form-title">Giriş yap</h2>
                         <form method="POST" class="register-form" id="login-form">
                             <div class="form-group">
+                                <span asp-validation-for="Email"></span>
                                 <label asp-for="Email"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input asp-for="Email" type="email" name="Email" id="email" placeholder="Email" />
                             </div>
                             <div class="form-group">
+                                <span asp-validation-for="Password"></span>
                                 <label asp-for="Password"><i class="zmdi zmdi-lock"></i></label>
                                 <input asp-for="Password" type="password" name="Password" id="pass" placeholder="Şifre" />
                             </div>

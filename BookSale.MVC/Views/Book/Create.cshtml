@@ -44,7 +44,7 @@
 
                                     // Değişiklik olduğunda çalışacak kod
                                     selectElement.onchange = function () {
-                                        // Seçilen option'un değerini al
+                                        // Seçilen option'ın değerini al
                                         var selectedValue = selectElement.value;
 
                                         // categoryContainer elementine değeri ata
@@ -58,11 +58,13 @@
                             </script>
 
                             <div class="form-floating">
+                                <span asp-validation-for="@Model.BookCreateDto.Category_Id"></span>
                                 <input id="categoryContainer" asp-for="@Model.BookCreateDto.Category_Id" hidden />
                             </div>
 
                             <br />
                             <div class="form-group">
+                                <span asp-validation-for="@Model.BookCreateDto.Name"></span>
                                 <input asp-for="@Model.BookCreateDto.Name" type="text" placeholder="Kitap İsmi" />
                             </div>
                             <div class="form-group">
@@ -74,9 +76,11 @@
                                 <input asp-for="@Model.BookCreateDto.StockAmount" type="number" autocomplete="off" placeholder="Stok Adedi" />
                             </div>
                             <div class="form-group">
+                                <span asp-validation-for="@Model.BookCreateDto.Author"></span>
                                 <input asp-for="@Model.BookCreateDto.Author" type="text"  placeholder="Yazarı" />
                             </div>
                             <div class="form-group">
+                                <span asp-validation-for="@Model.BookCreateDto.Publisher"></span>
                                 <input asp-for="@Model.BookCreateDto.Publisher" type="text" placeholder="Yayınevi" />
                             </div>
                             <div class="form-group">
@@ -84,6 +88,7 @@
                                 <input asp-for="@Model.BookCreateDto.ISBN" type="text" placeholder="ISBN" />
                             </div>
                             <div class="form-group">
+                                <span asp-validation-for="@Model.BookCreateDto.ImageUrl"></span>
                                 <input asp-for="@Model.BookCreateDto.ImageUrl" type="text" placeholder="Kitap Resim Linki" />
                             </div>
                             <div class="form-group form-button">
