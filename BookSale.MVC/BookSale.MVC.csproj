@@ -14,8 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BookSale.Sale.Business\BookSale.Sale.Business.csproj" />
-    <ProjectReference Include="..\BookSale.Sale.Entities\BookSale.Sale.Entities.csproj" />
     <ProjectReference Include="..\OrderBusiness\OrderBusiness.csproj" />
     <ProjectReference Include="..\Product.Entity\Product.Entity.csproj" />
   </ItemGroup>

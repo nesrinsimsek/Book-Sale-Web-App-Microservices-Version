@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="~/homeUI/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="~/homeUI/img/favicon-new.png">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 </head>
 <body>
     <div class="page-holder">
@@ -59,10 +60,8 @@
                                 }
                             }
 
-
                         </ul>
                         <ul class="navbar-nav ms-auto">
-
 
                             @if (httpAcc.HttpContext.Session.GetString("JwtToken") != null &&
                             httpAcc.HttpContext.Session.GetString("JwtToken").ToString().Length > 0)
@@ -95,6 +94,8 @@
         </header>
 
         @RenderBody()
+        <partial name="_Notifications" />
+
         <footer class="bg-dark text-white">
             <div class="container py-4">
 
@@ -107,6 +108,7 @@
                 </div>
             </div>
         </footer>
+
         <!-- JavaScript files-->
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="vendor/glightbox/js/glightbox.min.js"></script>
@@ -114,6 +116,7 @@
         <script src="vendor/swiper/swiper-bundle.min.js"></script>
         <script src="vendor/choices.js/public/assets/scripts/choices.min.js"></script>
         <script src="~/homeUI/js/front.js"></script>
+
         <script>
             // ------------------------------------------------------- //
             //   Inject SVG Sprite -
