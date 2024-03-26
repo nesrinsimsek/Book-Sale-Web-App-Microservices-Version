@@ -4,7 +4,7 @@ using BookSale.MVC.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
-
+using Microsoft.Extensions.Logging;
 namespace BookSale.MVC.Controllers
 {
     public class HomeController : Controller
