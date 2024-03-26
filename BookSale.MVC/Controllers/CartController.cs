@@ -58,7 +58,6 @@ namespace BookSale.MVC.Controllers
             _cartSessionHelper.SetCart("Cart", cart);
             return RedirectToAction("Index", "Cart");
 
-
         }
 
         public async Task<IActionResult> DecreaseQuantityInCart(int bookId)
@@ -68,7 +67,6 @@ namespace BookSale.MVC.Controllers
             _cartService.DecreaseQuantityInCart(cart, bookId);
             _cartSessionHelper.SetCart("Cart", cart);
             return RedirectToAction("Index", "Cart");
-
 
         }
 
@@ -88,7 +86,6 @@ namespace BookSale.MVC.Controllers
             }
 
             return RedirectToAction("Index", "Cart");
-
 
         }
     }

@@ -18,7 +18,7 @@ namespace EmailDomain.Services.Concrete
         {
             _configuration = configuration;
         }
-        public async Task Sender(string emailAddress, string mailContent, string mailSubject)
+        public async Task Send(string emailAddress, string mailContent, string mailSubject)
         {
             var apiKey = _configuration.GetSection("APIs")["SendGridApi"];
             var client = new SendGridClient(apiKey);

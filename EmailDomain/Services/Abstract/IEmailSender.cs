@@ -8,6 +8,6 @@ namespace EmailDomain.Services.Abstract
 {
     public interface IEmailSender
     {
-        Task Sender(string emailAddress, string mailContent, string mailSubject);
+        Task Send(string emailAddress, string mailContent, string mailSubject);
     }
 }

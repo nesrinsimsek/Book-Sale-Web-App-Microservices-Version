@@ -65,7 +65,8 @@ namespace BookSaleBus
                 _eventTypes.Add(typeof(T));
             }
 
-            //handlers dictionary o eventi key olarak içermiyorsa ekle
+            // handlers dictionary o eventi key olarak içermiyorsa ekle
+            // value olarak noş bir liste ekle
             if (!_handlers.ContainsKey(eventName))
             {
                 _handlers.Add(eventName, new List<Type>());
@@ -78,7 +79,7 @@ namespace BookSaleBus
                     $"Handler Type {handlerType.Name} already is registered for '{eventName}'", nameof(handlerType));
             }
 
-            // evente event handlerı kaydet
+            // eventin event handler listesine event handlerı kaydet
             _handlers[eventName].Add(handlerType);
 
             StartBasicConsume<T>();
@@ -110,6 +111,7 @@ namespace BookSaleBus
             channel.BasicConsume(eventName, true, consumer);
         }
 
+        // EmailEventHandler'daki Handle metodunu çalıştırıyor
         public async Task ProcessEvent(string eventName, string message)
         {
             if (_handlers.ContainsKey(eventName))
@@ -123,8 +125,8 @@ namespace BookSaleBus
                         if (handler == null) continue;
                         var eventType = _eventTypes.SingleOrDefault(t => t.Name == eventName);
                         var @event = JsonConvert.DeserializeObject(message, eventType);
-                        var conreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
-                        await (Task)conreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
+                        var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
+                        await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
                     }
                 }
             }

@@ -95,6 +95,7 @@ namespace BookSale.MVC.Controllers
 
                 // listede ilgili order var mı bakıyor
                 OrderListViewModel orderListViewModel = orderListViewModels.FirstOrDefault(vm => vm.Order.Id == order.Id);
+
                 // yoksa oluşturuyor (yani order.Id değişince)
                 if (orderListViewModel == null)
                 {

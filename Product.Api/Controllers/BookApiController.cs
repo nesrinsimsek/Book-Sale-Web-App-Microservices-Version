@@ -31,14 +31,10 @@ namespace Product.Api.Controllers
         public async Task<ActionResult<ApiResponse>> Add([FromBody] BookCreateDto bookCreateDto) //bunu dto yap
         {
             Book book = _mapper.Map<Book>(bookCreateDto);
-
-
             await _bookManager.AddBook(book);
             _response.Data = _mapper.Map<BookDto>(book);
             _response.StatusCode = HttpStatusCode.Created;
-
             return _response;
-
         }
 
 
@@ -51,7 +47,6 @@ namespace Product.Api.Controllers
             _response.Data = book;
             _response.StatusCode = HttpStatusCode.OK;
             return Ok(_response);
-
         }
 
 
@@ -61,7 +56,6 @@ namespace Product.Api.Controllers
         {
             await _bookManager.DeleteBook(bookId);
             return Ok();
-
         }
 
         [HttpGet("ById/{bookId}")]
@@ -72,7 +66,6 @@ namespace Product.Api.Controllers
             _response.StatusCode = HttpStatusCode.OK;
             _response.Data = bookDto;
             return Ok(_response);
-
         }
 
         [HttpGet("ByCategory/{categoryId}")]
@@ -89,13 +82,11 @@ namespace Product.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<ApiResponse>> GetList()
         {
-
             var books = await _bookManager.GetBookList();
             var bookDtos = _mapper.Map<List<BookDto>>(books);
             _response.StatusCode = HttpStatusCode.OK;
             _response.Data = bookDtos;
             return Ok(_response);
-
         }
     }
 }

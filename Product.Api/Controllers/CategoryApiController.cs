@@ -31,7 +31,6 @@ namespace Product.Api.Controllers
             _response.StatusCode = HttpStatusCode.OK;
             _response.Data = categoryDtos;
             return Ok(_response);
-
         }
     }
 }
