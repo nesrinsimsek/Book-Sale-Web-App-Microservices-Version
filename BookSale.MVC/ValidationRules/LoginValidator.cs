@@ -27,7 +27,6 @@ namespace BookSale.MVC.ValidationRules
                                                     "aktivasyonunuzu gerçekleştiriniz.")
               .When(x => !string.IsNullOrEmpty(x.Email) && !string.IsNullOrEmpty(x.Password));
 
-
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage("Şifre alanı boş bırakılamaz");
         }
