@@ -4,6 +4,7 @@ using BookSale.MVC.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using BookSale.MVC.Services.Abstract;
+using System.Diagnostics;
 
 namespace BookSale.MVC.Controllers
 {
@@ -88,5 +89,6 @@ namespace BookSale.MVC.Controllers
             return RedirectToAction("Index", "Cart");
 
         }
+
     }
 }

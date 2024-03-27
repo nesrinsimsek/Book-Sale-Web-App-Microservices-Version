@@ -20,7 +20,6 @@ namespace BookSale.MVC.Controllers
         {
             List<BookDto> list = new List<BookDto>();
 
-
             var response = await _bookService.GetAllAsync<ApiResponse>();
             if (response != null && response.IsSuccess)
             {

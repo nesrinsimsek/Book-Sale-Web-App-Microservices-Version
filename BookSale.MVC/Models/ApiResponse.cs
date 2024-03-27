@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -9,13 +10,20 @@ namespace BookSale.MVC.Models
 { 
     public class ApiResponse
     {
-        public ApiResponse()
-        {
-            ErrorMessages = new List<string>();
-        }
+        [NotMapped]
         public HttpStatusCode StatusCode { get; set; }
-        public bool IsSuccess { get; set; } = true;
+        [NotMapped]
+        public bool IsSuccess { get; set; }
+        [NotMapped]
         public List<string> ErrorMessages { get; set; }
         public object Data { get; set; }
+        public DateTime Date { get; }
+        public ApiResponse()
+        {
+            IsSuccess = true;
+            ErrorMessages = new List<string>();
+            Date = DateTime.Now;
+        }
+
     }
 }
