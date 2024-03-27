@@ -17,14 +17,19 @@ namespace BookSale.MVC.ValidationRules
 
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("E-posta alanı boş bırakılamaz")
-                .Must(UserStatusIsActive).WithMessage("Hesap aktivasyonunuz yapılmamıştır. " +
-                                                      "Lütfen e-posta adresinize gönderilen linke tıklayarak " +
-                                                      "aktivasyonunuzu gerçekleştiriniz.")
+                .Must((dto, email) => UserIsFound(email, dto.Password)).WithMessage("Geçersiz e-posta veya şifre")
+                .When(x => !string.IsNullOrEmpty(x.Email) && !string.IsNullOrEmpty(x.Password))
                 .EmailAddress().WithMessage("Geçersiz e-posta adresi");
 
+            RuleFor(x => x.Email)
+              .Must(UserStatusIsActive).WithMessage("Hesap aktivasyonunuz yapılmamıştır. " +
+                                                    "Lütfen e-posta adresinize gönderilen linke tıklayarak " +
+                                                    "aktivasyonunuzu gerçekleştiriniz.")
+              .When(x => !string.IsNullOrEmpty(x.Email) && !string.IsNullOrEmpty(x.Password));
+
+
             RuleFor(x => x.Password)
-                .NotEmpty().WithMessage("Şifre alanı boş bırakılamaz")
-                .Must((dto, password) => UserIsFound(dto.Email, password)).WithMessage("Geçersiz e-posta veya şifre");
+                .NotEmpty().WithMessage("Şifre alanı boş bırakılamaz");
         }
 
         private bool UserIsFound(string email, string password)
@@ -39,8 +44,8 @@ namespace BookSale.MVC.ValidationRules
         {
             var response = _authService.GetAllAsync<ApiResponse>().Result;
             var users = JsonConvert.DeserializeObject<List<UserDto>>(Convert.ToString(response.Data));
-            var user = users.FirstOrDefault(u => u.Email == email);
-            return user.Status == "Aktif";
+            var user = users.FirstOrDefault(u => u.Email == email && (u.Status == "Aktif" || u.Role == "Admin"));
+            return user != null;
         }
     }
 }

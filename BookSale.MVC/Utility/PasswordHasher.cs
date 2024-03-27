@@ -8,9 +8,13 @@ namespace BookSale.MVC.Utility
         {
             using (var sha256 = SHA256.Create())
             {
-                byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
-                byte[] hashedBytes = sha256.ComputeHash(passwordBytes);
-                return Convert.ToBase64String(hashedBytes);
+                if(password != null) {
+                    byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
+                    byte[] hashedBytes = sha256.ComputeHash(passwordBytes);
+                    return Convert.ToBase64String(hashedBytes);
+                }
+
+                return null;
             }
         }
     }
