@@ -9,14 +9,11 @@ namespace BookSale.MVC.Services.Concrete
 {
     public class BaseService : IBaseService
     {
-        public ApiResponse responseModel { get; set; }
         public IHttpClientFactory httpClient { get; set; }
 
         public BaseService(IHttpClientFactory httpClient)
         {
-            this.responseModel = new();
             this.httpClient = httpClient;
-
         }
 
         public async Task<T> SendAsync<T>(ApiRequest apiRequest)
@@ -61,7 +58,7 @@ namespace BookSale.MVC.Services.Concrete
 
             HttpResponseMessage apiResponse = await client.SendAsync(message); // HttpRequestMessage gönderiliyor
 
-            var apiContentStr = await apiResponse.Content.ReadAsStringAsync(); // HttpResponseMessage çekiliyor
+            var apiContentStr = await apiResponse.Content.ReadAsStringAsync(); // HttpResponseMessage contenti çekiliyor ve stringe çevriliyor
 
             var apiResponseObj = JsonConvert.DeserializeObject<T>(apiContentStr); // T = ApiResponse
 
