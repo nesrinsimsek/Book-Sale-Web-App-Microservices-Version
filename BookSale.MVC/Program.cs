@@ -50,6 +50,9 @@ try
     builder.Services.AddScoped<ICartService, CartService>();
     builder.Services.AddScoped<ICartSessionHelper, CartSessionHelper>();
 
+    builder.Services.AddScoped<IHttpRequestLogService, HttpRequestLogService>();
+    builder.Services.AddScoped<IHttpResponseLogService, HttpResponseLogService>();
+
     builder.Services.AddDistributedMemoryCache();
     builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                   .AddCookie(options =>

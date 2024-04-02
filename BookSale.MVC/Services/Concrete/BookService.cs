@@ -10,10 +10,15 @@ namespace BookSale.MVC.Services.Concrete
     public class BookService : BaseService, IBookService
     {
         private readonly IHttpClientFactory _clientFactory;
+        private readonly IHttpRequestLogService _httpRequestLogService;
+        private readonly IHttpResponseLogService _httpResponseLogService;
         private string _bookUrl;
-        public BookService(IHttpClientFactory clientFactory) : base(clientFactory)
+        public BookService(IHttpClientFactory clientFactory, IHttpRequestLogService httpRequestLogService, IHttpResponseLogService httpResponseLogService)
+            : base(clientFactory, httpRequestLogService, httpResponseLogService)
         {
             _clientFactory = clientFactory;
+            _httpRequestLogService = httpRequestLogService;
+            _httpResponseLogService = httpResponseLogService;
             _bookUrl = "https://localhost:7160";
         }
 

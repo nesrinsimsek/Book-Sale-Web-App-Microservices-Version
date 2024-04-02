@@ -10,10 +10,15 @@ namespace BookSale.MVC.Services.Concrete
     public class CategoryService : BaseService, ICategoryService
     {
         private readonly IHttpClientFactory _clientFactory;
+        private readonly IHttpRequestLogService _httpRequestLogService;
+        private readonly IHttpResponseLogService _httpResponseLogService;
         private string _categoryUrl;
-        public CategoryService(IHttpClientFactory clientFactory) : base(clientFactory)
+        public CategoryService(IHttpClientFactory clientFactory, IHttpRequestLogService httpRequestLogService, IHttpResponseLogService httpResponseLogService)
+            : base(clientFactory, httpRequestLogService, httpResponseLogService)
         {
             _clientFactory = clientFactory;
+            _httpRequestLogService = httpRequestLogService;
+            _httpResponseLogService = httpResponseLogService;
             _categoryUrl = "https://localhost:7160";
         }
 

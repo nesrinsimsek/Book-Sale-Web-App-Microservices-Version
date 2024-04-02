@@ -1,4 +1,5 @@
-﻿using BookSale.MVC.Models;
+﻿using Azure.Core;
+using BookSale.MVC.Models;
 using BookSale.MVC.Services.Abstract;
 using BookSale.MVC.Utility;
 using Newtonsoft.Json;
@@ -10,13 +11,17 @@ namespace BookSale.MVC.Services.Concrete
     public class BaseService : IBaseService
     {
         public IHttpClientFactory httpClient { get; set; }
+        public IHttpRequestLogService httpRequestLogService {get; set; }
+        public IHttpResponseLogService httpResponseLogService { get; set; }
 
-        public BaseService(IHttpClientFactory httpClient)
+        public BaseService(IHttpClientFactory httpClient, IHttpRequestLogService httpRequestLogService, IHttpResponseLogService httpResponseLogService)
         {
             this.httpClient = httpClient;
+            this.httpRequestLogService = httpRequestLogService;
+            this.httpResponseLogService = httpResponseLogService;
         }
 
-        public async Task<T> SendAsync<T>(ApiRequest apiRequest)
+        public async Task<T> SendAsync<T>(ApiRequest apiRequest) 
         {
 
             var client = httpClient.CreateClient("SaleAPI");
@@ -55,12 +60,17 @@ namespace BookSale.MVC.Services.Concrete
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.Token);
             }
 
+            httpRequestLogService.Add(apiRequest);
 
             HttpResponseMessage apiResponse = await client.SendAsync(message); // HttpRequestMessage gönderiliyor
 
             var apiContentStr = await apiResponse.Content.ReadAsStringAsync(); // HttpResponseMessage contenti çekiliyor ve stringe çevriliyor
 
-            var apiResponseObj = JsonConvert.DeserializeObject<T>(apiContentStr); // T = ApiResponse
+            var apiResponseObj = JsonConvert.DeserializeObject<T>(apiContentStr); // T = ApiResponse oluyor
+
+            ApiResponse response = (ApiResponse)Convert.ChangeType(apiResponseObj, typeof(T));
+          
+            httpResponseLogService.Add(response);
 
             return apiResponseObj;
 

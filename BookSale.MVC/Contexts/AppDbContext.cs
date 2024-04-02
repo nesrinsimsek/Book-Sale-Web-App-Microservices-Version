@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Net;
 using System;
+using Innofactor.EfCoreJsonValueConverter;
 
 namespace BookSale.MVC.Contexts
 {
@@ -16,11 +17,10 @@ namespace BookSale.MVC.Contexts
 
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ApiRequest>()
-                .OwnsOne(e => e.Data, d => d.ToJson());
-
-            modelBuilder.Entity<ApiResponse>()
-                .OwnsOne(e => e.Data, d => d.ToJson());
+            modelBuilder.Ignore<object>(); // object tipindeki datayı ignoreluyor
+            modelBuilder.AddJsonFields(); // json formatında ekliyor
         }
     }
+
+
 }
