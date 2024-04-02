@@ -6,6 +6,7 @@ namespace BookSale.MVC.Models
 {
     public class ApiRequest
     {
+        public int Id { get; set; }
         [NotMapped]
         public ApiType ApiType { get; set; }
         public string Url { get; set; }

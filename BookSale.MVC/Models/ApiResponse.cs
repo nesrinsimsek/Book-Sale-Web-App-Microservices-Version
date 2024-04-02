@@ -10,6 +10,7 @@ namespace BookSale.MVC.Models
 { 
     public class ApiResponse
     {
+        public int Id { get; set; }
         [NotMapped]
         public HttpStatusCode StatusCode { get; set; }
         [NotMapped]

@@ -6,6 +6,8 @@ using FluentValidation.AspNetCore;
 using System.Reflection;
 using NLog;
 using NLog.Web;
+using Microsoft.EntityFrameworkCore;
+using BookSale.MVC.Contexts;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("init main");
@@ -13,6 +15,9 @@ logger.Debug("init main");
 try
 {
     var builder = WebApplication.CreateBuilder(args);
+
+    builder.Services.AddDbContext<AppDbContext>(options => options.
+        UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
 
     // Add services to the container.
 
@@ -79,7 +84,7 @@ try
         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
         app.UseHsts();
     }
-   
+
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();
