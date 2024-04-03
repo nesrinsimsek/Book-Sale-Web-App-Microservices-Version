@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace BookSaleDomainCore.Commands
 {
+    // mediatR'ın Send metoduna IRequest tipinde parametre göndermek için kullanıyorum
+    // EmailCommand classını extend ediyorum
     public abstract class Command : IRequest<bool>
     {
         public DateTime Timestamp { get; protected set; }

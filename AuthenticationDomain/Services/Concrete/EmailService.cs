@@ -20,7 +20,8 @@ namespace AuthenticationDomain.Services.Concrete
             _bus = bus;
         }
 
-        // SendCommand mediatr'ın default olan Send metodunu çalıştırıyor
+        // RabbitMQBus classındaki SendCommand metodunu çağırıyor
+        // SendCommand, mediatR'ın default olan Send metodunu çağırıyor
         // Send metodu parametre tipini IRequest bekliyor
         // EmailCommand -> Command -> IRequest extend ediyor o yüzden direkt Email göndermek yerine EmailCommand gönderdim
         public void SendMail(Email email)

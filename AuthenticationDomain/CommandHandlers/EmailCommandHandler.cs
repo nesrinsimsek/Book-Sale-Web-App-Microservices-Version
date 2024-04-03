@@ -19,7 +19,7 @@ namespace AuthenticationDomain.CommandHandlers
             _bus = bus;
         }
 
-        // _mediator.Send metodu buraya getiriyor
+        // _mediator.Send metodu buraya getiriyor (RabbitMQBus classındaki)
         // IRequestHandler'daki Handle metodunu override ediyoruz
         public Task<bool> Handle(EmailCommand request, CancellationToken cancellationToken)
         {

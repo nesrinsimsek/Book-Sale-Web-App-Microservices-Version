@@ -66,7 +66,7 @@ namespace BookSaleBus
             }
 
             // handlers dictionary o eventi key olarak içermiyorsa ekle
-            // value olarak noş bir liste ekle
+            // value olarak boş bir liste ekle
             if (!_handlers.ContainsKey(eventName))
             {
                 _handlers.Add(eventName, new List<Type>());

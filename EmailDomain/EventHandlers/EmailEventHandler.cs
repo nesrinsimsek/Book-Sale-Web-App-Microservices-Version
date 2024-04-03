@@ -16,6 +16,8 @@ namespace EmailDomain.EventHandlers
         {
             _emailSender = emailSender;
         }
+
+        // RabbitMQBus classından bu metoda geliyor
         public async Task Handle(EmailSentEvent @event)
         {
             await _emailSender.Send(@event.EmailAddress, @event.MailContent, @event.MailSubject);
