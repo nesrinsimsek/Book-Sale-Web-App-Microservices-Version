@@ -27,7 +27,6 @@ namespace Product.Api.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles ="Admin")]
         public async Task<ActionResult<ApiResponse>> Add([FromBody] BookCreateDto bookCreateDto) //bunu dto yap
         {
             Book book = _mapper.Map<Book>(bookCreateDto);
@@ -39,7 +38,6 @@ namespace Product.Api.Controllers
 
 
         [HttpPut("{bookId}")]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ApiResponse>> Update([FromBody] BookUpdateDto bookUpdateDto) //bunu dto yap
         {
             Book book = _mapper.Map<Book>(bookUpdateDto);
@@ -51,7 +49,6 @@ namespace Product.Api.Controllers
 
 
         [HttpDelete("{bookId}")]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int bookId) //bunu dto yap
         {
             await _bookManager.DeleteBook(bookId);

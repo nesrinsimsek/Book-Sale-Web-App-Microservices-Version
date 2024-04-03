@@ -27,7 +27,6 @@ namespace OrderApi.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles ="User")]
         public async Task<ActionResult<ApiResponse>> Add([FromBody] OrderCreateDto orderCreateDto) //bunu dto yap
         {
             Order order = _mapper.Map<Order>(orderCreateDto);
@@ -42,7 +41,6 @@ namespace OrderApi.Controllers
 
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<ApiResponse>> GetList()
         {
             var orders = await _orderManager.GetOrderList();
@@ -54,7 +52,6 @@ namespace OrderApi.Controllers
         }
 
         [HttpGet("ById/{orderId}")]
-        [Authorize]
         public async Task<ActionResult<ApiResponse>> Get(int orderId)
         {
             var order = await _orderManager.GetOrderById(orderId);

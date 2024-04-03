@@ -79,7 +79,6 @@ namespace AuthenticationApi.Controllers
         }
 
         [HttpGet("ById/{userId}")]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<UserDto>> Get(int userId)
         {
             var user = await _userManager.GetUserById(userId);
@@ -104,7 +103,6 @@ namespace AuthenticationApi.Controllers
         }
 
         [HttpGet("OrderAccepted/{userId}")]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ApiResponse>> SendOrderAcceptedMail(int userId)
         {
 

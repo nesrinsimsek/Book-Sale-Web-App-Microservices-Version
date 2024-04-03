@@ -22,7 +22,7 @@ namespace AuthenticationDomain.Services.Concrete
 
         // SendCommand mediatr'ın default olan Send metodunu çalıştırıyor
         // Send metodu parametre tipini IRequest bekliyor
-        // EmailCommand -> Command -> IRequest extend ediyor o yüzden direkt Email göndermek yerine EmailCommand gönderdik
+        // EmailCommand -> Command -> IRequest extend ediyor o yüzden direkt Email göndermek yerine EmailCommand gönderdim
         public void SendMail(Email email)
         {
             var emailCommand = new EmailCommand(
