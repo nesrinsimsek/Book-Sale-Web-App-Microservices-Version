@@ -20,7 +20,7 @@ namespace AuthenticationDomain.CommandHandlers
         }
 
         // _mediator.Send metodu buraya getiriyor (RabbitMQBus classındaki)
-        // IRequestHandler'daki Handle metodunu override ediyoruz
+        // IRequestHandler'ın Handle metodunu override ediyoruz
         public Task<bool> Handle(EmailCommand request, CancellationToken cancellationToken)
         {
             //publish event to RabbitMQ

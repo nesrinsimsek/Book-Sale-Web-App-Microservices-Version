@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace AuthenticationDomain.Commands
 {
+    // EmailSentEvent ile aynı özelliklere sahip
+    // RabbitMQBus'taki SendCommand metoduna göndermek için kullanıyorum (Command classı IRequest'i extend ettiği için)
     public class EmailCommand : Command
     {
         public string EmailAddress { get; set; }
