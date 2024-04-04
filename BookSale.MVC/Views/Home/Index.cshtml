@@ -66,16 +66,4 @@
     </section>
 </div>
 
-@section Scripts {
-    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
-    <script type="text/javascript">
 
-
-        var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7152/AuthenticationHub").build();
-        connection.start().then(() => {
-            console.log("Bağlantı durumu", connection.connectionState);
-        }).catch((err) => { console.log(err) });
-
-
-    </script>
-}

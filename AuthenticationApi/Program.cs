@@ -7,7 +7,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using BookSale.IoC;
-using AuthenticationApi.Hubs;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -34,16 +33,9 @@ builder.Services.AddAuthentication(x =>
         };
     });
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("CorsPolicy", builder =>
-    {
-        builder.WithOrigins("https://localhost:7058").AllowAnyHeader()
-        .AllowAnyMethod().AllowCredentials();
-    });
-});
+
 builder.Services.AddControllers();
-builder.Services.AddSignalR();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -92,15 +84,6 @@ if (app.Environment.IsDevelopment())
     });
 }
 app.UseRouting();
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapHub<AuthenticationHub>("/AuthenticationHub");
-    endpoints.MapControllers();
-
-});
-
-app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

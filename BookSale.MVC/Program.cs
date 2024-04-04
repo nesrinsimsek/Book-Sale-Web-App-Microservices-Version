@@ -8,6 +8,7 @@ using NLog;
 using NLog.Web;
 using Microsoft.EntityFrameworkCore;
 using BookSale.MVC.Contexts;
+using BookSale.MVC.Hubs;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("init main");
@@ -19,6 +20,15 @@ try
     builder.Services.AddDbContext<AppDbContext>(options => options.
         UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
 
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("CorsPolicy", builder =>
+        {
+            builder.WithOrigins("https://localhost:7058").AllowAnyHeader()
+            .AllowAnyMethod().AllowCredentials();
+        });
+    });
+
     // Add services to the container.
 
     builder.Services.AddControllersWithViews().AddFluentValidation(options =>
@@ -26,6 +36,8 @@ try
         options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
     });
+
+    builder.Services.AddSignalR();
 
     builder.Logging.ClearProviders();
     builder.Host.UseNLog();
@@ -71,8 +83,6 @@ try
     });
     builder.Services.AddRazorPages();
 
-
-
     var app = builder.Build();
 
     if (app.Environment.IsDevelopment())
@@ -91,11 +101,21 @@ try
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();
-
     app.UseRouting();
     app.UseSession();
     app.UseAuthentication();
     app.UseAuthorization();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapHub<AuthenticationHub>("/AuthenticationHub");
+        endpoints.MapControllers();
+
+    });
+
+    app.UseCors("CorsPolicy");
+
+   
     app.MapRazorPages();
     app.MapControllerRoute(
         name: "default",
