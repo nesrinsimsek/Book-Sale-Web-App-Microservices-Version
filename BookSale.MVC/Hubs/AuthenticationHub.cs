@@ -15,7 +15,7 @@ namespace BookSale.MVC.Hubs
             {
                 if (!userConnections.ContainsKey(userId)) { userConnections[userId] = new HashSet<string>(); } // user id listede yoksa ekle
                 if (!userConnections[userId].Contains(connectionId)) { // user id için bu connection id yoksa
-                    if (userConnections[userId].Count >= 1) // başka bir connection varsa diğerlerinden çıkış yapmaya zorla
+                    if (userConnections[userId].Count >= 1) // ve başka connection varsa diğerlerinden çıkış yapmaya zorla
                     {
                         
                         Clients.Others.SendAsync("ForceLogout");

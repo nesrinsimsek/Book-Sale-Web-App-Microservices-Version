@@ -28,7 +28,6 @@ namespace BookSale.MVC.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginRequestDto loginRequestDto)
         {
             if (ModelState.IsValid)

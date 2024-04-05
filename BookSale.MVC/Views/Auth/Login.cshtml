@@ -72,7 +72,6 @@
             connection.on("ForceLogout", () => {
                 console.log("Başka bir browserda zaten oturum açılmış.");
 
-                // Oturumu sonlandırma isteği gönderme
                 fetch("/Auth/Logout", {
                     method: "GET"
                 })
@@ -80,29 +79,70 @@
                         if (!response.ok) {
                             throw new Error("Oturum sonlandırma isteği başarısız oldu.");
                         }
-                        // Başarılı bir şekilde oturum sonlandırıldı
                         console.log("Oturum başarıyla sonlandırıldı.");
                     })
                     .catch(error => {
                         console.error("Oturum sonlandırma hatası:", error);
                     });
-
-
             });
+
+
+
+
+            /** HandleForceLogout çalışıyor ama user id null geliyor **/
+
+            // document.addEventListener("DOMContentLoaded", function () {
+            //     document.getElementById("login-form").addEventListener("submit", function (event) {
+            //         event.preventDefault(); // Formun varsayılan submit işlemini engelle
+
+            //         // Formdaki email ve şifre değerlerini al
+            //         var email = document.getElementById("email").value;
+            //         var password = document.getElementById("pass").value;
+
+            //         // Fetch API kullanarak giriş isteği gönder
+            //         fetch('/Auth/Login', {
+            //             method: 'POST',
+            //             headers: {
+            //                 'Content-Type': 'application/json'
+            //             },
+            //             body: JSON.stringify({
+            //                 Email: email,
+            //                 Password: password
+            //             })
+            //         })
+            //             .then(function (response) {
+            //                 if (!response.ok) {
+            //                     throw new Error('Network response was not ok');
+            //                 }
+            //             
+            //                 connection.invoke("HandleForceLogout");
+            //             })
+            //             .catch(function (error) {
+            //                 console.error('There has been a problem with your fetch operation:', error);
+            //             });
+            //     });
+            // });
+
+
+
+
+
 
             // $(document).ready(function () {
             //     // Form submit olayını dinle
             //     $("#login-form").submit(function (event) {
+            
             //         // Formun default davranışını engelle
             //         event.preventDefault();
 
-            //         // handleForceLogout fonksiyonunu çağır
+            //         // HandleForceLogout metodunu çağır
             //         connection.invoke("HandleForceLogout"); // bu tüm browserlerda çalışıyor ama submit gerçekleşmeden çalıştığı için Hub'da user id null geliyor
 
 
-            //         setTimeout(function () { // bir kez çalışıyor diğerlerinde çalışmıyor. submiti bekleyip çalıştığından user id dolu geliyor
+            //         setTimeout(function () { // bir kez çalışıyor diğerlerinde çalışmıyor. submiti bekleyip çalıştığından user id doğru geliyor
             //             connection.invoke("HandleForceLogout");
             //         }, 500); // 500 milisaniye gecikme ekledik
+
 
             //         // Formu gönder
             //         this.submit();
@@ -110,7 +150,10 @@
             //     });
             // });
 
+
+
+
         </script>
     }
 
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</body>
