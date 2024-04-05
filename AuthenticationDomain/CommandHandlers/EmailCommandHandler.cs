@@ -12,7 +12,7 @@ namespace AuthenticationDomain.CommandHandlers
 {
     public class EmailCommandHandler : IRequestHandler<EmailCommand, bool>
     {
-        private readonly IEventBus _bus;
+        private readonly IEventBus _bus; // RabbitMQBus classı DI yapılıyor
 
         public EmailCommandHandler(IEventBus bus)
         {

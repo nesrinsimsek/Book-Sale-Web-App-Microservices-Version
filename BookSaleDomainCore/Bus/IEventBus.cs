@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookSaleDomainCore.Bus
 {
+    // RabbitMQBus extend ediyor
     public interface IEventBus
     {
         Task SendCommand<T>(T command) where T : Command;

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookSaleDomainCore.Bus
 {
+    // EmailEventHandler extend ediyor
     public interface IEventHandler<in TEvent> : IEventHandler
         where TEvent : Event
     {
